@@ -3,6 +3,8 @@ from libreria import app, db, bcrypt
 #import forms from forms.py in root
 from libreria.forms import RegForm, LoginForm, ReviewForm, SearchForm
 from libreria.models import User, Book, Review
+#importing the goodreads funtion to get review count and average rating
+from libreria.funcs import goodreads
 from flask_login import login_user, current_user, logout_user, login_required
 import json
 
@@ -101,7 +103,10 @@ def book(bookid):
         avgrating = total/count
         avgrating = round(avgrating,2)
 
-    return render_template('book.html', title='Book Title', form=form, book=book, ureview=ureview, count=count, avgrating=avgrating)
+    goodread = goodreads(book.isbn)
+    gcount = goodread[0]
+    grating = goodread[1]
+    return render_template('book.html', title='Book Title', form=form, book=book, ureview=ureview, count=count, avgrating=avgrating, grating=grating, gcount=gcount)
 
 @app.route("/reviews")
 @login_required

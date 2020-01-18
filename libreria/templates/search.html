@@ -4,23 +4,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/search.css') }}">{% endblock %}
 
 {% block body %}
-<div>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='images/logo1.png') }}"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="d-flex navbar-nav my-2 my-lg-0">
-                    <li class="nav-item"><a class="nav-link text-nowrap" href="{{ url_for('main') }}">Main</a></li>
-                    <li class="nav-item"><a class="nav-link text-nowrap" href="{{ url_for('reviews') }}">My Reviews</a></li>
-                    <li class="nav-item"><a class="nav-link text-nowrap" href="{{ url_for('logout') }}">Logout</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</div>
+{% include 'navbar.html' %}
 <form class="form-inline mx-auto" method="POST" action="">
     {{ form.hidden_tag() }}
     <div>
