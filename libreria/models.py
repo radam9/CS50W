@@ -93,6 +93,13 @@ class Book():
         else:
             return None
 
+    @staticmethod
+    def bsisbn(isbn):
+        r = db.session.execute("SELECT * FROM books WHERE isbn = :isbn", {"isbn":isbn}).fetchone()
+        if r != None:
+            return json.dumps(tuple(r))
+        else:
+            return None
 
     def updaterating(self,rating):
         '''

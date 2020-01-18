@@ -118,3 +118,29 @@ def reviews():
 @login_required
 def errorpage():
     return render_template('errorpage.html')
+
+@app.route("/api/<isbn>")
+@login_required
+def api(isbn):
+    b = Book.bsisbn(isbn)
+    if b == None:
+        return redirect(url_for('errorpage'))#set an errorhandler page invalid book isbn
+    else:
+        temp = json.loads(b)
+        book = Book(temp[0], temp[1], temp[2], temp[3], temp[4])
+    brev, count = Review.revsearchbid(book.id)
+    if count == 0:
+        rating = 0
+    else:
+        rating = float(brev[0].rating)
+
+    r = {}
+    r['title'] = book.title
+    r['author'] = book.author
+    r['year'] = book.year
+    r['isbn'] = book.isbn
+    r['review_count'] = count
+    r['average_rating'] = rating
+    jr = json.dumps(r)
+
+    return jr, 200
