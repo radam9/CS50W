@@ -1,0 +1,6 @@
+login forum (https://codepen.io/khadkamhn/pen/ZGvPLo)
+card (https://codepen.io/mrlubos/pen/KrEqpG)
+main image (Photo by Victoriano Izquierdo on Unsplash - https://unsplash.com/photos/HoevDVvxInw)
+logo (https://www.vectorstock.com/royalty-free-vector/pantheon-concept-linear-icon-isolated-on-vector-22813001)
+logout spinner (https://codepen.io/mrrocks/pen/EiplA)
+review form (https://codepen.io/Kikoku/pen/qaJoBG?editors=1100)

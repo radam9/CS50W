@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/book.css') }}">{% endblock %}
+
+{% block body %}
+{% include 'navbar.html' %}
+<div class='body-book'>
+    <div class="book-main">
+        <div class="book-box">
+            <div class="imgbx">
+                <img src="http://ia800609.us.archive.org/view_archive.php?archive=/19/items/olcovers74/olcovers74-L.zip&file=747457-L.jpg" alt="N/A image">
+            </div>
+            <div class="info-box">
+                <div class="info-card">
+                    <ul class"nobull">
+                        <li>Title: Memoirs of a Geisha</li>
+                        <li>Author: Arthur Golden</li>
+                        <li>ISBN: 1400096898</li>
+                        <li>Published: 2005</li>
+                        <li>Libreria: #reviews #rating</li>
+                        <li>Your Rating:</li>
+                        <li>Goodreads: 1624247 ratings 4.11 stars</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="review-box">
+            <form class="review-form" method="POST" action="">
+                {{ form.hidden_tag() }}
+                <div class="rating">
+                    {{ form.rating }}
+                </div>
+                <div class="user-review">
+                    {{ form.review(class='u-review-box', placeholder='Enter your review here!', id='review', rows='10') }}
+                </div>
+                {{ form.submit(class="button") }}
+            </form>
+            <div class="review-card">
+                <h4 class="reviewer">Adam rated it <div class="Stars" style="--rating: {{ form.rating.data }};"></h4>
+                <p class="review-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id enim ut neque tincidunt dignissim id in elit. Fusce facilisis diam et ligula maximus tristique ut non justo. Ut eget arcu venenatis lectus
+                    sollicitudin tempus. Praesent in dolor non tellus luctus sollicitudin. Nam rhoncus, magna quis condimentum placerat, tortor nulla fringilla enim, vel ultrices sapien lectus non neque. Duis maximus felis at tincidunt pellentesque.
+                    Maecenas id nisl viverra nisi finibus porta sed ac nisl. Curabitur vulputate nisi et massa pretium vulputate. Sed ut tristique nibh. Fusce dictum augue quis venenatis scelerisque. Mauris id facilisis tortor. Donec mollis ligula
+                    massa, eu malesuada magna tempor at. Integer pretium nibh leo, tempor mollis nulla lobortis quis.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

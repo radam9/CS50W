@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block stylesheet %}<link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">{% endblock %}
+
+{% block body %}
+{% include 'navbar.html' %}
+<div class="body-main">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+<h1>Welcome to Libreria Username!</h1>
+<h2>Have you read these books?</h2>
+<div class="container">
+    <div class='card-wrapper'>
+        <div class='card'>
+            <div class='layer'>
+                <ul class="nobull">
+                    <li class="card-entry">Title: Memoirs of a Geisha</li>
+                    <li class="card-entry">Author: Arthur Golden</li>
+                    <li class="card-entry">ISBN: 1400096898</li>
+                    <li class="card-entry">Published: 2005</li>
+                    <li class="card-entry">Libreria: #reviews #rating</li>
+                    <li class="card-entry">Your Rating:</li>
+                    <li class="card-entry">Goodreads: 1624247 ratings 4.11 stars</li>
+                </ul>
+                <div class='corner'></div>
+                <div class='corner'></div>
+                <div class='corner'></div>
+                <div class='corner'></div>
+            </div>
+        </div>
+    </div>
+    <div class='card-wrapper'>
+        <div class='card'>
+            <div class='layer'>
+                <ul class="nobull">
+                    <li class="card-entry">Title: Memoirs of a Geisha</li>
+                    <li class="card-entry">Author: Arthur Golden</li>
+                    <li class="card-entry">ISBN: 1400096898</li>
+                    <li class="card-entry">Published: 2005</li>
+                    <li class="card-entry">Libreria: #reviews #rating</li>
+                    <li class="card-entry">Your Rating:</li>
+                    <li class="card-entry">Goodreads: 1624247 ratings 4.11 stars</li>
+                </ul>
+                <div class='corner'></div>
+                <div class='corner'></div>
+                <div class='corner'></div>
+                <div class='corner'></div>
+            </div>
+        </div>
+    </div>
+    <div class='card-wrapper'>
+        <div class='card'>
+            <div class='layer'>
+                <ul class="nobull">
+                    <li class="card-entry">Title: Memoirs of a Geisha</li>
+                    <li class="card-entry">Author: Arthur Golden</li>
+                    <li class="card-entry">ISBN: 1400096898</li>
+                    <li class="card-entry">Published: 2005</li>
+                    <li class="card-entry">Libreria: #reviews #rating</li>
+                    <li class="card-entry">Your Rating:</li>
+                    <li class="card-entry">Goodreads: 1624247 ratings 4.11 stars</li>
+                </ul>
+                <div class='corner'></div>
+                <div class='corner'></div>
+                <div class='corner'></div>
+                <div class='corner'></div>
+            </div>
+        </div>
+    </div>
+    <div class='card-wrapper'>
+        <div class='card'>
+            <div class='layer'>
+                <ul class="nobull">
+                    <li class="card-entry">Title: Memoirs of a Geisha</li>
+                    <li class="card-entry">Author: Arthur Golden</li>
+                    <li class="card-entry">ISBN: 1400096898</li>
+                    <li class="card-entry">Published: 2005</li>
+                    <li class="card-entry">Libreria: #reviews #rating</li>
+                    <li class="card-entry">Your Rating:</li>
+                    <li class="card-entry">Goodreads: 1624247 ratings 4.11 stars</li>
+                </ul>
+                <div class='corner'></div>
+                <div class='corner'></div>
+                <div class='corner'></div>
+                <div class='corner'></div>
+            </div>
+        </div>
+    </div>
+    <div class='card-wrapper'>
+        <div class='card'>
+            <div class='layer'>
+                <ul class="nobull">
+                    <li class="card-entry">Title: Memoirs of a Geisha</li>
+                    <li class="card-entry">Author: Arthur Golden</li>
+                    <li class="card-entry">ISBN: 1400096898</li>
+                    <li class="card-entry">Published: 2005</li>
+                    <li class="card-entry">Libreria: #reviews #rating</li>
+                    <li class="card-entry">Your Rating:</li>
+                    <li class="card-entry">Goodreads: 1624247 ratings 4.11 stars</li>
+                </ul>
+                <div class='corner'></div>
+                <div class='corner'></div>
+                <div class='corner'></div>
+                <div class='corner'></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

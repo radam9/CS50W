@@ -1,0 +1,29 @@
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+body {
+    background: rgb(138, 172, 155);
+    width: 100%;
+    height: 100vh;
+}
+
+.review-main {
+	position: relative;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.reviews {
+    background: rgb(98, 78, 111);
+    position: relative;
+    max-width: 1500px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}

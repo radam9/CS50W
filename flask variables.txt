@@ -1,0 +1,3 @@
+set FLASK_APP=Libreria.py
+set FLASK_ENV=development
+set DATABASE_URL=postgres://wvrvbpeptlqslu:57babbc2a58f1a8d5fba8714961cb187f1c0fb499cec5995e7594321e30ae46e@ec2-79-125-2-142.eu-west-1.compute.amazonaws.com:5432/d32p7ajckq4r6u
