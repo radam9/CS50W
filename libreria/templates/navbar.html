@@ -5,17 +5,8 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <form class="form-inline mx-auto">
-                <input class="form-control" type="search" placeholder="Search" aria-lable="Search">
-                <select class="custom-select" name="type" id="search-type">
-                    <option value="title">Title</option>
-                    <option value="author">Author</option>
-                    <option value="isbn">ISBN</option>
-                </select>
-                <button class="btn btn-light" type="submit">Search</button>
-            </form>
             <ul class="d-flex navbar-nav my-2 my-lg-0">
-                <li class="nav-item"><a class="nav-link text-nowrap" href="{{ url_for('main') }}">Main</a></li>
+                <li class="nav-item"><a class="nav-link text-nowrap" href="{{ url_for('search') }}">Search</a></li>
                 <li class="nav-item"><a class="nav-link text-nowrap" href="{{ url_for('reviews') }}">My Reviews</a></li>
                 <li class="nav-item"><a class="nav-link text-nowrap" href="{{ url_for('logout') }}">Logout</a></li>
             </ul>

@@ -10,22 +10,22 @@ import json
 @app.route("/", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('main'))
+        return redirect(url_for('search'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.ultimateuser(username=form.username.data)
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('main'))
+            return redirect(next_page) if next_page else redirect(url_for('search'))
         else:
             flash('Invalid credentials! if your not a user please Sign Up first.')
-    return render_template('index.html', title='Book Reviews', form=form)
+    return render_template('login.html', title='Book Reviews', form=form)
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('main'))
+        return redirect(url_for('search'))
     form = RegForm()
     if form.validate_on_submit():
         hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -37,34 +37,12 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Sign Up', form=form)
 
-@app.route("/main")
-@login_required
-def main():
-    return render_template('main.html', title='Book Reviews')
-
-@app.route("/book", methods=['GET', 'POST'])
-@login_required
-def book():
-    form = ReviewForm()
-    if form.validate_on_submit():
-        flash('Your review has been submitted!', 'success')
-        review = Review.create(review=form.review.data, rating=form.rating.data, bookid=900, userid=current_user.id)
-        return redirect(url_for('main'))
-    return render_template('book.html', title='Book Title', form=form)
-
-@app.route("/reviews")
-@login_required
-def reviews():
-    reviews = Review.revsearchuid(current_user.id)
-    return render_template('reviews.html', title='My Reviews', reviews=reviews)
 
 @app.route("/logout")
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('login'))
-    # I need to redirect the user from the logout.html to login.html
-    # return render_template('logout.html', title='Logging Out')
 
 @app.route("/search", methods=['GET', 'POST'])
 @login_required
@@ -72,14 +50,13 @@ def search():
     form = SearchForm()
     if form.validate_on_submit():
         if form.type.data == 'title':
-            session['books'] = Book.searchtitle(title=form.search.data)
+            session['books'] = Book.bsearchtitle(title=form.search.data)
         elif form.type.data == 'isbn':
-            session['books'] = Book.searchisbn(isbn=form.search.data)
+            session['books'] = Book.bsearchisbn(isbn=form.search.data)
         elif form.type.data == 'author':
-            session['books'] = Book.searchauthor(author=form.search.data)
+            session['books'] = Book.bsearchauthor(author=form.search.data)
         return redirect(url_for('results'))
-
-    return render_template('temp.html', title='Book Search Results', form=form)
+    return render_template('search.html', title='Search for books', form=form)
 
 @app.route("/results")
 @login_required
@@ -91,4 +68,48 @@ def results():
     books = list()
     for t in temp:
         books.append(Book(t[0], t[1], t[2], t[3], t[4]))
-    return render_template('search.html', title='Book Search Results', books=books)
+    return render_template('results.html', title='Book search results', books=books)
+
+@app.route("/book/<int:bookid>", methods=['GET', 'POST'])
+@login_required
+def book(bookid):
+    session['book'] = Book.bsearchid(bookid)
+    if session['book'] == None:
+        return redirect(url_for('errorpage'))#set an errorhandler page invalid book id
+    else:
+        temp = json.loads(session['book'])
+        book = Book(temp[0], temp[1], temp[2], temp[3], temp[4])
+
+    ureview = Review.revsearch(current_user.id, bookid)
+    form = ReviewForm()
+    if form.validate_on_submit():
+        if ureview == None:
+            flash('Your review has been submitted!', 'success')
+            review = Review.create(review=form.review.data, rating=form.rating.data, bookid=book.id, userid=current_user.id)
+            return redirect(url_for('errorpage'))#change to a message page
+        else:
+            return redirect(url_for('errorpage'))#set an errorhandler page you have already submitted a review for this book
+    breview, count = Review.revsearchbid(bookid)
+    total = 0
+    if count == 0:
+        avgrating = 0
+    elif count == 1:
+        avgrating = breview[0].rating
+    else:
+        for b in breview:
+            total += b.rating
+        avgrating = total/count
+        avgrating = round(avgrating,2)
+
+    return render_template('book.html', title='Book Title', form=form, book=book, ureview=ureview, count=count, avgrating=avgrating)
+
+@app.route("/reviews")
+@login_required
+def reviews():
+    reviews = Review.revsearchuid(current_user.id)
+    return render_template('reviews.html', title='My Reviews', reviews=reviews)
+
+@app.route("/errorpage")
+@login_required
+def errorpage():
+    return render_template('errorpage.html')

@@ -4,23 +4,48 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/search.css') }}">{% endblock %}
 
 {% block body %}
-{% include 'navbar.html' %}
-
-
-{% for book in books %}
-<div class="card" style="width: 18rem;">
-    <div class="card-body">
-        <h5 class="card-title">{{ book.title }}</h5>
-        <p class="card-text">
-            <ul>
-                <li>{{ book.isbn }}</li>
-                <li>{{ book.author }}</li>
-                <li>{{ book.year }}</li>
-            </ul>
-        </p>
-    </div>
+<div>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='images/logo1.png') }}"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="d-flex navbar-nav my-2 my-lg-0">
+                    <li class="nav-item"><a class="nav-link text-nowrap" href="{{ url_for('main') }}">Main</a></li>
+                    <li class="nav-item"><a class="nav-link text-nowrap" href="{{ url_for('reviews') }}">My Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link text-nowrap" href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 </div>
-{% endfor %}
-
+<form class="form-inline mx-auto" method="POST" action="">
+    {{ form.hidden_tag() }}
+    <div>
+        {% if form.search.errors %}
+        {{ form.search(class="form-control is-invalid") }}
+        <div>
+            {% for error in form.search.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.search(class="form-control") }}
+        {% endif %}
+        {{ form.type(class="custom-select", id="search-type") }}
+        {{ form.submit(class="btn btn-light") }}
+    </div>
+</form>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 
 {% endblock %}

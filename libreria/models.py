@@ -28,7 +28,7 @@ class User(UserMixin):
 
     @classmethod
     def ultimateid(cls, id):
-        response = db.session.execute("SELECT id,username,password FROM users WHERE id = :id", {"id":id}).fetchone()
+        response = db.session.execute("SELECT * FROM users WHERE id = :id", {"id":id}).fetchone()
         return cls(response[1], response[2], response[0])
 
     @classmethod
@@ -53,7 +53,7 @@ class Book():
         self.year = year
 
     @staticmethod
-    def searchisbn(isbn):
+    def bsearchisbn(isbn):
         response = db.session.execute("SELECT * FROM books WHERE isbn LIKE :isbn", {"isbn": "%" + isbn + "%"}).fetchall()
         books=list()
         if response != None:
@@ -64,7 +64,7 @@ class Book():
             return None
 
     @staticmethod
-    def searchtitle(title):
+    def bsearchtitle(title):
         response = db.session.execute("SELECT * FROM books WHERE title LIKE :title", {"title": "%" + title + "%"}).fetchall()
         books=list()
         if response != None:
@@ -75,13 +75,21 @@ class Book():
             return None
 
     @staticmethod
-    def searchauthor(author):
+    def bsearchauthor(author):
         response = db.session.execute("SELECT * FROM books WHERE author LIKE :author", {"author": "%" + author + "%"}).fetchall()
         books=list()
         if response != None:
             for r in response:
                 books.append(json.dumps(tuple(r)))
             return books
+        else:
+            return None
+
+    @staticmethod
+    def bsearchid(id):
+        r = db.session.execute("SELECT * FROM books WHERE id = :id", {"id":id}).fetchone()
+        if r != None:
+            return json.dumps(tuple(r))
         else:
             return None
 
@@ -123,10 +131,12 @@ class Review():
     def revsearchbid(bookid):
         response = db.session.execute("SELECT * FROM reviews WHERE books_id = :bookid", {"bookid": bookid}).fetchall()
         reviews = list()
+        count = 0
         if response != None:
             for r in response:
+                count += 1
                 reviews.append(Review(r[0], r[1], r[2], r[3], r[4]))
-            return reviews
+            return reviews, count
         else:
             return None
 

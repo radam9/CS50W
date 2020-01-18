@@ -9,18 +9,18 @@
     <div class="book-main">
         <div class="book-box">
             <div class="imgbx">
-                <img src="http://ia800609.us.archive.org/view_archive.php?archive=/19/items/olcovers74/olcovers74-L.zip&file=747457-L.jpg" alt="N/A image">
+                <img src="http://covers.openlibrary.org/b/isbn/{{ book.isbn }}-L.jpg" alt="N/A image">
             </div>
             <div class="info-box">
                 <div class="info-card">
                     <ul class"nobull">
-                        <li>Title: Memoirs of a Geisha</li>
-                        <li>Author: Arthur Golden</li>
-                        <li>ISBN: 1400096898</li>
-                        <li>Published: 2005</li>
-                        <li>Libreria: #reviews #rating</li>
-                        <li>Your Rating:</li>
-                        <li>Goodreads: 1624247 ratings 4.11 stars</li>
+                        <li><label class="unknown">Title:</label> {{ book.title }}</li>
+                        <li><label class="unknown">Author:</label> {{ book.author }}</li>
+                        <li><label class="unknown">ISBN:</label> {{ book.isbn }}</li>
+                        <li><label class="unknown">Published:</label> {{ book.year }}</li>
+                        <li><label class="unknown">Libreria:</label> {{ count }}reviews {{ avgrating }} avg rating</li>
+                        <li><label class="unknown">Your Rating:</label> {{ ureview.rating }} stars</li>
+                        <li><label class="unknown">Goodreads:</label> 1624247 ratings 4.11 stars</li>
                     </ul>
                 </div>
             </div>

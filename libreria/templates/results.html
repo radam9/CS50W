@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/search.css') }}">{% endblock %}
+
+{% block body %}
+{% include 'navbar.html' %}
+
+
+{% for book in books %}
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{ book.title }}</h5>
+        <p class="card-text">
+            <ul>
+                <li>{{ book.isbn }}</li>
+                <li>{{ book.author }}</li>
+                <li>{{ book.year }}</li>
+            </ul>
+        </p>
+    </div>
+</div>
+{% endfor %}
+
+
+{% endblock %}
