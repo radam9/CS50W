@@ -115,8 +115,12 @@ def book(bookid):
 @app.route("/reviews")
 @login_required
 def reviews():
-    reviews = Review.revsearchuid(current_user.id)
-    return render_template('reviews.html', title='My Reviews', reviews=reviews)
+    revs = Review.revsearchuid(current_user.id)
+    books = list()
+    for r in revs:
+        book = json.loads(Book.bsearchid(r.bookid))
+        books.append(Book(book[0], book[1], book[2], book[3], book[4]))
+    return render_template('reviews.html', title='My Reviews', reviews=zip(books,revs))
 
 @app.route("/review_submit")
 @login_required
