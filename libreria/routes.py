@@ -1,4 +1,4 @@
-from flask import render_template, request, url_for, flash, redirect, session
+from flask import render_template, request, url_for, flash, redirect, session, abort, jsonify
 from libreria import app, db, bcrypt
 #import forms from forms.py in root
 from libreria.forms import RegForm, LoginForm, ReviewForm, SearchForm
@@ -77,7 +77,7 @@ def results():
 def book(bookid):
     session['book'] = Book.bsearchid(bookid)
     if session['book'] == None:
-        return redirect(url_for('errorpage'))#set an errorhandler page invalid book id
+        abort(404)
     else:
         temp = json.loads(session['book'])
         book = Book(temp[0], temp[1], temp[2], temp[3], temp[4])
@@ -88,9 +88,12 @@ def book(bookid):
         if ureview == None:
             flash('Your review has been submitted!', 'success')
             review = Review.create(review=form.review.data, rating=form.rating.data, bookid=book.id, userid=current_user.id)
-            return redirect(url_for('errorpage'))#change to a message page
+            session['revmsg'] = 1#value used to notify the review submit page that a review hasn't been submitted for this book by the user.
+            return redirect(url_for('revsubmit'))
         else:
-            return redirect(url_for('errorpage'))#set an errorhandler page you have already submitted a review for this book
+            session['revmsg'] = 0#value used to notify the review submit page that a review has been submitted for this book by the user.
+            return redirect(url_for('revsubmit'))
+            
     breview, count = Review.revsearchbid(bookid)
     total = 0
     if count == 0:
@@ -114,17 +117,19 @@ def reviews():
     reviews = Review.revsearchuid(current_user.id)
     return render_template('reviews.html', title='My Reviews', reviews=reviews)
 
-@app.route("/errorpage")
+@app.route("/review_submit")
 @login_required
-def errorpage():
-    return render_template('errorpage.html')
+def revsubmit():
+    temp = json.loads(session['book'])
+    book = Book(temp[0], temp[1], temp[2], temp[3], temp[4])
+    return render_template('message.html', title='Review submission', message=session['revmsg'], book=book)
 
 @app.route("/api/<isbn>")
 @login_required
 def api(isbn):
     b = Book.bsisbn(isbn)
     if b == None:
-        return redirect(url_for('errorpage'))#set an errorhandler page invalid book isbn
+        abort(404, description="Book not found")
     else:
         temp = json.loads(b)
         book = Book(temp[0], temp[1], temp[2], temp[3], temp[4])
@@ -141,6 +146,6 @@ def api(isbn):
     r['isbn'] = book.isbn
     r['review_count'] = count
     r['average_rating'] = rating
-    jr = json.dumps(r)
+    jr = jsonify(r)
 
     return jr, 200
