@@ -54,7 +54,7 @@ class Book():
 
     @staticmethod
     def bsearchisbn(isbn):
-        response = db.session.execute("SELECT * FROM books WHERE isbn LIKE :isbn", {"isbn": "%" + isbn + "%"}).fetchall()
+        response = db.session.execute("SELECT * FROM books WHERE isbn ILIKE :isbn", {"isbn": "%" + isbn + "%"}).fetchall()
         books=list()
         if response != None:
             for r in response:
@@ -65,7 +65,7 @@ class Book():
 
     @staticmethod
     def bsearchtitle(title):
-        response = db.session.execute("SELECT * FROM books WHERE title LIKE :title", {"title": "%" + title + "%"}).fetchall()
+        response = db.session.execute("SELECT * FROM books WHERE title ILIKE :title", {"title": "%" + title + "%"}).fetchall()
         books=list()
         if response != None:
             for r in response:
@@ -76,7 +76,7 @@ class Book():
 
     @staticmethod
     def bsearchauthor(author):
-        response = db.session.execute("SELECT * FROM books WHERE author LIKE :author", {"author": "%" + author + "%"}).fetchall()
+        response = db.session.execute("SELECT * FROM books WHERE author ILIKE :author", {"author": "%" + author + "%"}).fetchall()
         books=list()
         if response != None:
             for r in response:

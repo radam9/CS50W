@@ -86,14 +86,13 @@ def book(bookid):
     form = ReviewForm()
     if form.validate_on_submit():
         if ureview == None:
-            flash('Your review has been submitted!', 'success')
             review = Review.create(review=form.review.data, rating=form.rating.data, bookid=book.id, userid=current_user.id)
             session['revmsg'] = 1#value used to notify the review submit page that a review hasn't been submitted for this book by the user.
             return redirect(url_for('revsubmit'))
         else:
             session['revmsg'] = 0#value used to notify the review submit page that a review has been submitted for this book by the user.
             return redirect(url_for('revsubmit'))
-            
+
     breview, count = Review.revsearchbid(bookid)
     total = 0
     if count == 0:
