@@ -5,6 +5,7 @@
 
 {% block body %}
 {% include 'navbar.html' %}
+<div><img src="{{ url_for('static', filename='images/pantheon-s.png') }}"></div>
 <form class="form-inline mx-auto" method="POST" action="">
     {{ form.hidden_tag() }}
     <div>

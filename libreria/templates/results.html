@@ -1,26 +1,44 @@
 {% extends 'base.html' %}
 
 {% block stylesheet %}
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/search.css') }}">{% endblock %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/search.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/table.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/util.css') }}">{% endblock %}
 
 {% block body %}
 {% include 'navbar.html' %}
 
+<h1>Search Results:</h1><span> Search results for "{{ searchresult }}"</span>
 
-{% for book in books %}
-<div class="card" style="width: 18rem;">
-    <div class="card-body">
-        <h5 class="card-title">{{ book.title }}</h5>
-        <p class="card-text">
-            <ul>
-                <li>{{ book.isbn }}</li>
-                <li>{{ book.author }}</li>
-                <li>{{ book.year }}</li>
-            </ul>
-        </p>
+
+<div class="limiter">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <div class="table100">
+                <table>
+                    <thead>
+                        <tr class="table100-head">
+                            <th class="column1">Title</th>
+                            <th class="column2">Author</th>
+                            <th class="column3">Year</th>
+                            <th class="column4">ISBN</th>
+                        </tr>
+                    </thead>
+                    {% for book in books %}
+                    <tbody>
+                        <tr>
+                            <td class="column1">{{ book.title }}</td>
+                            <td class="column2">{{ book.author }}</td>
+                            <td class="column3">{{ book.year }}</td>
+                            <td class="column4">{{ book.isbn }}</td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
     </div>
 </div>
-{% endfor %}
 
 
 {% endblock %}

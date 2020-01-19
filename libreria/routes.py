@@ -50,6 +50,7 @@ def logout():
 @login_required
 def search():
     form = SearchForm()
+    session['searchresult'] = form.search.data
     if form.validate_on_submit():
         if form.type.data == 'title':
             session['books'] = Book.bsearchtitle(title=form.search.data)
@@ -64,13 +65,14 @@ def search():
 @login_required
 def results():
     sbooks = session['books']
+    searchresult = session['searchresult']
     temp = list()
     for b in sbooks:
         temp.append(json.loads(b))
     books = list()
     for t in temp:
         books.append(Book(t[0], t[1], t[2], t[3], t[4]))
-    return render_template('results.html', title='Book search results', books=books)
+    return render_template('results.html', title='Book search results', books=books, searchresult=searchresult)
 
 @app.route("/book/<int:bookid>", methods=['GET', 'POST'])
 @login_required
