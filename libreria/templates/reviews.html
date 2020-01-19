@@ -1,31 +1,30 @@
 {% extends 'base.html' %}
 
 {% block stylesheet %}
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/reviews.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/reviewcard.css') }}">{% endblock %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/reviews.css') }}">{% endblock %}
 
 {% block body %}
 {% include 'navbar.html' %}
-<h1>{{ current_user.username }} reviews:</h1>
-<div class="review-item">
-    {% for book, review in reviews %}
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="review-pic">
-                <img src="http://covers.openlibrary.org/b/isbn/{{ book.isbn }}-L.jpg">
-            </div>
+<div>
+<h1>{{ current_user.username }}'s reviews:</h1>
+</div>
+{% for book, review in reviews %}
+<div class="rev-box">
+    <div class="blog-post">
+        <div class="blog-post-img">
+            <img src="http://covers.openlibrary.org/b/isbn/{{ book.isbn }}-L.jpg" alt="">
         </div>
-        <div class="col-lg-8">
-            <div class="review-content text-box text-white">
-                <div class="rating">
-                    <h5><i>Rating</i><span>{{ review.rating }}</span> / 5</h5>
-                </div>
-                <div class="top-meta"><a href="">Book</a></div>
-                <h3>{{ book.title }}</h3>
-                <p>{{ review.review }}</p>
+        <div class="blog-post-info">
+            <div class="blog-post-rating">
+                <span>rating:</span>
+                <span>{{ review.rating }} / 5</span>
             </div>
+            <h1 class="blog-post-title"><a href="{{ url_for('book', bookid=book.id) }}">{{ book.title }}</a></h1>
+            <p class="blog-post">
+                {{ review.review }}
+            </p>
         </div>
     </div>
-    {% endfor %}
 </div>
+{% endfor %}
 {% endblock %}

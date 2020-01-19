@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
 {% block stylesheet %}
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/search.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/results.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/table.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/util.css') }}">{% endblock %}
 
 {% block body %}
 {% include 'navbar.html' %}
 
+<div class='h-box'>
 <h1>Search Results:</h1><span> Search results for "{{ searchresult }}"</span>
-
-
+</div>
 <div class="limiter">
     <div class="container-table100">
         <div class="wrap-table100">
@@ -27,7 +27,7 @@
                     {% for book in books %}
                     <tbody>
                         <tr>
-                            <td class="column1">{{ book.title }}</td>
+                            <td class="column1"><a class="stretched-link" href="{{ url_for('book', bookid=book.id) }}">{{ book.title }}</a></td>
                             <td class="column2">{{ book.author }}</td>
                             <td class="column3">{{ book.year }}</td>
                             <td class="column4">{{ book.isbn }}</td>

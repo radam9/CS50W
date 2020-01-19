@@ -1,5 +1,3 @@
-/*//////////////////////////////////////////////////////////////////
-[ RESTYLE TAG ]*/
 * {
     margin: 0px;
     padding: 0px;
@@ -8,7 +6,7 @@
 
 body, html {
     height: 100%;
-    font-family: sans-serif;
+    /* font-family: sans-serif; */
 }
 
 /* ------------------------------------ */
@@ -29,9 +27,6 @@ a:hover {
 }
 
 /* ------------------------------------ */
-h1, h2, h3, h4, h5, h6 {
-    margin: 0px;
-}
 
 p {
     margin: 0px;
@@ -85,17 +80,12 @@ iframe {
 .container-table100 {
     width: 100%;
     min-height: 100vh;
-    background: #c850c0;
-    background: -webkit-linear-gradient(45deg, #4158d0, #c850c0);
-    background: -o-linear-gradient(45deg, #4158d0, #c850c0);
-    background: -moz-linear-gradient(45deg, #4158d0, #c850c0);
-    background: linear-gradient(45deg, #4158d0, #c850c0);
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
     display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     flex-wrap: wrap;
     padding: 33px 30px;
@@ -108,7 +98,7 @@ iframe {
 table {
     border-spacing: 1;
     border-collapse: collapse;
-    background: white;
+    background: rgba(43, 43, 45, 0.3);
     border-radius: 10px;
     overflow: hidden;
     width: 100%;
@@ -164,18 +154,25 @@ table td.r, table th.r {
 tbody tr:nth-child(even) {
     background-color: #f5f5f5;
 }
+table tr td a,  table tr td a:hover{
+    display:block;
+    height:100%;
+    width:600%;
+    text-decoration: inherit;
+    color: inherit;
+}
 
 tbody tr {
     font-family: OpenSans-Regular;
     font-size: 15px;
-    color: #808080;
+    color: black;
     line-height: 1.2;
     font-weight: unset;
 }
 
 tbody tr:hover {
-    color: #555555;
-    background-color: #f5f5f5;
+    color: black;
+    background-color: rgba(43, 43, 45, 0.1);
     cursor: pointer;
 }
 

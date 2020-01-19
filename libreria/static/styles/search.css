@@ -1,0 +1,57 @@
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+    background: linear-gradient(135deg, #7fa090, #dcc173);
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.search-main {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 91.9vh;
+}
+.search-main .box {
+    position: relative;
+    margin: auto auto;
+}
+.img-box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    margin: auto;
+	margin-bottom: 50px;
+}
+
+#img {
+    position: relative;
+    width: 150px;
+}
+
+.form-inline {
+    position: relative;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 10px 0;
+}

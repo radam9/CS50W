@@ -43,7 +43,7 @@ body {
     height: 500px;
 }
 
-.book-main .book-box .imgbx img {
+#img1 {
     position: absolute;
     top: 0;
     left: 0;
@@ -51,6 +51,15 @@ body {
     height: 100%;
     object-fit: contain;
 }
+#img2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 
 .book-main .book-box .info-box {
     background-color: black;
