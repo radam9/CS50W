@@ -100,8 +100,8 @@ def book(bookid):
     ubreview = list()
     if count == 0:
         avgrating = 0
-    elif count == 1:
-        avgrating = breview[0].rating
+    # elif count == 1:
+    #     avgrating = breview[0].rating
     else:
         for b in breview:
             ubreview.append(User.ultimateid(b.userid))
