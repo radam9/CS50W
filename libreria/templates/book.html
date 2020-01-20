@@ -18,9 +18,9 @@
                     <li><label class="lab">Author:</label> {{ book.author }}</li>
                     <li><label class="lab">ISBN:</label> {{ book.isbn }}</li>
                     <li><label class="lab">Published:</label> {{ book.year }}</li>
-                    <li><label class="lab">Libreria:</label> {{ count }}reviews {{ avgrating }} avg rating</li>
-                    <li><label class="lab">Your Rating:</label> {{ ureview.rating }} stars</li>
-                    <li><label class="lab">Goodreads:</label> {{ gcount }} ratings {{ grating }} stars</li>
+                    <li><label class="lab">Libreria:</label> reviews: {{ count }} - rating: {{ avgrating }}</li>
+                    <li><label class="lab">Your Rating:</label> {{ ureview.rating }} / 5</li>
+                    <li><label class="lab">Goodreads:</label> reviews: {{ gcount }} - rating: {{ grating }}</li>
                 </ul>
             </div>
         </div>
