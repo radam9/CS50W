@@ -134,7 +134,7 @@ def revsubmit():
 def api(isbn):
     b = Book.bsisbn(isbn)
     if b == None:
-        abort(404, description="Book not found")
+        abort(404)
     else:
         temp = json.loads(b)
         book = Book(temp[0], temp[1], temp[2], temp[3], temp[4])

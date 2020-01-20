@@ -20,6 +20,7 @@ body {
     align-items: center;
     flex-wrap: wrap;
     height: 91.9vh;
+	padding-bottom: 20%;
 }
 .search-main .box {
     position: relative;
