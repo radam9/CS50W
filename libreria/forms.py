@@ -25,6 +25,6 @@ class ReviewForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class SearchForm(FlaskForm):
-    search = StringField('Search', validators=[DataRequired()])
+    search = StringField('Search', validators=[DataRequired(), Length(min=0, max=20)])
     type = SelectField('Type', choices=[('title', 'Title'), ('isbn', 'ISBN'), ('author', 'Author')])
     submit = SubmitField('Search')
