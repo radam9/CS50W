@@ -41,8 +41,7 @@
     {% for review, user in burev|reverse %}
     <div class="review-card">
         <div class="review">
-            <h4 class="reviewer">{{ user.username }} rated it: {{ review.rating }} / 5<div class="Stars" style="--rating: {{ form.rating.data }};"></div>
-            </h4>
+            <h4 class="reviewer">{{ user.username }} rated it: {{ review.rating }} / 5</h4>
             <p class="review-text">{{ review.review }}</p>
 
         </div>

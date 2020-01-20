@@ -101,11 +101,6 @@ class Book():
         else:
             return None
 
-    def updaterating(self,rating):
-        '''
-        update the rating through the review class, and it should get the avg ratings for a single book after each rating update and send that information over to "book.rating"
-        '''
-        pass
 
 class Review():
 
