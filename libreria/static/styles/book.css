@@ -1,163 +1,175 @@
-/* CSS for book.html */
 *,
 *:after,
 *:before {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-    background: #373b39;
+	background: linear-gradient(135deg, #7fa090, #dcc173);
+    position: relative;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+}
+/* main book box styling */
+.bookbox {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	padding: 25px;
 }
 
-.body-book {
+.book {
+	width: 100%;
+	max-width: 50rem;
+	min-width: 32rem;
+	padding: 1rem;
+	background-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1.4rem 8rem rgba(0,0,0,.2);
     display: flex;
-    justify-content: center;
-    align-content: center;
-}
-
-.book-main {
-    position: relative;
-    max-width: 1000px;
-    display: flex;
-    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+	flex-wrap: wrap;
+    border-radius: .4rem;
 }
 
-.book-main .book-box {
+.bookimg {
+	min-width: 16.5rem;
+    max-width: 16.5rem;
+    height: 27.225rem;
     position: relative;
+	border-radius: .4rem;
+}
+
+.book-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0.4rem;
+}
+.bookinfo {
+	background-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1.4rem 8rem rgba(0,0,0,.2);
+	width: 30rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 50px 0;
+    justify-content: flex-end;
+	padding: 25px;
+	border-radius: .4rem;
 }
-
-.book-main .book-box .imgbx {
-    position: relative;
-    width: 306px;
-    height: 500px;
-}
-
 #img1 {
     position: absolute;
-    top: 0;
+    /* top: 0; */
     left: 0;
     width: 100%;
     height: 100%;
     object-fit: contain;
+	border-radius: .4rem;
 }
 #img2 {
     position: absolute;
-    top: 0;
+    /* top: 0; */
     left: 0;
     width: 100%;
     height: 100%;
     object-fit: contain;
+	border-radius: .4rem;
+}
+
+.nobull {
+	list-style-type: none;
+}
+
+.nobull li {
+	font-size: 20px;
+	font-weight: 400;
+}
+
+.nobull .lab {
+	font-weight: 600;
 }
 
 
-.book-main .book-box .info-box {
-    background-color: black;
-    position: relative;
-    width: 600px;
-    height: 500px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex: 1;
-}
 
-.book-main .book-box .info-box {
-    padding-left: 30px;
-}
-
-.book-main .book-box .info-box .nobull {
-    list-style-type: none;
-    font-family: sans-serif;
-    color: rgb(255, 255, 255);
-}
-
-.book-main .book-box .info-box li {
-    list-style-type: none;
-    font-size: 16px;
-    font-family: sans-serif;
-    color: rgb(255, 255, 255);
-    margin: 15px;
-}
-.book-main .book-box .info-box .unknown {
-    font-weight: 700;
-}
-
+/* review input styling */
 .review-box {
-    position: relative;
-    background: rgb(115, 80, 46);
-    max-width: 1000px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	padding: 5px;
+}
+.review-form {
+	width: 100%;
+	max-width: 50rem;
+	min-width: 32rem;
+	padding: 1rem;
+	background-color: rgba(0, 0, 0, 0.2);
+	box-shadow: 0 1.4rem 8rem rgba(0,0,0,.2);
+	display: flex;
+	align-items: baseline;
+	flex-wrap: wrap;
+	flex-direction: column;
+	border-radius: .4rem;
+}
+.user-review {
+	width: 100%;
+	margin: 3px 0;
 }
 
-.review-box .review-form {
-    position: relative;
-    background: rgb(191, 184, 136);
-    width: 1000px;
-    margin: 0 50px;
+.user-review textarea{
+	resize: vertical;
+	background-color: rgba(255, 255, 255, 0.7);
+	width: 100%;
+	border-radius: 0.4rem;
 }
 
-.review-box .review-form .user-review {
-    position: relative;
-    max-width: 1000px;
+.btn {
+	background-color: rgba(255, 255, 255, 0.3);
 }
 
-#review {
-    position: relative;
-    width: 880px;
-    margin: 10px 10px;
-    resize: none;
+/* Styling the books reviews */
+.review-card {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	padding: 5px;
+	margin: auto;
 }
 
-.review-box .review-card {
-    background: rgb(236, 224, 143);
-    position: relative;
-    width: 1000px;
-    margin: 5px 50px;
-    padding: 20px;
+.review {
+	width: 100%;
+	max-width: 50rem;
+	min-width: 32rem;
+	padding: 1rem;
+	background-color: rgba(0, 0, 0, 0.2);
+	box-shadow: 0 1.4rem 8rem rgba(0,0,0,.2);
+	display: flex;
+	align-items: baseline;
+	flex-wrap: wrap;
+	flex-direction: column;
+	border-radius: .4rem;
 }
 
-.review-box .review-card .reviewer {
-    margin: 10px 5px;
-}
 
-.review-box .review-card .review-text {
-    text-align: justify;
-}
-
-/* CSS for the stars in reviews */
-:root {
-  --star-size: 60px;
-  --star-color: #fff;
-  --star-background: #fc0;
-}
-
-.Stars {
-  --percent: calc(var(--rating) / 5 * 100%);
-
-  display: inline-block;
-  font-size: var(--star-size);
-  font-family: Times; // make sure ★ appears correctly
-  line-height: 1;
-
-  &::before {
-    content: '★★★★★';
-    letter-spacing: 3px;
-    background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+@media screen and (max-width: 1086px) {
+	.book {
+		width: 32rem;
+	}
+	#img1, #img2 {
+		left: 40%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.review-form {
+		width: 32rem;
+	}
+	.review-card {
+		width: 32rem;
+	}
 }

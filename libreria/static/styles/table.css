@@ -98,7 +98,7 @@ iframe {
 table {
     border-spacing: 1;
     border-collapse: collapse;
-    background: rgba(43, 43, 45, 0.3);
+    background: rgba(43, 43, 45, 0.25);
     border-radius: 10px;
     overflow: hidden;
     width: 100%;
@@ -144,8 +144,7 @@ table td.r, table th.r {
 }
 
 .table100-head th {
-    font-family: OpenSans-Regular;
-    font-size: 18px;
+    font-size: 20px;
     color: #fff;
     line-height: 1.2;
     font-weight: unset;
@@ -163,8 +162,7 @@ table tr td a,  table tr td a:hover{
 }
 
 tbody tr {
-    font-family: OpenSans-Regular;
-    font-size: 15px;
+    font-size: 18px;
     color: black;
     line-height: 1.2;
     font-weight: unset;

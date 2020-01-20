@@ -97,12 +97,14 @@ def book(bookid):
 
     breview, count = Review.revsearchbid(bookid)
     total = 0
+    ubreview = list()
     if count == 0:
         avgrating = 0
     elif count == 1:
         avgrating = breview[0].rating
     else:
         for b in breview:
+            ubreview.append(User.ultimateid(b.userid))
             total += b.rating
         avgrating = total/count
         avgrating = round(avgrating,2)
@@ -110,7 +112,7 @@ def book(bookid):
     goodread = goodreads(book.isbn)
     gcount = goodread[0]
     grating = goodread[1]
-    return render_template('book.html', title='Book Title', form=form, book=book, ureview=ureview, count=count, avgrating=avgrating, grating=grating, gcount=gcount)
+    return render_template('book.html', title='Book Title', form=form, book=book, ureview=ureview, count=count, avgrating=avgrating, grating=grating, gcount=gcount, burev=zip(breview, ubreview))
 
 @app.route("/reviews")
 @login_required

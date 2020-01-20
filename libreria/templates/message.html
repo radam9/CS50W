@@ -5,11 +5,14 @@
 
 {% block body %}
 {% include 'navbar.html' %}
-
-{% if message == 1 %}
-<p>Your review for<a href="{{ url_for('book', bookid=book.id) }}">{{ book.title }}</a>has been submitted!</p>
-{% else %}
-<p>You have already submitted a review for<a href="{{ url_for('book', bookid=book.id) }}">{{ book.title }}</a>.</p>
-{% endif %}
+<div class="message-main">
+    {% if message == 1 %}
+    <h1>Review Submitted.</h1>
+    <p>Your review for, <a href="{{ url_for('book', bookid=book.id) }}">{{ book.title }}</a> has been submitted!</p>
+    {% else %}
+    <h1>Review not submitted.</h1>
+    <p>You have already submitted a review for, <a href="{{ url_for('book', bookid=book.id) }}">{{ book.title }}</a>.</p>
+    {% endif %}
+</div>
 
 {% endblock %}

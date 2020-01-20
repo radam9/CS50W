@@ -14,18 +14,13 @@ body {
     background-attachment: fixed;
 }
 
-h1 {
-    font-weight: 600;
+.message-main {
+    padding: 50px 0 0 100px;
 }
-span{
-    font-size: 20px;
-}
-
-.h-box {
-    padding: 25px;
-    color: #e1fbef;
+.message-main h1 {
+    font-size: 3.125rem;
 }
 
-th {
-    background: #343a40;
+.message-main p {
+    font-size: 1.875rem;
 }

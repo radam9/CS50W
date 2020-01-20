@@ -6,6 +6,21 @@
 	margin: 0;
 	padding: 0;
 }
+body {
+	/* font-family: 'Patrick Hand', cursive; */
+	font-family: 'Roboto', sans-serif;
+}
 .navbar {
 	font-size: 20px;
+}
+
+.navbar .navbar-brand {
+	font-family: 'Norican', cursive;
+	font-size: 30px;
+	color: #bdb7b7;
+}
+
+.navbar .navbar-brand img {
+	filter: invert(100%);
+	margin-right: 10px;
 }

@@ -7,7 +7,10 @@
 {% include 'navbar.html' %}
 <div class="search-main">
     <div class="box">
-        <div class="img-box"><img src="{{ url_for('static', filename='images/pantheon-s.png') }}" id="img"></div>
+        <div class="img-box">
+            <img src="{{ url_for('static', filename='images/pantheon-s.png') }}" id="img">
+            <!-- <h1>Libreria</h1> -->
+        </div>
         <form class="form-inline mx-auto" method="POST" action="">
             {{ form.hidden_tag() }}
             <div class="search-box">
