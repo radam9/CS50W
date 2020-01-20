@@ -1,12 +1,20 @@
+{% extends 'base.html' %}
 
+{% block stylesheet %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/404.css') }}">
-<link href="https://fonts.googleapis.com/css?family=Tillana&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Tillana&display=swap" rel="stylesheet">{% endblock %}
+
+{% block body %}
+{% include 'navbar.html' %}
 
 
 
+<div class="angel">
 <div class="main404">
     <h1>
         404
     </h1>
     <h2>We're sorry, but the page you have requested was not found.</h2>
 </div>
+</div>
+{% endblock %}
