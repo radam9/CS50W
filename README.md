@@ -4,60 +4,63 @@ CS50W - Web Programming with Python and JavaScript
 
 This is project1's repo.
 It contains the code and files for project1, which is a website based project to practice the basics of Python, Flask and SQL.
+The application is packaged and is launched using  ``` run.py``` in the main directory.
+### The project directory looks as follows:
+```bash
+───Project1
+   └───libreria
+       ├───static
+       │   ├───images
+       │   └───styles
+       └───templates
+```
 
-### The project consists of 10 files in total, which are as follows:
+####	The ``Project1`` folder contains the following files:
 
-- index.html > contains the code for the website's main page.
+- README.md  
 
-- books.html > contains the code for the website's books page.
+- requirements.txt > contains the required python packages for this project.
 
-- movies.html > contains the code for the website's movies page.
+- resources.txt > contains the sources of images and other resources using for the website.
 
-- music.html > contains the code for the website's music page.
+- run.py > main app launching file.
 
-- Logo1.png > is the image used in the navigation bar.
+#### The ``libreria`` folder contains:
 
-#### inside style folder:
+-  _ _init__.py > main application initialization file, contains the app.config parameters as well as db initialization.
 
-- original.css > contains the original css code used to format the pages.
+- books.csv > provided csv with list of books and info.
 
-- style.css > contains the css code obtained from converting the style.scss file.
+- errors.py > The errorhandler for the 404 page.
 
-- style.css.map
+- form.py > The Flask-WTForms code to get the user input from various pages.
+- funcs.py > Goodreads api function to get book ratings count and average rating.
+- import.py > Initializes the database by creating 3 tables: books, users and reviews. It also imports the contents of ``books.csv`` into the database books table.
+- models.py > The User, Book and Review classes as well as relevant methods.
+- routes.py > The Flask app routes.
 
-- style.scss > contains the scss code used to format the html files.
+#### The ``static`` folder contains:
+- ``images`` folder that contains images used in the webpage.
+- ``styles`` folder that contains all the css for the webpage.
+#### The ``templates`` folder contains all relavent html files.
 
 
+### Project1 requirements check list:
 
-### Project0 requirements check list:
+- [x] **Login page:** login functionality, existing user in db check and correct password check.
+- [x] **Register page:** register functionality, existing username check and required input check.
+- [x] **Logout:** Logout button on the navigation bar, logs out the user and redirects to the Login page.
+- [x] **Import:** ``import.py`` Create database tables and import ``books.csv`` to the database.
+- [x] **Search:** Once the user is logged in, the are redirected to a search page where they can search for books by title, author or isbn (part of title/author/isbn also works). After the search, the user is redirected to a results page showing the results of his or her search or a message showing "No Results".
+- [x] **Book Page:** Clicking on a book from either "results page" or "my reviews page" will redirect the user to a page containing the book details and user reviews.
+- [x] **Review Submission:** On the book page the user can submit a review with score 1 to 5 and a text component. The user can't submit a review to the same book twice.
+- [x] **Goodreads Review Data:** On the book page, the goodreads review count and average rating are included using goodreads api.
+- [x] **API Access:** If the user makes a GET request to ``/api/<isbn>`` they are given a JSON response with the book info, they are given a 404 error if the isbn is not found.
 
-- [x] At least 4 html pages and move freely between pages.
+- [x] SQLAlchemy ORM not used.
 
-- [x] HTML must contain at least:  
-  - [x] (1) ul/ol
-  - [x] (1) table
-  - [x] (1) image
-
-- [x] At least 1 stylesheet
-
-- [x] CSS Stylesheet must contain at least
-  - [x] (5) css properties
-  - [x] (5) css selectors
-  - [x] (1) #id
-  - [x] (1) .class
-
-- [x] at least 1 @media
-
-- [x] Bootstrap 4 must use at least
-  - [x] (1) component
-  - [x] (1) grid model with at least 2 columns
-
-- [x] SCSS Stylesheet must contain at least
-  - [x] (1) SCSS Variable
-  - [x] (1) SCSS Nesting
-  - [x] (1) SCSS Inheritance
-
-- [x] readme.md file containing
+- [x] Python packages used to run the application included in ``requirements.txt``.
+- [x] ``README.md`` file containing
   - [x] project description
   - [x] contents of each file
   - [x] (optional) any aditional info

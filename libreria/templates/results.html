@@ -2,12 +2,16 @@
 
 {% block stylesheet %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/results.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/table.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/util.css') }}">{% endblock %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/results-table.css') }}">{% endblock %}
 
 {% block body %}
 {% include 'navbar.html' %}
 
+{% if books|length < 1 %}
+<div class='h-box'>
+<h1>No Search Results:</h1><span> There were no search results for "{{ searchresult }}"</span>
+</div>
+{% else %}
 <div class='h-box'>
 <h1>Search Results:</h1><span> Search results for "{{ searchresult }}"</span>
 </div>
@@ -39,6 +43,6 @@
         </div>
     </div>
 </div>
-
+{% endif %}
 
 {% endblock %}
