@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../static/index.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+    <title>Flack</title>
+  </head>
+  <body>
+    <!-- Main Container (sidebar + main section) -->
+    <div class="container">
+      <!-- Sidebar Container -->
+      <div class="sidebar">
+        <div class="side-user">
+          <span id="username"></span>
+          <button class="logout">Logout</button>
+        </div>
+        <div class="side-create">
+          <input type="text" placeholder="New channel name"></input>
+          <button class="create">Create</button>
+        </div>
+        <!-- Channel List -->
+        <div class="side-clist">
+          <ul>
+            {% for room in rooms %}
+              <li>{{ room }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <!-- Main chat section Container -->
+      <div class="chat-main">
+        <!-- Chatroom Title -->
+        <h1>Current Chatroom Name</h1>
+        <!-- Chat Area -->
+        <div class="chat">
+          <ul>
+            <!-- chat messages list -->
+          </ul>
+        </div>
+        <!-- Chat Input -->
+        <div class="chat-input">
+          <input type="text" placeholder="Type here!"></input>
+          <button class="send" id="btnsend">Send</button>
+        </div>
+      </div>
+    </div>
+    
+    
+  </body>
+</html>
