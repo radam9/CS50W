@@ -67,6 +67,21 @@ body {
   list-style-type: none;
 }
 
+.message {
+  width: 90%;
+  background-color: aliceblue;
+  border-radius: 5px;
+  padding: 5px;
+}
+.msg-info {
+  font-weight: 600;
+  padding-bottom: 5px;
+}
+.time {
+  font-weight: 400;
+  font-size: 12px;
+}
+
 .chat-input {
   height: 10vh;
   width: 75%;

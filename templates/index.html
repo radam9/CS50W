@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="../static/index.css" />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo=" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='index.js') }}"></script>
     <title>Flack</title>
   </head>
@@ -24,7 +25,7 @@
         </div>
         <!-- Channel List -->
         <div class="side-clist">
-          <ul>
+          <ul>Channels
             {% for room in rooms %}
               <li>{{ room }}</li>
             {% endfor %}
@@ -38,12 +39,16 @@
         <!-- Chat Area -->
         <div class="chat">
           <ul>
+            <div class="message">
+              <div class="msg-info">Username <span class="time"> - 28-01-2020 - 14:00</span></div>
+              <div class="msg-body">This is a test message!</div class="msg-body">
+            </div>
             <!-- chat messages list -->
           </ul>
         </div>
         <!-- Chat Input -->
         <div class="chat-input">
-          <input type="text" placeholder="Type here!"></input>
+          <input type="text" id="msgsend" placeholder="Type here!"></input>
           <button class="send" id="btnsend">Send</button>
         </div>
       </div>

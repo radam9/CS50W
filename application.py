@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask_socketio import SocketIO, emit, send, join_room, leave_room
+from collections import deque
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "The Strongest Secret Key Ever!"
@@ -7,28 +8,39 @@ app.config["SESSION_TYPE"] = "filesystem"
 socketio = SocketIO(app)
 
 
-clist = {"General": [], "Introduction": [], "Hobbies": []}
-users = {}
+clist = {"General": deque([], maxlen=100), "Introduction": [], "Hobbies": []}
+ulist = {}
 
 
 @app.route("/")
 def main():
-    rooms = clist.keys()
-    return render_template("index.html", rooms=rooms)
+    users = list(ulist.keys())
+    rooms = list(clist.keys())
+    socketio.emit("connect", {"users": users, "rooms": rooms})
+    return render_template("index.html", rooms=rooms, users=users)
 
 
-@app.route("/logout")
-def logout(username):
-    users.pop(username)
-    return render_template("logout.html")
+@socketio.on("onconnect")
+def onconnect(data):
+    ulist[data["username"]] = request.sid
+    join_room(data["activechannel"])
+    user = data["username"]
+    c = data["activechannel"]
+    print(f"\n\n{user} has connected and joined {c}\n\n")
+    users = list(ulist.keys())
+    rooms = list(clist.keys())
+    emit("connected", {"users": users, "rooms": rooms})
 
 
-@socketio.on("eventconnect")
-def onconnect(username):
-    users[username] = request.sid
-    print(f"\n\n{username} has connected\n\n")
-    data = [username, request.sid]
-    send(data)
+@socketio.on("sendmsg")
+def handle_msg(data):
+    clist[data["activechannel"]].append((data["username"], data["msg"], data["time"]))
+    print(clist[data["activechannel"]])
+    emit(
+        "msgupdate",
+        {"user": data["username"], "msg": data["msg"], "time": data["time"]},
+        broadcast=True,
+    )
 
 
 @socketio.on("join")
@@ -36,7 +48,7 @@ def join(room_join):
     username = room_join["username"]
     room = room_join["room"]
     join_room(room)
-    send(username + " has joined the room.", room=room)
+    emit("joined", username + " has joined the room.", room=room)
 
 
 @socketio.on("leave")
