@@ -27,9 +27,17 @@ def onconnect(data):
     user = data["username"]
     c = data["activechannel"]
     print(f"\n\n{user} has connected and joined {c}\n\n")
+    print(ulist)
     users = list(ulist.keys())
     rooms = list(clist.keys())
     emit("connected", {"users": users, "rooms": rooms})
+
+
+@socketio.on("ondisconnect")
+def ondisconnect(data):
+    user = data["username"]
+    ulist.pop(user)
+    print(ulist)
 
 
 @socketio.on("sendmsg")
@@ -38,9 +46,27 @@ def handle_msg(data):
     print(clist[data["activechannel"]])
     emit(
         "msgupdate",
-        {"user": data["username"], "msg": data["msg"], "time": data["time"]},
+        {
+            "user": data["username"],
+            "activechannel": data["activechannel"],
+            "msg": data["msg"],
+            "time": data["time"],
+        },
         broadcast=True,
     )
+    print("delay")
+
+
+@socketio.on("createchannel")
+def createroom(data):
+    if data["channel"] in clist:
+        emit(
+            "confirmcreate",
+            {"code": "0", "msg": "A channel with that name already exists!"},
+        )
+    else:
+        clist[data["channel"]] = deque([], maxlen=100)
+        emit("confirmcreate", {"code": "1", "channel": data["channel"]})
 
 
 @socketio.on("join")

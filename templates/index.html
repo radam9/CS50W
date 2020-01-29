@@ -4,9 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- custom css -->
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo=" crossorigin="anonymous"></script>
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- bootstrap js/jquery/popper -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- socketio -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <!-- handlebars -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.2/handlebars.min.js"></script>
+    <!-- Handlebars template for channels -->
+    <script id="h-channels" type="text/x-handlebars-template">
+      <li>{{ channel }}</li>
+    </script>
+    <!-- Handlebars template for messages -->
+    <!-- custom js -->
     <script src="{{ url_for('static', filename='index.js') }}"></script>
     <title>Flack</title>
   </head>
@@ -16,16 +31,16 @@
       <!-- Sidebar Container -->
       <div class="sidebar">
         <div class="side-user">
-          <span id="username"></span>
-          <button class="logout">Logout</button>
+          <span id="idusername"></span>
+          <button class="logout" id="btnlogout">Logout</button>
         </div>
         <div class="side-create">
-          <input type="text" placeholder="New channel name"></input>
-          <button class="create">Create</button>
+          <input type="text" placeholder="New channel name" id="channelcreate"></input>
+          <button class="create" id="btncreate">Create</button>
         </div>
         <!-- Channel List -->
         <div class="side-clist">
-          <ul>Channels
+          <ul id="chanlist">Channels
             {% for room in rooms %}
               <li>{{ room }}</li>
             {% endfor %}
