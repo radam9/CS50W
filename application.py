@@ -8,16 +8,16 @@ app.config["SESSION_TYPE"] = "filesystem"
 socketio = SocketIO(app)
 
 
-clist = {"General": deque([], maxlen=100), "Introduction": [], "Hobbies": []}
+clist = {"General": deque([], maxlen=100), "Internet": [], "Sports": []}
 ulist = {}
 
 
 @app.route("/")
 def main():
-    users = list(ulist.keys())
-    rooms = list(clist.keys())
+    users = list(ulist)
+    rooms = list(clist)
     socketio.emit("connect", {"users": users, "rooms": rooms})
-    return render_template("index.html", rooms=rooms, users=users)
+    return render_template("index.html")
 
 
 @socketio.on("onconnect")
@@ -28,9 +28,12 @@ def onconnect(data):
     c = data["activechannel"]
     print(f"\n\n{user} has connected and joined {c}\n\n")
     print(ulist)
-    users = list(ulist.keys())
-    rooms = list(clist.keys())
-    emit("connected", {"users": users, "rooms": rooms})
+    users = list(ulist)
+    rooms = list(clist)
+    if clist[data["activechannel"]]:
+        active = list(clist[data["activechannel"]])
+        emit("connected", {"code": "1", "users": users, "rooms": rooms, "msgs": active})
+    emit("connected", {"code": "0", "users": users, "rooms": rooms})
 
 
 @socketio.on("ondisconnect")
@@ -42,7 +45,9 @@ def ondisconnect(data):
 
 @socketio.on("sendmsg")
 def handle_msg(data):
-    clist[data["activechannel"]].append((data["username"], data["msg"], data["time"]))
+    clist[data["activechannel"]].append(
+        {"user": data["username"], "msg": data["msg"], "time": data["time"]}
+    )
     print(clist[data["activechannel"]])
     emit(
         "msgupdate",

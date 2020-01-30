@@ -38,6 +38,23 @@ document.addEventListener("DOMContentLoaded", () => {
   socket.on("connect", () => {
     login();
   });
+  //server reply with channel and messages data
+  socket.on("connected", data => {
+    //if no messages exist in the activechannel
+    if (data["code"] == "0") {
+      for (const e of data["rooms"]) {
+        createchannel({ channel: e });
+      }
+    } else if (data["code"] == "1") {
+      for (const e of data["rooms"]) {
+        createchannel({ channel: e });
+      }
+      // debugger;
+      for (const e of data["msgs"]) {
+        createmsg(e);
+      }
+    }
+  });
 
   // Channel Creating Section
   // enable the create button if there is content in the input field, and use the "enter" key to submit if there is content in the input field, then requesting from the server to create a new channel by pressing "Enter"
@@ -69,16 +86,12 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Channel creating confirmation from the server (accepting or rejecting).
-  socket.on("confirmcreate", payload => {
-    if (payload["code"] == "0") {
-      alert(payload["msg"]);
+  socket.on("confirmcreate", data => {
+    if (data["code"] == "0") {
+      alert(data["msg"]);
     } else {
       //create html element
-      const template = Handlebars.compile(
-        document.getElementById("h-channels").innerHTML
-      );
-      const item = template(payload);
-      document.getElementById("chanlist").innerHTML += item;
+      createchannel(data);
     }
   });
 
@@ -120,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // receiving flask msg broadcast and displaying it in html
   socket.on("msgupdate", data => {
+    createmsg(data);
     console.log(data);
   });
 
@@ -140,19 +154,8 @@ document.addEventListener("DOMContentLoaded", () => {
       username: (username = localStorage.getItem("username"))
     });
     localStorage.clear();
-    loginpop();
-    login();
+    location.reload();
   };
-
-  // socket.on("msgupdate", data => {
-  //   data["user"]
-  //   data["msg"]
-  //   data["time"]
-  // });
-
-  // socket.on("message", data => {
-  //   console.log(`Connected as: ${data}`);
-  // });
 
   // funtion to login the user with username and channel
   function login() {
@@ -167,5 +170,21 @@ document.addEventListener("DOMContentLoaded", () => {
       username: (username = localStorage.getItem("username")),
       activechannel: activechannel
     });
+  }
+  // function to create channel divs
+  function createchannel(data) {
+    const template = Handlebars.compile(
+      document.getElementById("h-channels").innerHTML
+    );
+    const item = template(data);
+    document.getElementById("chanlist").innerHTML += item;
+  }
+  // function to create message divs
+  function createmsg(data) {
+    const template = Handlebars.compile(
+      document.getElementById("h-messages").innerHTML
+    );
+    const item = template(data);
+    document.getElementById("msglist").innerHTML += item;
   }
 });
