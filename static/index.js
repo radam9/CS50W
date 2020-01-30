@@ -71,15 +71,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // Channel creating confirmation from the server (accepting or rejecting).
   socket.on("confirmcreate", payload => {
     if (payload["code"] == "0") {
-      alert(payload["message"]);
+      alert(payload["msg"]);
     } else {
       //create html element
-      var template = Handlebars.compile(
+      const template = Handlebars.compile(
         document.getElementById("h-channels").innerHTML
       );
-      var html = template(payload);
-      document.getElementById("chanlist").innerHTML += html;
-      console.log(html);
+      const item = template(payload);
+      document.getElementById("chanlist").innerHTML += item;
     }
   });
 
