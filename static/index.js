@@ -51,14 +51,6 @@ function chatapp() {
   });
   //server reply with channel and messages data
   socket.on("connected", data => {
-    // data["rooms"].foreach(c => {
-    //   createchannel({ channel: c });
-    // });
-    // if (data["code"] == "1") {
-    //   data["msgs"].foreach(m => {
-    //     createmsg(m);
-    //   });
-    // }
     for (const e of data["rooms"]) {
       createchannel({ channel: e });
     }
@@ -155,15 +147,11 @@ function chatapp() {
 
   // funtion to login the user with username and channel
   function login() {
-    //get username from localstorage
-    var username = localStorage.getItem("username");
     //set the username in the sidebar
     document.querySelector("#idusername").innerHTML = username;
-    //get the activechannel from localstorage
-    var activechannel = localStorage.getItem("activechannel");
     //send the username and activechannel to the server
     socket.emit("onconnect", {
-      username: (username = localStorage.getItem("username")),
+      username: username,
       activechannel: activechannel
     });
   }

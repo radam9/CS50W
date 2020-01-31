@@ -33,7 +33,8 @@ def onconnect(data):
     if clist[data["activechannel"]]:
         active = list(clist[data["activechannel"]])
         emit("connected", {"code": "1", "users": users, "rooms": rooms, "msgs": active})
-    emit("connected", {"code": "0", "users": users, "rooms": rooms})
+    else:
+        emit("connected", {"code": "0", "users": users, "rooms": rooms})
 
 
 @socketio.on("ondisconnect")
