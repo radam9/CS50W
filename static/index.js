@@ -1,3 +1,4 @@
+// User login modal
 if (
   !localStorage.getItem("username") &&
   !localStorage.getItem("activechannel")
@@ -25,7 +26,7 @@ if (
     chatapp();
   };
 }
-
+// main javascript script
 function chatapp() {
   // setting the username and activechannel as variables
   var username = localStorage.getItem("username");
@@ -54,6 +55,8 @@ function chatapp() {
     for (const e of data["rooms"]) {
       createchannel({ channel: e });
     }
+    // set active highlight on the activechannel
+    document.getElementById("list-" + activechannel).className += " active";
     //if no messages exist in the activechannel
     if (data["code"] == "1") {
       for (const e of data["msgs"]) {
@@ -125,12 +128,13 @@ function chatapp() {
   // receiving flask msg broadcast and displaying it in html
   socket.on("msgupdate", data => {
     createmsg(data);
-    console.log(data);
   });
 
   // Channel Joining Section
 
-  // highlighting the active channel
+  // join channel
+
+  // highlighting the clicked channel
   $("#chanlist a").on("click", function(e) {
     e.preventDefault();
     $(this).tab("show");
@@ -148,7 +152,10 @@ function chatapp() {
   // funtion to login the user with username and channel
   function login() {
     //set the username in the sidebar
-    document.querySelector("#idusername").innerHTML = username;
+    document.getElementById("idusername").innerHTML = username;
+    //set channel name ontop of chat
+    var hash = "#";
+    document.getElementById("ctitle").innerHTML = hash.concat(activechannel);
     //send the username and activechannel to the server
     socket.emit("onconnect", {
       username: username,
