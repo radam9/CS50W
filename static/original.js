@@ -1,22 +1,29 @@
-if (
-  !localStorage.getItem("username") &&
-  !localStorage.getItem("activechannel")
-) {
-  // var username = prompt("Enter your desired display name: ");
-  $("#myModal").modal({ backdrop: "static", keyboard: false });
-  document.getElementById("btnUser").onclick = () => {
-    var username = document.getElementById("displayname");
-    localStorage.setItem("username", username.value);
-    username.value = "";
-    localStorage.setItem("activechannel", "General");
-    $("#myModal").modal("hide");
-    chatapp();
-  };
-  // localStorage.setItem("username", username);
-  // localStorage.setItem("activechannel", "General");
+loginpop();
+
+// function for the login popup
+function loginpop() {
+  if (
+    !localStorage.getItem("username") &&
+    !localStorage.getItem("activechannel")
+  ) {
+    // var username = prompt("Enter your desired display name: ");
+    $("#myModal").modal({ backdrop: "static", keyboard: false });
+    document.getElementById("btnUser").onclick = () => {
+      var username = document.getElementById("displayname");
+      localStorage.setItem("username", username.value);
+      username.value = "";
+      localStorage.setItem("activechannel", "General");
+      $("#myModal").modal("hide");
+    };
+    // localStorage.setItem("username", username);
+    // localStorage.setItem("activechannel", "General");
+  }
 }
 
-function chatapp() {
+// const template = Handlebars.compile();
+
+// Main eventlistener to start the
+document.addEventListener("DOMContentLoaded", () => {
   // setting the username and activechannel as variables
   var username = localStorage.getItem("username");
   var activechannel = localStorage.getItem("activechannel");
@@ -64,7 +71,7 @@ function chatapp() {
   // enable the create button if there is content in the input field, and use the "enter" key to submit if there is content in the input field, then requesting from the server to create a new channel by pressing "Enter"
   channelCreate.onkeyup = e => {
     e.preventDefault();
-    if (e.keyCode === 13 && channelCreate.value.length > 0) {
+    if (e.keyCode === 13) {
       // var channel = channelCreate.value;
       btnCreate.click();
     } else {
@@ -97,9 +104,19 @@ function chatapp() {
 
   // enable the send button if there is content in the input field, and use the "enter" key to submit if there is content in the input field, then sending the message to the server by pressing "Enter"
   msgSend.onkeyup = e => {
-    if (e.keyCode == 13 && msgSend.value.length > 0) {
+    if (e.keyCode == 13) {
       // var message = msgSend.value;
-      btnSend.click();
+      if (msgSend.value.length > 0) {
+        let time = new Date().toLocaleString();
+        socket.emit("sendmsg", {
+          msg: msgSend.value,
+          username: username,
+          activechannel: activechannel,
+          time: time
+        });
+        msgSend.value = "";
+        btnSend.disabled = true;
+      }
     } else {
       if (msgSend.value.length > 0) btnSend.disabled = false;
       else btnSend.disabled = true;
@@ -174,9 +191,4 @@ function chatapp() {
     const messagesWindow = document.querySelector("#msglist");
     messagesWindow.scrollTop = messagesWindow.scrollHeight;
   }
-}
-
-var username = localStorage.getItem("username");
-if (username != null) {
-  chatapp();
-}
+});
