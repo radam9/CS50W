@@ -2,18 +2,28 @@ if (
   !localStorage.getItem("username") &&
   !localStorage.getItem("activechannel")
 ) {
-  // var username = prompt("Enter your desired display name: ");
+  var btnChat = document.getElementById("btnUser");
+  var dn = document.getElementById("displayname");
   $("#myModal").modal({ backdrop: "static", keyboard: false });
-  document.getElementById("btnUser").onclick = () => {
-    var username = document.getElementById("displayname");
-    localStorage.setItem("username", username.value);
-    username.value = "";
+  $("#displayname").trigger("focus");
+
+  dn.onkeyup = e => {
+    if (e.keyCode == 13 && dn.value.length > 0) {
+      e.preventDefault();
+      btnChat.click();
+    } else {
+      if (dn.value.length > 0) btnChat.disabled = false;
+      else btnChat.disabled = true;
+    }
+  };
+  // detect button click
+  btnChat.onclick = () => {
+    localStorage.setItem("username", dn.value);
+    dn.value = "";
     localStorage.setItem("activechannel", "General");
     $("#myModal").modal("hide");
     chatapp();
   };
-  // localStorage.setItem("username", username);
-  // localStorage.setItem("activechannel", "General");
 }
 
 function chatapp() {
@@ -63,8 +73,8 @@ function chatapp() {
   // Channel Creating Section
   // enable the create button if there is content in the input field, and use the "enter" key to submit if there is content in the input field, then requesting from the server to create a new channel by pressing "Enter"
   channelCreate.onkeyup = e => {
-    e.preventDefault();
     if (e.keyCode === 13 && channelCreate.value.length > 0) {
+      e.preventDefault();
       // var channel = channelCreate.value;
       btnCreate.click();
     } else {
@@ -98,6 +108,7 @@ function chatapp() {
   // enable the send button if there is content in the input field, and use the "enter" key to submit if there is content in the input field, then sending the message to the server by pressing "Enter"
   msgSend.onkeyup = e => {
     if (e.keyCode == 13 && msgSend.value.length > 0) {
+      e.preventDefault();
       // var message = msgSend.value;
       btnSend.click();
     } else {
