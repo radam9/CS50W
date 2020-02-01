@@ -84,8 +84,7 @@ def handle_msg(data):
 def createroom(data):
     if data["channel"] in clist:
         emit(
-            "confirmcreate",
-            {"code": "0", "msg": "A channel with that name already exists!"},
+            "confirmcreate", {"code": "0"},
         )
     else:
         clist[data["channel"]] = deque([], maxlen=100)

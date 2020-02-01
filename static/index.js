@@ -98,9 +98,9 @@ function chatapp() {
   };
 
   // Channel creating confirmation from the server (accepting or rejecting).
-  socket.on("confirmcreate", data => {
+  socket.on("confirmcreate", () => {
     if (data["code"] == "0") {
-      alert(data["msg"]);
+      $("#alertmodal").modal();
     } else {
       //create html element
       createchannel(data);
