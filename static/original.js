@@ -1,4 +1,4 @@
-// User login modal
+// User login modal.
 if (
   !localStorage.getItem("username") &&
   !localStorage.getItem("activechannel")
