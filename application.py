@@ -24,8 +24,6 @@ def onconnect(data):
     ulist[user] = request.sid
     time = data["time"]
     join_room(room)
-    print(f"\n\n{user} has connected and joined {room}\n\n")
-    print(ulist)
     users = list(ulist)
     rooms = list(clist)
     if clist[room]:
@@ -74,10 +72,7 @@ def handle_msg(data):
     msg = data["msg"]
     time = data["time"]
     room = data["activechannel"]
-    clist[room].append(
-        {"user": data["username"], "msg": data["msg"], "time": data["time"]}
-    )
-    print(clist[data["activechannel"]])
+    clist[room].append({"user": user, "msg": msg, "time": time})
     emit(
         "msgupdate",
         {"user": user, "activechannel": room, "msg": msg, "time": time,},
