@@ -1,29 +1,33 @@
-loginpop();
+// User login modal
+if (
+  !localStorage.getItem("username") &&
+  !localStorage.getItem("activechannel")
+) {
+  var btnChat = document.getElementById("btnUser");
+  var dn = document.getElementById("displayname");
+  $("#myModal").modal({ backdrop: "static", keyboard: false });
+  $("#displayname").trigger("focus");
 
-// function for the login popup
-function loginpop() {
-  if (
-    !localStorage.getItem("username") &&
-    !localStorage.getItem("activechannel")
-  ) {
-    // var username = prompt("Enter your desired display name: ");
-    $("#myModal").modal({ backdrop: "static", keyboard: false });
-    document.getElementById("btnUser").onclick = () => {
-      var username = document.getElementById("displayname");
-      localStorage.setItem("username", username.value);
-      username.value = "";
-      localStorage.setItem("activechannel", "General");
-      $("#myModal").modal("hide");
-    };
-    // localStorage.setItem("username", username);
-    // localStorage.setItem("activechannel", "General");
-  }
+  dn.onkeyup = e => {
+    if (e.keyCode == 13 && dn.value.length > 0) {
+      e.preventDefault();
+      btnChat.click();
+    } else {
+      if (dn.value.length > 0) btnChat.disabled = false;
+      else btnChat.disabled = true;
+    }
+  };
+  // detect button click
+  btnChat.onclick = () => {
+    localStorage.setItem("username", dn.value);
+    dn.value = "";
+    localStorage.setItem("activechannel", "General");
+    $("#myModal").modal("hide");
+    chatapp();
+  };
 }
-
-// const template = Handlebars.compile();
-
-// Main eventlistener to start the
-document.addEventListener("DOMContentLoaded", () => {
+// main javascript script
+function chatapp() {
   // setting the username and activechannel as variables
   var username = localStorage.getItem("username");
   var activechannel = localStorage.getItem("activechannel");
@@ -32,6 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
   var channelCreate = document.getElementById("channelcreate");
   var btnSend = document.getElementById("btnsend");
   var msgSend = document.getElementById("msgsend");
+  // setting variable for channel tabs
+  var chan = document.getElementById("chanlist");
 
   // disable create channel and send msg buttons
   btnCreate.disabled = true;
@@ -48,17 +54,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   //server reply with channel and messages data
   socket.on("connected", data => {
-    // data["rooms"].foreach(c => {
-    //   createchannel({ channel: c });
-    // });
-    // if (data["code"] == "1") {
-    //   data["msgs"].foreach(m => {
-    //     createmsg(m);
-    //   });
-    // }
     for (const e of data["rooms"]) {
       createchannel({ channel: e });
     }
+    // set active highlight on the activechannel
+    document.getElementById("list-" + activechannel).className += " active";
     //if no messages exist in the activechannel
     if (data["code"] == "1") {
       for (const e of data["msgs"]) {
@@ -67,11 +67,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // server reply for joining room
+  socket.on("joined", data => {
+    for (const e of data["msgs"]) {
+      createmsg(e);
+    }
+  });
+
   // Channel Creating Section
   // enable the create button if there is content in the input field, and use the "enter" key to submit if there is content in the input field, then requesting from the server to create a new channel by pressing "Enter"
   channelCreate.onkeyup = e => {
-    e.preventDefault();
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 && channelCreate.value.length > 0) {
+      e.preventDefault();
       // var channel = channelCreate.value;
       btnCreate.click();
     } else {
@@ -104,19 +111,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // enable the send button if there is content in the input field, and use the "enter" key to submit if there is content in the input field, then sending the message to the server by pressing "Enter"
   msgSend.onkeyup = e => {
-    if (e.keyCode == 13) {
+    if (e.keyCode == 13 && msgSend.value.length > 0) {
+      e.preventDefault();
       // var message = msgSend.value;
-      if (msgSend.value.length > 0) {
-        let time = new Date().toLocaleString();
-        socket.emit("sendmsg", {
-          msg: msgSend.value,
-          username: username,
-          activechannel: activechannel,
-          time: time
-        });
-        msgSend.value = "";
-        btnSend.disabled = true;
-      }
+      btnSend.click();
     } else {
       if (msgSend.value.length > 0) btnSend.disabled = false;
       else btnSend.disabled = true;
@@ -136,15 +134,31 @@ document.addEventListener("DOMContentLoaded", () => {
     btnSend.disabled = true;
   };
 
-  // receiving flask msg broadcast and displaying it in html
+  // receiving flask msg broadcast and displaying it in html (including when someone leaves the room)
   socket.on("msgupdate", data => {
     createmsg(data);
-    console.log(data);
   });
 
   // Channel Joining Section
 
-  // highlighting the active channel
+  // join channel
+  chan.addEventListener("click", e => {
+    var oldchannel = localStorage.getItem("activechannel");
+    var newchannel = e.target.id;
+    var activechannel = newchannel.slice(5);
+    localStorage.setItem("activechannel", activechannel);
+    var hash = "#";
+    document.getElementById("ctitle").innerHTML = hash.concat(activechannel);
+    document.getElementById("msglist").innerHTML = "";
+    let time = new Date().toLocaleString();
+    socket.emit("joinchannel", {
+      oldchannel: oldchannel,
+      activechannel: activechannel,
+      username: username,
+      time: time
+    });
+  });
+  // bootstrap for highlighting the clicked channel
   $("#chanlist a").on("click", function(e) {
     e.preventDefault();
     $(this).tab("show");
@@ -152,8 +166,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Logout/disconnect
   document.querySelector("#btnlogout").onclick = () => {
+    let time = new Date().toLocaleString();
     socket.emit("ondisconnect", {
-      username: (username = localStorage.getItem("username"))
+      username: username,
+      activechannel: activechannel,
+      time: time
     });
     localStorage.clear();
     location.reload();
@@ -161,15 +178,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // funtion to login the user with username and channel
   function login() {
-    //get username from localstorage
-    var username = localStorage.getItem("username");
     //set the username in the sidebar
-    document.querySelector("#idusername").innerHTML = username;
-    //get the activechannel from localstorage
-    var activechannel = localStorage.getItem("activechannel");
+    document.getElementById("idusername").innerHTML = username;
+    //set channel name ontop of chat
+    var hash = "#";
+    document.getElementById("ctitle").innerHTML = hash.concat(activechannel);
     //send the username and activechannel to the server
     socket.emit("onconnect", {
-      username: (username = localStorage.getItem("username")),
+      username: username,
       activechannel: activechannel
     });
   }
@@ -191,4 +207,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const messagesWindow = document.querySelector("#msglist");
     messagesWindow.scrollTop = messagesWindow.scrollHeight;
   }
-});
+}
+
+var username = localStorage.getItem("username");
+if (username != null) {
+  chatapp();
+}

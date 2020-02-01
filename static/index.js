@@ -28,14 +28,15 @@ if (
 }
 // main javascript script
 function chatapp() {
-  // setting the username and activechannel as variables
+  // setting the username as a variable
   var username = localStorage.getItem("username");
-  var activechannel = localStorage.getItem("activechannel");
   // getting the channel create elements and send message elements and setting them as variables
   var btnCreate = document.getElementById("btncreate");
   var channelCreate = document.getElementById("channelcreate");
   var btnSend = document.getElementById("btnsend");
   var msgSend = document.getElementById("msgsend");
+  // setting variable for channel tabs
+  var chan = document.getElementById("chanlist");
 
   // disable create channel and send msg buttons
   btnCreate.disabled = true;
@@ -55,13 +56,21 @@ function chatapp() {
     for (const e of data["rooms"]) {
       createchannel({ channel: e });
     }
+    var activechannel = localStorage.getItem("activechannel");
     // set active highlight on the activechannel
     document.getElementById("list-" + activechannel).className += " active";
-    //if no messages exist in the activechannel
+    //if messages exist in the activechannel
     if (data["code"] == "1") {
       for (const e of data["msgs"]) {
         createmsg(e);
       }
+    }
+  });
+
+  // server reply for joining room
+  socket.on("joined", data => {
+    for (const e of data["msgs"]) {
+      createmsg(e);
     }
   });
 
@@ -118,14 +127,14 @@ function chatapp() {
     socket.emit("sendmsg", {
       msg: msgSend.value,
       username: username,
-      activechannel: activechannel,
+      activechannel: localStorage.getItem("activechannel"),
       time: time
     });
     msgSend.value = "";
     btnSend.disabled = true;
   };
 
-  // receiving flask msg broadcast and displaying it in html
+  // receiving flask msg broadcast and displaying it in html (including when someone leaves the room)
   socket.on("msgupdate", data => {
     createmsg(data);
   });
@@ -133,8 +142,26 @@ function chatapp() {
   // Channel Joining Section
 
   // join channel
-
-  // highlighting the clicked channel
+  chan.addEventListener("click", e => {
+    var oldchannel = localStorage.getItem("activechannel");
+    var newchannel = e.target.id;
+    var activechannel = newchannel.slice(5);
+    if (oldchannel === activechannel) {
+    } else if (oldchannel != activechannel) {
+      localStorage.setItem("activechannel", activechannel);
+      var hash = "#";
+      document.getElementById("ctitle").innerHTML = hash.concat(activechannel);
+      document.getElementById("msglist").innerHTML = "";
+      let time = new Date().toLocaleString();
+      socket.emit("joinchannel", {
+        oldchannel: oldchannel,
+        activechannel: activechannel,
+        username: username,
+        time: time
+      });
+    }
+  });
+  // bootstrap for highlighting the clicked channel
   $("#chanlist a").on("click", function(e) {
     e.preventDefault();
     $(this).tab("show");
@@ -142,8 +169,11 @@ function chatapp() {
 
   //Logout/disconnect
   document.querySelector("#btnlogout").onclick = () => {
+    let time = new Date().toLocaleString();
     socket.emit("ondisconnect", {
-      username: (username = localStorage.getItem("username"))
+      username: username,
+      activechannel: localStorage.getItem("activechannel"),
+      time: time
     });
     localStorage.clear();
     location.reload();
@@ -151,15 +181,18 @@ function chatapp() {
 
   // funtion to login the user with username and channel
   function login() {
+    var activechannel = localStorage.getItem("activechannel");
     //set the username in the sidebar
     document.getElementById("idusername").innerHTML = username;
     //set channel name ontop of chat
     var hash = "#";
     document.getElementById("ctitle").innerHTML = hash.concat(activechannel);
     //send the username and activechannel to the server
+    let time = new Date().toLocaleString();
     socket.emit("onconnect", {
       username: username,
-      activechannel: activechannel
+      activechannel: activechannel,
+      time: time
     });
   }
   // function to create channel divs
