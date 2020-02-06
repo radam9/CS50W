@@ -32,12 +32,19 @@ class Topping(models.Model):
 
 
 class Order(models.Model):
+    STATUS = [
+        ("Order Received", "Order Received"),
+        ("Processing", "Processing"),
+        ("On Route", "On Route"),
+        ("Delivered", "Delivered"),
+    ]
+
     user = models.ForeignKey(
         User, on_delete=models.SET("User Deleted"), related_name="user_order"
     )
     contents = models.TextField()
     total = models.DecimalField(max_digits=6, decimal_places=2)
-    status = models.CharField(max_length=15)
+    status = models.CharField(max_length=20, choices=STATUS)
 
     def __str__(self):
         return f"Order no.25 by customer no.{self.user} for ${self.total} is currently {self.status}"
