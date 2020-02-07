@@ -1,6 +1,11 @@
-from django.http import HttpResponse
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-def index(request):
-    return HttpResponse("Project 3: TODO")
+def home(request):
+    return render(request, "orders/base.html")
+
+
+@login_required
+def orders(request):
+    return render(request, "orders/orders.html")

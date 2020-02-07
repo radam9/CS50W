@@ -43,25 +43,35 @@
           </li>
         </ul>
         <ul class="navbar-nav justify-content-center">
+          {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
+            <a class="nav-link" href="{% url 'orders' %}">My Orders</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Card</a>
+            <a class="nav-link" href="#">Cart</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Checkout</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Logout</a>
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
           </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+          </li>
+          {% endif %}
         </ul>
       </div>
     </nav>
-    {% block body %}{% endblock %}
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+      {{ message }}
+    </div>
+    {% endfor %} {% endif %} {% block body %}{% endblock %}
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
