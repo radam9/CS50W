@@ -5,7 +5,7 @@ from .models import Menu, Order, Topping, Category
 class MenuAdmin(admin.ModelAdmin):
     list_display = ["id", "item", "category", "sprice", "lprice"]
     search_fields = ["item", "category"]
-    list_filter = ["item", "category"]
+    list_filter = ["category"]
     list_editable = ["item", "category", "sprice", "lprice"]
     list_display_links = ["id"]
 
@@ -13,21 +13,20 @@ class MenuAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
     list_display = ["id", "user", "total", "status"]
     search_fields = ["user", "total", "status"]
-    list_filter = ["user", "status"]
+    list_filter = ["status"]
     list_editable = ["status"]
     list_display_links = ["id"]
 
 
 class ToppingAdmin(admin.ModelAdmin):
-    list_display = ["id", "item"]
-    search_fields = ["item"]
-    list_editable = ["item"]
+    list_display = ["id", "item", "category", "price"]
+    list_editable = ["item", "category", "price"]
+    list_filter = ["category"]
     list_display_links = ["id"]
 
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ["id", "item"]
-    search_fields = ["item"]
     list_editable = ["item"]
     list_display_links = ["id"]
 

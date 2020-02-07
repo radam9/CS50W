@@ -25,7 +25,10 @@ class Menu(models.Model):
 
 
 class Topping(models.Model):
+    CATS = [("Pizza", "Pizza"), ("Subs", "Subs"), ("Steak+Cheese", "Steak+Cheese")]
     item = models.CharField(max_length=20)
+    price = models.DecimalField(max_digits=4, decimal_places=2)
+    category = models.CharField(max_length=20, choices=CATS)
 
     def __str__(self):
         return self.item
