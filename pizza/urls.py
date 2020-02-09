@@ -20,7 +20,6 @@ from users import views as user_views
 
 urlpatterns = [
     path("", include("orders.urls")),
-    path("orders/", include("orders.urls")),
     path("register/", user_views.register, name="register"),
     path(
         "login/",

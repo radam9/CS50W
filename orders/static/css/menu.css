@@ -1,0 +1,51 @@
+.menumain {
+  background-color: #191919;
+}
+
+.menu {
+  background-color: rgba(0, 0, 0, 0.61);
+  color: rgb(211, 204, 180);
+}
+.pizza {
+  background-image: url("../images/pizza.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: rgb(252, 252, 252);
+}
+
+h2 {
+  background-color: rgba(238, 236, 198, 0.22);
+}
+
+hr {
+  background-color: #ffffff;
+  width: 430px;
+}
+
+.btn .btn-outline-light {
+  font-size: 18px;
+  font-weight: bold;
+  font-style: normal;
+}
+.subs {
+  background-image: url("../images/sub.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: rgb(255, 255, 255);
+}
+.pasta-salad {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: rgb(255, 255, 255);
+  background-image: url("../images/salad.jpg");
+}
+.dinner {
+  color: rgb(255, 255, 255);
+  background-image: url("../images/dinner.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
