@@ -40,6 +40,7 @@ class Order(models.Model):
         ("Processing", "Processing"),
         ("On Route", "On Route"),
         ("Delivered", "Delivered"),
+        ("None", ""),
     ]
 
     user = models.ForeignKey(
@@ -47,8 +48,8 @@ class Order(models.Model):
     )
     contents = models.TextField()
     total = models.DecimalField(max_digits=6, decimal_places=2)
-    status = models.CharField(max_length=20, choices=STATUS)
+    status = models.CharField(max_length=20, choices=STATUS, default="None")
 
     def __str__(self):
-        return f"Order no.25 by customer no.{self.user} for ${self.total} is currently {self.status}"
+        return f"User {self.user} - Total ${self.total} - Status {self.status}"
 
