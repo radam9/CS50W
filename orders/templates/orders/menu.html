@@ -19,31 +19,33 @@
     <div class="row">
       <div class="col-md-6">
         <h2 class="text-center">Regular Pizza</h2>
+        {% for reg in regular %}
         <div>
           <div>
-            <h4>Cheese</h4>
-            <p>With Mozzarella &amp; Cheddar cheese.</p>
+            <h4>{{ reg.item }}</h4>
           </div>
           <div class="d-flex justify-content-between flex-nowrap">
-            <p>Small: $12.00 - Large: $15.00</p>
+            <p>Small: ${{ reg.sprice }} - Large: ${{ reg.lprice }}</p>
             <button class="btn btn-outline-light" type="button">+</button>
           </div>
         </div>
         <hr />
+        {% endfor %}
       </div>
       <div class="col-md-6">
         <h2 class="text-center">Sicilian Pizza</h2>
+        {% for sic in sicilian %}
         <div>
           <div>
-            <h4>Cheese</h4>
-            <p>With Mozzarella &amp; Cheddar cheese.</p>
+            <h4>{{ sic.item }}</h4>
           </div>
           <div class="d-flex justify-content-between flex-nowrap">
-            <p>Small: $12.00 - Large: $15.00</p>
+            <p>Small: ${{ sic.sprice }} - Large: ${{ sic.lprice }}</p>
             <button class="btn btn-outline-light" type="button">+</button>
           </div>
         </div>
         <hr />
+        {% endfor %}
       </div>
     </div>
   </div>
@@ -57,28 +59,32 @@
     </div>
     <div class="row">
       <div class="col-md-6">
+        {% for sl in subl %}
         <div>
           <div>
-            <h4>Cheese</h4>
+            <h4>{{ sl.item }}</h4>
           </div>
           <div class="d-flex justify-content-between flex-nowrap">
-            <p>Small: $12.00 - Large: $15.00</p>
+            <p>Small: ${{ sl.sprice }} - Large: ${{ sl.lprice }}</p>
             <button class="btn btn-outline-light" type="button">+</button>
           </div>
         </div>
         <hr />
+        {% endfor %}
       </div>
       <div class="col-md-6">
+        {% for sr in subr %}
         <div>
           <div>
-            <h4>Cheese</h4>
+            <h4>{{ sr.item }}</h4>
           </div>
           <div class="d-flex justify-content-between flex-nowrap">
-            <p>Small: $12.00 - Large: $15.00</p>
+            <p>Small: ${{ sr.sprice }} - Large: ${{ sr.lprice }}</p>
             <button class="btn btn-outline-light" type="button">+</button>
           </div>
-          <hr />
         </div>
+        <hr />
+        {% endfor %}
       </div>
     </div>
   </div>
@@ -89,29 +95,33 @@
       <div class="row">
         <div class="col-md-6">
           <h2 class="text-center">Pastas</h2>
+          {% for past in pasta %}
           <div>
             <div>
-              <h4>Cheese</h4>
+              <h4>{{ past.item }}</h4>
             </div>
             <div class="d-flex justify-content-between flex-nowrap">
-              <p>Small: $12.00 - Large: $15.00</p>
+              <p>Small: ${{ past.sprice }} - Large: ${{ past.lprice }}</p>
               <button class="btn btn-outline-light" type="button">+</button>
             </div>
           </div>
           <hr />
+          {% endfor %}
         </div>
         <div class="col-md-6">
           <h2 class="text-center">Salads</h2>
+          {% for sala in salad %}
           <div>
             <div>
-              <h4>Cheese</h4>
+              <h4>{{ sala.item}}</h4>
             </div>
             <div class="d-flex justify-content-between flex-nowrap">
-              <p>Small: $12.00 - Large: $15.00</p>
+              <p>Small: ${{ sala.sprice }} - Large: ${{ sala.lprice }}</p>
               <button class="btn btn-outline-light" type="button">+</button>
             </div>
           </div>
           <hr />
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -126,28 +136,32 @@
     </div>
     <div class="row">
       <div class="col-md-6">
+        {% for dl in dinnerl %}
         <div>
           <div>
-            <h4>Cheese</h4>
+            <h4>{{ dl.item }}</h4>
           </div>
           <div class="d-flex justify-content-between flex-nowrap">
-            <p>Small: $12.00 - Large: $15.00</p>
+            <p>Small: ${{ dl.sprice }} - Large: ${{ dl.lprice }}</p>
             <button class="btn btn-outline-light" type="button">+</button>
           </div>
         </div>
         <hr />
+        {% endfor %}
       </div>
       <div class="col-md-6">
+        {% for dr in dinnerr %}
         <div>
           <div>
-            <h4>Cheese</h4>
+            <h4>{{ dr.item }}</h4>
           </div>
           <div class="d-flex justify-content-between flex-nowrap">
-            <p>Small: $12.00 - Large: $15.00</p>
+            <p>Small: ${{ dr.sprice }} - Large: ${{ dr.lprice }}</p>
             <button class="btn btn-outline-light" type="button">+</button>
           </div>
-          <hr />
         </div>
+        <hr />
+        {% endfor %}
       </div>
     </div>
   </div>
