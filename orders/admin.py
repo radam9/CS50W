@@ -2,6 +2,10 @@ from django.contrib import admin
 from .models import Menu, Order, Topping, Category
 
 
+class MenuInline(admin.TabularInline):
+    model = Menu
+
+
 class MenuAdmin(admin.ModelAdmin):
     list_display = ["id", "item", "category", "sprice", "lprice"]
     search_fields = ["item", "category"]
@@ -26,6 +30,7 @@ class ToppingAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
+    inlines = [MenuInline]
     list_display = ["id", "item"]
     list_editable = ["item"]
     list_display_links = ["id"]
