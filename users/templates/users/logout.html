@@ -1,9 +1,15 @@
-{% extends "orders/base.html" %} {% block body %}
+{% extends "orders/base.html" %}{% load staticfiles %} {% block styles %}
+<link rel="stylesheet" href="{% static 'css/users.css' %}" />
+{% endblock %} {% load crispy_forms_tags %} {% block body %}
 <div class="container">
-    <h2>You have been logged out</h2>
-    <div class="border-top pt-3">
-      <small class="text-muted">
-        <a href="{% url 'login' %}">Login again.</a></small>
+  <div class="row logout">
+    <div class="col-md-6">
+      <h2>You have been logged out</h2>
+      <div class="border-top pt-3">
+        <small class="text-muted">
+          <a href="{% url 'login' %}">Login again.</a></small
+        >
+      </div>
     </div>
   </div>
 </div>
