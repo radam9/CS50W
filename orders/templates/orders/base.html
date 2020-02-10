@@ -56,10 +56,10 @@
         <ul class="navbar-nav justify-content-center">
           {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="#">Cart</a>
+            <a class="nav-link" href="{% url 'cart' %}">Cart</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Checkout</a>
+            <a class="nav-link" href="#">My Orders</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">Logout</a>

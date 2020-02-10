@@ -29,3 +29,10 @@ def menu(request):
     }
     return render(request, "orders/menu.html", context=menu)
 
+
+def myorders(request):
+    pass
+
+
+def cart(request):
+    return render(request, "orders/cart.html")

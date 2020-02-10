@@ -1,0 +1,83 @@
+{% extends "orders/base.html" %}{% load staticfiles %} {% block styles %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}" />
+{% endblock %}{% block body %}
+<div class="container">
+  <div class="row cart1"><h1>Your Cart</h1></div>
+  <div class="row cart2">
+    <div class="col-md-8">
+      <div>
+        <div class="d-flex justify-content-between flex-nowrap">
+          <h4>3 Toppings - Regular Pizza</h4>
+          <button class="btn btn-outline-light btn-cart" type="button">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="d-flex justify-content-between flex-nowrap">
+          <div>
+            <p>Size: Small</p>
+            <p>Toppings: Pepperoni - Tuna - Pineapple</p>
+          </div>
+          <p class="c-price">$15.00</p>
+        </div>
+      </div>
+      <hr />
+      <div>
+        <div class="d-flex justify-content-between flex-nowrap">
+          <h4>3 Toppings - Regular Pizza</h4>
+          <button class="btn btn-outline-light btn-cart" type="button">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="d-flex justify-content-between flex-nowrap">
+          <div>
+            <p>Size: Small</p>
+            <p>Toppings: Pepperoni - Tuna - Pineapple</p>
+          </div>
+          <p class="c-price">$15.00</p>
+        </div>
+      </div>
+      <hr />
+      <div>
+        <div class="d-flex justify-content-between flex-nowrap">
+          <h4>3 Toppings - Regular Pizza</h4>
+          <button class="btn btn-outline-light btn-cart" type="button">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="d-flex justify-content-between flex-nowrap">
+          <div>
+            <p>Size: Small</p>
+            <p>Toppings: Pepperoni - Tuna - Pineapple</p>
+          </div>
+          <p class="c-price">$15.00</p>
+        </div>
+      </div>
+      <hr />
+      <div>
+        <div class="d-flex justify-content-between flex-nowrap">
+          <h4>3 Toppings - Regular Pizza</h4>
+          <button class="btn btn-outline-light btn-cart" type="button">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="d-flex justify-content-between flex-nowrap">
+          <div>
+            <p>Size: Small</p>
+            <p>Toppings: Pepperoni - Tuna - Pineapple</p>
+          </div>
+          <p class="c-price">$15.00</p>
+        </div>
+      </div>
+      <hr />
+      <div class="d-flex justify-content-end flex-nowrap">
+        <div>
+          <h4 class="total">Total Price: $47.98</h4>
+          <button class="btn btn-outline-light btn-end" type="button">
+            Place Order
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}
