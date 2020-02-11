@@ -43,13 +43,29 @@ class Order(models.Model):
         ("None", ""),
     ]
 
-    user = models.ForeignKey(
-        User, on_delete=models.SET("User Deleted"), related_name="user_order"
-    )
-    contents = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_order")
     total = models.DecimalField(max_digits=6, decimal_places=2)
     status = models.CharField(max_length=20, choices=STATUS, default="None")
 
     def __str__(self):
         return f"User {self.user} - Total ${self.total} - Status {self.status}"
+
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class OrderItem(models.Model):
+    item = models.CharField(max_length=20)
+    category = models.CharField(max_length=20)
+    size = models.CharField(max_length=5)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    toppings = models.ManyToManyField(Topping)
+    quantity = models.PositiveIntegerField(default=1)
+    order = models.ForeignKey(
+        Order, on_delete=models.CASCADE, null=True, related_name="order_id"
+    )
+    cart = models.ForeignKey(
+        Cart, on_delete=models.SET_NULL, null=True, related_name="cart_id"
+    )
 
