@@ -13,10 +13,18 @@ class Category(models.Model):
 
 
 class Menu(models.Model):
+    t = [
+        ("0", "0"),
+        ("1", "1"),
+        ("2", "2"),
+        ("3", "3"),
+        ("4", "4"),
+    ]
     item = models.CharField(max_length=30)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="menu_category"
     )
+    tops = models.CharField(max_length=1, choices=t, default="0")
     sprice = models.DecimalField(max_digits=4, decimal_places=2)
     lprice = models.DecimalField(max_digits=4, decimal_places=2)
 

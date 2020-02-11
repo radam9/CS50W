@@ -11,10 +11,10 @@ class OrderItemInline(admin.TabularInline):
 
 
 class MenuAdmin(admin.ModelAdmin):
-    list_display = ["id", "item", "category", "sprice", "lprice"]
+    list_display = ["id", "item", "category", "tops", "sprice", "lprice"]
     search_fields = ["item", "category"]
     list_filter = ["category"]
-    list_editable = ["item", "category", "sprice", "lprice"]
+    list_editable = ["item", "category", "tops", "sprice", "lprice"]
     list_display_links = ["id"]
 
 
