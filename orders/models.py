@@ -14,17 +14,17 @@ class Category(models.Model):
 
 class Menu(models.Model):
     t = [
-        ("0", "0"),
-        ("1", "1"),
-        ("2", "2"),
-        ("3", "3"),
-        ("4", "4"),
+        ("0", 0),
+        ("1", 1),
+        ("2", 2),
+        ("3", 3),
+        ("4", 4),
     ]
     item = models.CharField(max_length=30)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="menu_category"
     )
-    tops = models.CharField(max_length=1, choices=t, default="0")
+    tops = models.IntegerField(choices=t, default=0)
     sprice = models.DecimalField(max_digits=4, decimal_places=2)
     lprice = models.DecimalField(max_digits=4, decimal_places=2)
 
@@ -33,7 +33,7 @@ class Menu(models.Model):
 
 
 class Topping(models.Model):
-    CATS = [("Pizza", "Pizza"), ("Subs", "Subs"), ("Steak+Cheese", "Steak+Cheese")]
+    CATS = [("Pizza", "Pizza"), ("Sub", "Sub"), ("Steak+Cheese", "Steak+Cheese")]
     item = models.CharField(max_length=20)
     price = models.DecimalField(max_digits=4, decimal_places=2)
     category = models.CharField(max_length=20, choices=CATS)
@@ -64,9 +64,10 @@ class Cart(models.Model):
 
 
 class OrderItem(models.Model):
+    s = [("s", "Small"), ("l", "Large")]
     item = models.CharField(max_length=20)
     category = models.CharField(max_length=20)
-    size = models.CharField(max_length=5)
+    size = models.CharField(max_length=1, choices=s, blank=False, default="Large")
     price = models.DecimalField(max_digits=5, decimal_places=2)
     toppings = models.ManyToManyField(Topping)
     quantity = models.PositiveIntegerField(default=1)

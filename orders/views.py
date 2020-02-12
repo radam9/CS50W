@@ -1,5 +1,10 @@
 from django.shortcuts import render
-from orders.models import Menu
+from django.http import HttpResponse
+from django.template import loader
+from orders.models import Menu, Topping
+from django.db.models import Q
+from orders.forms import CreateOrderItem
+
 
 # Create your views here.
 def home(request):
@@ -28,6 +33,24 @@ def menu(request):
         "dinnerr": dinnerr,
     }
     return render(request, "orders/menu.html", context=menu)
+
+
+def modal(request):
+    i = int(request.GET["item"][5::])
+    item = Menu.objects.filter(id=i)[0]
+    form = CreateOrderItem()
+    # changing the queryset contents (the toppings showin in the modal)
+    if item.category.item == "Regular Pizza" or item.category.item == "Sicilian Pizza":
+        form.fields["toppings"].queryset = Topping.objects.filter(category="Pizza")
+    elif item.category.item == "Sub" and item.item == "Steak + Cheese":
+        form.fields["toppings"].queryset = Topping.objects.filter(
+            Q(category="Steak+Cheese") | Q(category="Sub")
+        )
+    else:
+        form.fields["toppings"].queryset = Topping.objects.filter(category="Sub")
+
+    t = loader.get_template("orders/modal.html")
+    return HttpResponse(t.render({"item": item, "form": form}, request))
 
 
 def myorders(request):
