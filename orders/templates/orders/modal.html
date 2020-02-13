@@ -13,9 +13,9 @@
           <span aria-hidden="true">×</span>
         </button>
       </div>
-      <form action="">
+      <form id="sform" action="" method="POST">
         {% csrf_token %}
-        <div class="modal-body" style="padding-left: 30px;padding-right: 30px;">
+        <div class="modal-body">
           <p>{{ item.item }} - {{ item.category }}</p>
           {% if item.tops > 0 %}
           <p>Choose your toppings:</p>
@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-outline-dark place" type="button">
+          <button id="{{ item.id }}" class="btn btn-outline-light place" type="submit">
             Place Order
           </button>
         </div>

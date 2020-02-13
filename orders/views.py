@@ -36,21 +36,34 @@ def menu(request):
 
 
 def modal(request):
-    i = int(request.GET["item"][5::])
-    item = Menu.objects.filter(id=i)[0]
-    form = CreateOrderItem()
-    # changing the queryset contents (the toppings showin in the modal)
-    if item.category.item == "Regular Pizza" or item.category.item == "Sicilian Pizza":
-        form.fields["toppings"].queryset = Topping.objects.filter(category="Pizza")
-    elif item.category.item == "Sub" and item.item == "Steak + Cheese":
-        form.fields["toppings"].queryset = Topping.objects.filter(
-            Q(category="Steak+Cheese") | Q(category="Sub")
-        )
-    else:
-        form.fields["toppings"].queryset = Topping.objects.filter(category="Sub")
-
     t = loader.get_template("orders/modal.html")
-    return HttpResponse(t.render({"item": item, "form": form}, request))
+    if request.method == "POST":
+        form = CreateOrderItem(request.POST)
+        if form.is_valid():
+            print("isvalid")
+            return HttpResponse("Success")
+        else:
+            return HttpResponse(t.render({"form": form}, request))
+
+    elif request.method == "GET":
+        i = int(request.GET["item"])
+        item = Menu.objects.filter(id=i)[0]
+        form = CreateOrderItem(x=i, initial={"size": "l"})
+        # form = CreateOrderItem(initial={"size": "l"})
+        # changing the queryset contents (the toppings showin in the modal)
+        # if (
+        #     item.category.item == "Regular Pizza"
+        #     or item.category.item == "Sicilian Pizza"
+        # ):
+        #     form.fields["toppings"].queryset = Topping.objects.filter(category="Pizza")
+        # elif item.category.item == "Sub" and item.item == "Steak + Cheese":
+        #     form.fields["toppings"].queryset = Topping.objects.filter(
+        #         Q(category="Steak+Cheese") | Q(category="Sub")
+        #     )
+        # else:
+        #     form.fields["toppings"].queryset = Topping.objects.filter(category="Sub")
+
+        return HttpResponse(t.render({"item": item, "form": form}, request))
 
 
 def myorders(request):

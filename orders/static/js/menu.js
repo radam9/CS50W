@@ -1,13 +1,11 @@
 $(".additem").on("click", e => {
-  var id = e.currentTarget.id;
+  var id = e.currentTarget.id.slice(5);
   console.log(id);
   $.ajax({
     type: "GET",
     url: "/modal/",
     data: { item: id },
     success: function(data) {
-      console.log("I received the data");
-      console.log(data);
       $(".modalslot").append(data);
       $(".modal").modal({ backdrop: "static" });
       //delete modal html after it is closed.
@@ -15,13 +13,23 @@ $(".additem").on("click", e => {
         $(".modalslot").empty();
       });
       //how should i submit the form from the modal?
-      // $(".place").on("click", data =>{
-      //   $.ajax({
-      //     type: "POST",
-      //     url: "/modal/",
-      //     data: {item:id}
-      //   })
-      // });
+      $("#sform").submit(() => {
+        var x = document.getElementsByName("csrfmiddlewaretoken")[0].value;
+        $.ajax({
+          headers: {
+            "X-CSRFToken": x
+          },
+          type: "POST",
+          url: "/modal/",
+          data: $("#sform").serialize(),
+          dataType: "json",
+          error: function(newdata) {
+            $(".modalslot").empty();
+            $(".modalslot").append(newdata);
+            $(".modal").modal("show");
+          }
+        });
+      });
     }
   });
 });
