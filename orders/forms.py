@@ -17,11 +17,9 @@ class CreateOrderItem(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        for key, value in kwargs.items():
-            if key == "x":
-                i = kwargs.pop("x")
-                item = Menu.objects.get(id=i)
-                break
+        if "x" in kwargs:
+            i = kwargs.pop("x")
+            item = Menu.objects.get(id=i)
 
         super(CreateOrderItem, self).__init__(*args, **kwargs)
 
