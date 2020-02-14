@@ -17,10 +17,13 @@ class CreateOrderItem(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        self.i = kwargs.pop("x")
-        item = Menu.objects.filter(id=self.i)[0]
+        for key, value in kwargs.items():
+            if key == "x":
+                i = kwargs.pop("x")
+                item = Menu.objects.get(id=i)
+                break
 
-        super(CreateOrderItem, self).__init__(self, *args, **kwargs)
+        super(CreateOrderItem, self).__init__(*args, **kwargs)
 
         if (
             item.category.item == "Regular Pizza"
