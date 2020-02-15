@@ -75,3 +75,13 @@ hr {
 #div_id_quantity {
   width: 110px;
 }
+.price {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+}
+.price-tag {
+  width: 110px;
+  margin-left: 15px;
+}

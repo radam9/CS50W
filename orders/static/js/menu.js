@@ -21,8 +21,16 @@ $(".additem").on("click", e => {
           },
           type: "POST",
           url: "/modal/",
-          data: $("#sform").serialize(),
-          dataType: "json",
+          data: $("#sform").serialize() + "&item=" + id,
+          // dataType: "json",
+          success: function(dat) {
+            console.log(dat);
+            $(".modal").modal("hide");
+            // $(".modal").on("hidden.bs.modal", () => {
+            //   $(".modalslot").empty();
+            // });
+            return false;
+          },
           error: function(newdata) {
             $(".modalslot").empty();
             $(".modalslot").append(newdata);

@@ -16,19 +16,25 @@
       <form id="sform" action="" method="POST">
         {% csrf_token %}
         <div class="modal-body">
-          <p>{{ item.item }} - {{ item.category }}</p>
+          <p class="item" id="{{ item.id }}">{{ item.item }} - {{ item.category }}</p>
           {% if item.tops > 0 %}
           <p>Choose your toppings:</p>
           {{ form.toppings|as_crispy_field }}
           {% endif %}
           {{ form.size|as_crispy_field }}
           {{ form.quantity|as_crispy_field }}
-          <div class="text-right">
-            {% if item.sprice == 0 %}
-            <p style="font-size: 20px;">Sub-Total: ${{ item.lprice }}</p>
-            {% else %}
-            <p style="font-size: 20px;">Sub-Total: ${{ item.sprice }}</p>
-            {% endif %}
+          <div class="price">
+            <p style="font-size: 20px;">Sub-Total: </p>
+            <div class="input-group mb-3 price-tag">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              {% if item.sprice == 0 %}
+              <input type="text" class="form-control" id="price" value="{{ item.lprice }}" disabled>
+              {% else %}
+              <input type="text" class="form-control" id="price" value="{{ item.sprice }}" disabled>
+              {% endif %}
+            </div>
           </div>
         </div>
         <div class="modal-footer">

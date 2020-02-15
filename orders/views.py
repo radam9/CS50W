@@ -38,12 +38,13 @@ def menu(request):
 def modal(request):
     t = loader.get_template("orders/modal.html")
     if request.method == "POST":
-        form = CreateOrderItem(request.POST)
+        i = int(request.POST["item"])
+        form = CreateOrderItem(request.POST, x=i)
         if form.is_valid():
             print("isvalid")
-            return HttpResponse("Success")
+            return HttpResponse("it was a success!", status=200)
         else:
-            return HttpResponse(t.render({"form": form}, request))
+            return HttpResponse(t.render({"form": form}, request), status=422)
 
     elif request.method == "GET":
         i = int(request.GET["item"])
