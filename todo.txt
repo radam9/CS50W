@@ -1,0 +1,3 @@
+1. validate the toppings being passed from the modal form to django in menu.html
+2. return the form validation to the modal on bad input
+3. improve the forms.py and views.py for orders.app regarding the modelform and its related code and functionality

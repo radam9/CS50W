@@ -18,8 +18,8 @@
         <div class="modal-body">
           <p class="item" id="{{ item.id }}">{{ item.item }} - {{ item.category }}</p>
           {% if item.tops > 0 %}
-          <p>Choose your toppings:</p>
-          {{ form.toppings|as_crispy_field }}
+          <p class="tops" id="{{ item.tops }}">Choose your toppings:</p>
+          {{ form.toppings }}
           {% endif %}
           {{ form.size|as_crispy_field }}
           {{ form.quantity|as_crispy_field }}
@@ -29,11 +29,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text">$</span>
               </div>
-              {% if item.sprice == 0 %}
               <input type="text" class="form-control" id="price" value="{{ item.lprice }}" disabled>
-              {% else %}
-              <input type="text" class="form-control" id="price" value="{{ item.sprice }}" disabled>
-              {% endif %}
             </div>
           </div>
         </div>

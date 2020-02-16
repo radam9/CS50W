@@ -60,12 +60,12 @@ class Order(models.Model):
 
 
 class Cart(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_cart")
 
 
 class OrderItem(models.Model):
     s = [("s", "Small"), ("l", "Large")]
-    item = models.CharField(max_length=20)
+    item = models.CharField(max_length=30)
     category = models.CharField(max_length=20)
     size = models.CharField(max_length=1, choices=s, blank=False, default="Large")
     price = models.DecimalField(max_digits=5, decimal_places=2)

@@ -5,7 +5,7 @@ from orders.models import OrderItem, Topping, Menu
 
 class CreateOrderItem(forms.ModelForm):
 
-    item = forms.IntegerField(min_value=1, max_value=100)
+    itemid = forms.IntegerField(min_value=1, max_value=100)
 
     class Meta:
         model = OrderItem
@@ -22,44 +22,44 @@ class CreateOrderItem(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         if "x" in kwargs:
             i = kwargs.pop("x")
-            item = Menu.objects.get(id=i)
+            mitem = Menu.objects.get(id=i)
 
             super(CreateOrderItem, self).__init__(*args, **kwargs)
             if (
-                item.category.item == "Regular Pizza"
-                or item.category.item == "Sicilian Pizza"
-            ) and (item.item != "Cheese"):
+                mitem.category.item == "Regular Pizza"
+                or mitem.category.item == "Sicilian Pizza"
+            ) and (mitem.item != "Cheese"):
                 self.fields["toppings"] = forms.ModelMultipleChoiceField(
                     queryset=Topping.objects.filter(category="Pizza"),
-                    widget=forms.SelectMultiple(),
+                    widget=forms.SelectMultiple(attrs={"class": "selectpicker"}),
                 )
-            elif item.item == "Steak + Cheese":
+            elif mitem.item == "Steak + Cheese":
                 self.fields["toppings"] = forms.ModelMultipleChoiceField(
                     queryset=Topping.objects.filter(
                         Q(category="Steak+Cheese") | Q(category="Sub")
                     ),
-                    widget=forms.SelectMultiple(),
+                    widget=forms.SelectMultiple(attrs={"class": "selectpicker"}),
                     required=False,
                 )
-            elif item.category.item == "Sub":
+            elif mitem.category.item == "Sub":
                 self.fields["toppings"] = forms.ModelMultipleChoiceField(
                     queryset=Topping.objects.filter(category="Sub"),
-                    widget=forms.SelectMultiple(),
+                    widget=forms.SelectMultiple(attrs={"class": "selectpicker"}),
                     required=False,
                 )
 
             # modifying the size field depending on the menu item
             if (
-                item.category.item == "Pasta"
-                or item.category.item == "Salad"
-                or item.item == "Sausage, Peppers & Onions"
+                mitem.category.item == "Pasta"
+                or mitem.category.item == "Salad"
+                or mitem.item == "Sausage, Peppers & Onions"
             ):
                 self.fields["size"].choices = [("l", "Large")]
 
             def clean_toppings(self):
                 toppings = self.cleaned_data["toppings"]
-                item_id = self.cleaned_data["item"]
-                menuitem = Menu.objects.get(id=item_id)
+                itemid = self.cleaned_data["itemid"]
+                menuitem = Menu.objects.get(id=itemid)
                 if len(toppings) > menuitem.tops:
                     raise forms.ValidationError("You have selected too many toppings")
                 if (

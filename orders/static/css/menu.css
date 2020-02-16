@@ -72,6 +72,11 @@ hr {
   margin-top: 15px;
   margin-bottom: 15px;
 }
+#div_id_size div {
+  display: flex;
+  margin-left: 15px;
+}
+
 #div_id_quantity {
   width: 110px;
 }
