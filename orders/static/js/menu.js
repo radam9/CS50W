@@ -1,6 +1,5 @@
 $(".additem").on("click", e => {
   var id = e.currentTarget.id.slice(5);
-  console.log(id);
   $.ajax({
     type: "GET",
     url: "/modal/",
@@ -18,7 +17,11 @@ $(".additem").on("click", e => {
       ).change(() => {
         var baseprice = parseFloat($("#price").val());
         if ($("#id_size_1").is(":checked")) {
-          baseprice = parseFloat($(".sprice-" + id).text());
+          if ($("#id_size_2").length) {
+            baseprice = parseFloat($(".sprice-" + id).text());
+          } else {
+            baseprice = parseFloat($(".lprice-" + id).text());
+          }
         } else if ($("#id_size_2").is(":checked")) {
           baseprice = parseFloat($(".lprice-" + id).text());
         }
@@ -37,7 +40,7 @@ $(".additem").on("click", e => {
       });
       //submit form
       $("#sform").submit(e => {
-        var x = document.getElementsByName("csrfmiddlewaretoken")[0].value;
+        const x = document.getElementsByName("csrfmiddlewaretoken")[0].value;
         e.preventDefault();
         $.ajax({
           headers: {
@@ -53,20 +56,8 @@ $(".additem").on("click", e => {
             price: $("#price").val(),
             toppings: $("#id_toppings.selectpicker").val()
           },
-          // data:
-          //   $("#sform").serialize() +
-          //   "&item=" +
-          //   id +
-          //   "&price=" +
-          //   $("#price").val() +
-          //   "&toppings=" +
-          //   $("#id_toppings.selectpicker").val(),
-          success: function(dat) {
-            console.log(dat);
+          success: function() {
             $(".modal").modal("hide");
-            // $(".modal").on("hidden.bs.modal", () => {
-            //   $(".modalslot").empty();
-            // });
             return false;
           },
           error: function(newdata) {

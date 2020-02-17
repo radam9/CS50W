@@ -1,6 +1,8 @@
 {% extends "orders/base.html" %}{% load staticfiles %} {% block styles %}
 <link rel="stylesheet" href="{% static 'css/menu.css' %}" />
-{% endblock %} {% load crispy_forms_tags %} {% block body %}
+{% endblock %}{% block title %}Menu{% endblock %} 
+{% load crispy_forms_tags %}
+{% block body %}
 <div class="menumain">
   <div class="container">
     <div class="row">

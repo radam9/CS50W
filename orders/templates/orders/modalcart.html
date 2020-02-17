@@ -1,0 +1,28 @@
+<div class="modal fade" tabindex="-1" id="ordermodal" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Order Confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      {% for order in orders %}
+      <div class="d-flex justify-content-between flex-nowrap">
+          <h5>{{ order.item }} - {{ order.category }}</h5>
+          <p>${{ order.price }}</p>
+        </div>
+        <p>Size: {{ order.size }}</p>
+        <p>Toppings: {{ order.toppings }}</p>
+      {% endfor %}
+      <hr />
+      <h5 id="total">Total: ${{ total }}</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="confirm">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

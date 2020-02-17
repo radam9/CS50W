@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import User
 
 
@@ -45,15 +46,16 @@ class Topping(models.Model):
 class Order(models.Model):
     STATUS = [
         ("Order Received", "Order Received"),
-        ("Processing", "Processing"),
+        ("Preparing", "Preparing"),
         ("On Route", "On Route"),
         ("Delivered", "Delivered"),
         ("None", ""),
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_order")
-    total = models.DecimalField(max_digits=6, decimal_places=2)
-    status = models.CharField(max_length=20, choices=STATUS, default="None")
+    total = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
+    status = models.CharField(max_length=20, choices=STATUS, default="Order Received")
+    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"User {self.user} - Total ${self.total} - Status {self.status}"
@@ -64,10 +66,10 @@ class Cart(models.Model):
 
 
 class OrderItem(models.Model):
-    s = [("s", "Small"), ("l", "Large")]
+    s = [("Small", "Small"), ("Large", "Large")]
     item = models.CharField(max_length=30)
     category = models.CharField(max_length=20)
-    size = models.CharField(max_length=1, choices=s, blank=False, default="Large")
+    size = models.CharField(max_length=5, choices=s, blank=False, default="Large")
     price = models.DecimalField(max_digits=5, decimal_places=2)
     toppings = models.ManyToManyField(Topping)
     quantity = models.PositiveIntegerField(default=1)
@@ -77,4 +79,10 @@ class OrderItem(models.Model):
     cart = models.ForeignKey(
         Cart, on_delete=models.SET_NULL, null=True, related_name="cart_id"
     )
+
+    def __str__(self):
+        return f"{self.item} - {self.category} - {self.size} - {self.price}- {self.toppings} - {self.quantity}"
+
+    def __repr__(self):
+        return f"{self.item} - {self.category} - {self.size} - {self.price}- {self.toppings} - {self.quantity}"
 

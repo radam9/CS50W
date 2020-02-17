@@ -8,4 +8,5 @@ urlpatterns = [
     path("cart/", views.cart, name="cart"),
     path("myorders/", views.myorders, name="myorders"),
     path("modal/", views.modal, name="modal"),
+    path("modalcart/", views.modalcart, name="modalcart"),
 ]

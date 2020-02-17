@@ -54,7 +54,7 @@ class CreateOrderItem(forms.ModelForm):
                 or mitem.category.item == "Salad"
                 or mitem.item == "Sausage, Peppers & Onions"
             ):
-                self.fields["size"].choices = [("l", "Large")]
+                self.fields["size"].choices = [("Large", "Large")]
 
             def clean_toppings(self):
                 toppings = self.cleaned_data["toppings"]

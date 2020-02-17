@@ -20,7 +20,7 @@ class MenuAdmin(admin.ModelAdmin):
 
 class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderItemInline]
-    list_display = ["id", "user", "total", "status"]
+    list_display = ["id", "user", "total", "status", "date"]
     search_fields = ["user", "total", "status"]
     list_filter = ["status"]
     list_editable = ["status"]

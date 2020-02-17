@@ -1,0 +1,178 @@
+.container {
+  justify-content: center;
+}
+.myorders1 {
+  justify-content: center;
+  padding: 5% 0;
+  background-color: rgba(31, 31, 31, 0.522);
+  color: white;
+  border-radius: 5px;
+}
+.myorders2 {
+  justify-content: center;
+  padding: 0 0 15% 0;
+  background-color: rgba(31, 31, 31, 0.522);
+  color: white;
+  border-radius: 5px;
+}
+h2 {
+  text-align: center;
+}
+.received {
+  color: #f9be9c;
+}
+.preparing {
+  color: #eef3ae;
+}
+.onroute {
+  color: #abe4f5;
+}
+.delivered {
+  color: #9eeaae;
+}
+
+/*[Table]*/
+.limiter {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.container-table100 {
+  width: 100%;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 33px 30px;
+}
+
+.wrap-table100 {
+  width: 1170px;
+}
+
+table {
+  border-spacing: 1;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+table * {
+  position: relative;
+}
+
+table td,
+table th {
+  font-weight: 400;
+  padding-left: 8px;
+}
+
+table thead tr {
+  height: 60px;
+  background: rgba(0, 0, 0, 0.65);
+}
+
+table tbody tr {
+  height: 70px;
+  background: rgba(36, 36, 37, 0.74);
+}
+
+table tbody tr:last-child {
+  border: 0;
+}
+
+tbody:nth-child(even) tr {
+  background: rgba(27, 27, 27, 0.74);
+}
+
+tbody tr:hover {
+  color: white;
+  background: rgba(54, 54, 56, 0.74);
+}
+
+.column1,
+.column2 {
+  width: 100px;
+  text-align: center;
+}
+.column3,
+.column4 {
+  width: 200px;
+  text-align: center;
+}
+
+@media screen and (max-width: 576px) {
+  .container-table100 {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  table {
+    display: block;
+  }
+
+  table > *,
+  table tr,
+  table td,
+  table th {
+    display: block;
+  }
+
+  table thead {
+    display: none;
+  }
+
+  table tbody tr {
+    height: auto;
+    padding: 37px 0;
+  }
+
+  table tbody tr td {
+    padding-left: 40% !important;
+    margin-bottom: 24px;
+  }
+
+  table tbody tr td:last-child {
+    margin-bottom: 0;
+  }
+
+  table tbody tr td:before {
+    color: #b4b4b4;
+    line-height: 1.2;
+    position: absolute;
+    width: 40%;
+    left: 0;
+    top: 0;
+  }
+
+  table tbody tr td:nth-child(1):before {
+    content: "Order ID";
+  }
+
+  table tbody tr td:nth-child(2):before {
+    content: "Total Price";
+  }
+
+  table tbody tr td:nth-child(3):before {
+    content: "Order Date";
+  }
+
+  table tbody tr td:nth-child(4):before {
+    content: "Status";
+  }
+
+  .column4,
+  .column1,
+  .column2,
+  .column3 {
+    width: 100%;
+  }
+}

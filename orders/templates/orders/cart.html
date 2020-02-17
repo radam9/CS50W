@@ -1,83 +1,50 @@
 {% extends "orders/base.html" %}{% load staticfiles %} {% block styles %}
 <link rel="stylesheet" href="{% static 'css/cart.css' %}" />
-{% endblock %}{% block body %}
+{% endblock %}{% block title %}Cart{% endblock %}{% block body %}
 <div class="container">
   <div class="row cart1"><h1>Your Cart</h1></div>
   <div class="row cart2">
     <div class="col-md-8">
-      <div>
+    {% if orders|length == 0 %}
+    <h2>Your Cart is empty, check the <a href="{% url 'menu' %}">menu</a> and add items to checkout.</h2>
+    {% else %}
+    <form id="formsubmit" action="" method="POST">
+    {% csrf_token %}
+    {% for order in orders %}
+      <div class="orderitem-{{ order.id }}">
         <div class="d-flex justify-content-between flex-nowrap">
-          <h4>3 Toppings - Regular Pizza</h4>
-          <button class="btn btn-outline-light btn-cart" type="button">
+          <h4>{{ order.item }} - {{ order.category }}</h4>
+          <button class="btn btn-outline-light btn-cart" id="orderitem-{{ order.id }}" type="button">
             <i class="fas fa-times"></i>
           </button>
         </div>
         <div class="d-flex justify-content-between flex-nowrap">
           <div>
-            <p>Size: Small</p>
-            <p>Toppings: Pepperoni - Tuna - Pineapple</p>
+            <p>Size: {{ order.size }}</p>
+            {% if order.toppings|length > 2 %}
+            <p>Toppings:  {{ order.toppings }}</p>
+            {% endif %}
           </div>
-          <p class="c-price">$15.00</p>
+          <p class="c-price">${{ order.price }}</p>
         </div>
+        <hr />
       </div>
-      <hr />
-      <div>
-        <div class="d-flex justify-content-between flex-nowrap">
-          <h4>3 Toppings - Regular Pizza</h4>
-          <button class="btn btn-outline-light btn-cart" type="button">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-        <div class="d-flex justify-content-between flex-nowrap">
-          <div>
-            <p>Size: Small</p>
-            <p>Toppings: Pepperoni - Tuna - Pineapple</p>
-          </div>
-          <p class="c-price">$15.00</p>
-        </div>
-      </div>
-      <hr />
-      <div>
-        <div class="d-flex justify-content-between flex-nowrap">
-          <h4>3 Toppings - Regular Pizza</h4>
-          <button class="btn btn-outline-light btn-cart" type="button">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-        <div class="d-flex justify-content-between flex-nowrap">
-          <div>
-            <p>Size: Small</p>
-            <p>Toppings: Pepperoni - Tuna - Pineapple</p>
-          </div>
-          <p class="c-price">$15.00</p>
-        </div>
-      </div>
-      <hr />
-      <div>
-        <div class="d-flex justify-content-between flex-nowrap">
-          <h4>3 Toppings - Regular Pizza</h4>
-          <button class="btn btn-outline-light btn-cart" type="button">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-        <div class="d-flex justify-content-between flex-nowrap">
-          <div>
-            <p>Size: Small</p>
-            <p>Toppings: Pepperoni - Tuna - Pineapple</p>
-          </div>
-          <p class="c-price">$15.00</p>
-        </div>
-      </div>
-      <hr />
+    {% endfor %}
       <div class="d-flex justify-content-end flex-nowrap">
         <div>
-          <h4 class="total">Total Price: $47.98</h4>
-          <button class="btn btn-outline-light btn-end" type="button">
+          <h4 class="total">Total Price: $<span id="totprice">{{ total }}</span></h4>
+          <button class="btn btn-outline-light btn-end" id="place-order" type="button">
             Place Order
           </button>
         </div>
       </div>
+      </form>
+      {% endif %}
     </div>
   </div>
 </div>
+<div class="modalslot"></div>
 {% endblock body %}
+{% block script %}
+<script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}
