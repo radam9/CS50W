@@ -82,7 +82,7 @@ It contains the code and files for project3, which is a website based project to
 	- Users can login and logout of the website.
 
 - [x]  **Shopping Cart:** 
-	- Logged-in users see and menu representation, where they can add items to their cart (with toppings or extras).
+	- Logged-in users see the menu representation, where they can add items to their cart (with toppings or extras).
 	- Shopping cart is saved when a user closes the window or relogs.
 
 - [x]  **Placing an Order:** 
