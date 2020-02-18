@@ -15,11 +15,11 @@ class Category(models.Model):
 
 class Menu(models.Model):
     t = [
-        ("0", 0),
-        ("1", 1),
-        ("2", 2),
-        ("3", 3),
-        ("4", 4),
+        (0, 0),
+        (1, 1),
+        (2, 2),
+        (3, 3),
+        (4, 4),
     ]
     item = models.CharField(max_length=30)
     category = models.ForeignKey(
