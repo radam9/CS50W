@@ -1,0 +1,6 @@
+Django==3.0.4
+
+#for myscripts
+openpyxl==3.0.3
+requests==2.23.0
+beautifulsoup4==4.8.2
