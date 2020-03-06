@@ -1,0 +1,53 @@
+{% extends "mydramas/base.html" %}{% load static %}
+{% block title %}Dashboard {% endblock title %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+{% endblock stylesheet %}
+{% block js %}
+<script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+{% endblock js %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 ww-tile">
+            <div class="wrap-tile">
+                <div class="tile">
+                    <div>Dramas</div>
+                    <div>251</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 ww-tile">
+            <div class="wrap-tile">
+                <div class="tile">
+                    <div>Favorites</div>
+                    <div>35</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 ww-tile">
+            <div class="wrap-tile">
+                <div class="tile">
+                    <div>Episodes</div>
+                    <div>1400</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 ww-tile">
+            <div class="wrap-tile">
+                <div class="tile">
+                    <div>Watch Time</div>
+                    <div>278</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"><div id="fav-pie"></div></div>
+        <div class="col-md-8"><div id="fav-area"></div></div>
+    </div>
+</div>
+{% endblock body %}
+{% block script %}
+<script src="{% static 'js/dashboard.js' %}"></script>
+{% endblock script %}
