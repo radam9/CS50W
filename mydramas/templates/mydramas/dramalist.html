@@ -1,3 +1,55 @@
-{% extends "mydramas/base.html" %}
+{% extends "mydramas/base.html" %}{% load static %}
 {% block title %}Drama List {% endblock title %}
-{% block body %} <h1>Welcome to the Dramalist!!</h1> {% endblock body %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/dramalist.css' %}" />
+{% endblock stylesheet %}
+{% block body %}
+<div class="container">
+  <div class="row dramas1"><h1>Drama list</h1></div>
+  <div class="row dramas2">
+    <div class="col-md-12">
+      {% if dramas|length == 0 %}
+      <h2>You currently don't have any Dramas.</h2>
+      {% else %}
+      <div class="limiter">
+        <div class="container-table100">
+          <div class="wrap-table100">
+              <div class="table100">
+                  <table>
+                      <thead>
+                          <tr class="table100-head">
+                              <th class="column1">Title</th>
+                              <th class="column2">Year</th>
+                              <th class="column3">Network</th>
+                              <th class="column4">Rating</th>
+                              <th class="column5">MDL URL</th>
+                              <th class="column6">Favorite</th>
+                              <th class="column7">Episodes</th>
+                              <th class="column8">Duration</th>
+                              <th class="column9">Watch Date</th>
+                              <th class="column10">E</th>
+                          </tr>
+                      </thead>
+                      {% for drama in dramas %}
+                      <tbody>
+                          <tr>
+                              <td class="column1">{{ drama.title }}</td>
+                              <td class="column2">{{ drama.year }}</td>
+                              <td class="column3">{{ drama.network }}</td>
+                              <td class="column4">{{ drama.rating }}</td>
+                              <td class="column5"><a href="{{ drama.mdlurl }}">Link</a></td>
+                              <td class="column6">{{ drama.favorite }}</td>
+                              <td class="column7">{{ drama.epcount }}</td>
+                              <td class="column8">{{ drama.eplength }} min</td>
+                              <td class="column9">{{ drama.watchdate|date:"d/M/Y" }}</td>
+                              <td class="column10">e</td>
+                          </tr>
+                      </tbody>
+                      {% endfor %}
+                  </table>
+              </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+{% endblock body %}
