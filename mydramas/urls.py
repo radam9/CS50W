@@ -10,6 +10,7 @@ router.register("network", views.NetworkView)
 urlpatterns = [
     path("", views.home, name="home"),
     path("api/", include(router.urls)),
+    path("api/favorite/", views.favorite, name="favorite"),
     path("dashboard/", views.dashboard, name="dashboard"),
     path("dramalist/", views.dramalist, name="dramalist"),
 ]

@@ -5,6 +5,11 @@
 {% endblock stylesheet %}
 {% block js %}
 <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/material.js"></script>
 {% endblock js %}
 {% block body %}
 <div class="container">
@@ -13,7 +18,7 @@
             <div class="wrap-tile">
                 <div class="tile">
                     <div>Dramas</div>
-                    <div>251</div>
+                    <div>{{ data.dramas }}</div>
                 </div>
             </div>
         </div>
@@ -21,7 +26,7 @@
             <div class="wrap-tile">
                 <div class="tile">
                     <div>Favorites</div>
-                    <div>35</div>
+                    <div>{{ data.favorites }}</div>
                 </div>
             </div>
         </div>
@@ -29,7 +34,7 @@
             <div class="wrap-tile">
                 <div class="tile">
                     <div>Episodes</div>
-                    <div>1400</div>
+                    <div>{{ data.episodes }}</div>
                 </div>
             </div>
         </div>
@@ -37,14 +42,14 @@
             <div class="wrap-tile">
                 <div class="tile">
                     <div>Watch Time</div>
-                    <div>278</div>
+                    <div>{{ data.duration }}</div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4"><div id="fav-pie"></div></div>
-        <div class="col-md-8"><div id="fav-area"></div></div>
+        <div class="col-md-5"><div class="chart-container"><div id="fav-pie"></div style="width: 900px; height: 800px;"></div></div>
+        <div class="col-md-7"><div class="chart-container"><div id="fav-area"></div></div></div>
     </div>
 </div>
 {% endblock body %}
