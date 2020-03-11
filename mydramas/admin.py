@@ -21,16 +21,7 @@ class DramaAdmin(admin.ModelAdmin):
         "eplength",
         "watchdate",
     ]
-    search_fields = [
-        "title",
-        "year",
-        "network",
-        "rating",
-        "favorite",
-        "epcount",
-        "eplength",
-        "watchdate",
-    ]
+    search_fields = ["title"]
     list_filter = ["year", "network", "rating", "favorite", "epcount"]
     list_display_links = ["id"]
 
