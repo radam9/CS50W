@@ -1,5 +1,5 @@
 {% extends "mydramas/base.html" %}{% load static %}
-{% block title %}Drama List {% endblock title %}
+{% block title %}Drama List{% endblock title %}
 {% block stylesheet %}
 <link rel="stylesheet" href="{% static 'css/dramalist.css' %}" />
 {% endblock stylesheet %}
@@ -8,7 +8,7 @@
   <div class="row dramas1"><h1>Drama list</h1></div>
   <div class="row dramas2">
     <div class="col-md-12">
-      {% if dramas|length == 0 %}
+      {% if object_list|length == 0 %}
       <h2>You currently don't have any Dramas.</h2>
       {% else %}
       <div class="limiter">
@@ -30,7 +30,7 @@
                               <th class="column10">E</th>
                           </tr>
                       </thead>
-                      {% for drama in dramas %}
+                      {% for drama in object_list %}
                       <tbody>
                           <tr>
                               <td class="column1">{{ drama.title }}</td>

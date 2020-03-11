@@ -1,0 +1,4 @@
+[1] DRY the favorite view (network/rating) code is very similar and repetitive.
+[2] DRY the dashboard JS code
+[3] Find a more efficient way to make/populate/run the dashboard
+[4]

@@ -70,6 +70,38 @@ def getdramainfo(url):
     return data
 
 
+def getdramainfoview(url):
+    r = requests.get(url)
+    data = []
+    soup = BeautifulSoup(r.text, "html.parser")
+    x = soup.find("ul", class_="list m-b-0")
+    y = soup.find("div", class_="col-sm-4 film-cover cover")
+    data.append(x.find("span", itemprop="name").contents[0])
+    # temp = x.find(text="Country:")
+    # data.append(temp.find_parent("li").text[9:-1])
+    temp = x.find(text="Episodes:")
+    data.append(temp.find_parent("li").text[10::])
+    temp = x.find(text="Aired:")
+    year = temp.find_parent("li").text
+    data.append(year[year.find(",") + 2 : year.find(",") + 6])
+    temp = x.find(text="Original Network:")
+    if temp == None:
+        data.append(None)
+    else:
+        data.append(temp.find_next().text)
+    temp = x.find(text="Duration:")
+    temp = temp.find_parent("li").text[10::]
+    if len(temp) == 12:
+        data.append(int(temp[0:1]) * 60 + int(temp[6:7]))
+    elif len(temp) == 13:
+        data.append(int(temp[0:1]) * 60 + int(temp[6:8]))
+    else:
+        data.append(int(temp[0:2]))
+    image = y.find("img")
+    data.append(image["src"])
+    return data
+
+
 def appendinfofile(data):
     wb = load_workbook(dbfile)
     sheet = wb["test"]

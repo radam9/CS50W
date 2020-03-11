@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "crispy_forms",
 ]
 
 MIDDLEWARE = [
@@ -114,7 +115,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
+LOGIN_REDIRECT_URL = "dashboard"
+LOGIN_URL = "login"
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"]
 }
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
