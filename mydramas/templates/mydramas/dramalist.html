@@ -1,4 +1,4 @@
-{% extends "mydramas/base.html" %}{% load static %}
+{% extends "mydramas/base.html" %}{% load static %}{% load crispy_forms_tags %}
 {% block title %}Drama List{% endblock title %}
 {% block stylesheet %}
 <link rel="stylesheet" href="{% static 'css/dramalist.css' %}" />
@@ -6,10 +6,16 @@
 {% block body %}
 <div class="container">
   <div class="row dramas1"><h1>Drama list</h1></div>
+  <div class="row dramas1">
+    <form method="GET">
+      {{ filter.form|crispy }}
+      <button type="submit" class="btn btn-outline-primary">Search</button>
+    </form>    
+  </div>
   <div class="row dramas2">
     <div class="col-md-12">
-      {% if object_list|length == 0 %}
-      <h2>You currently don't have any Dramas.</h2>
+      {% if filter.qs|length == 0 %}
+      <h2>No Dramas found!</h2>
       {% else %}
       <div class="limiter">
         <div class="container-table100">
@@ -30,7 +36,7 @@
                               <th class="column10">E</th>
                           </tr>
                       </thead>
-                      {% for drama in object_list %}
+                      {% for drama in filter.qs %}
                       <tbody>
                           <tr>
                               <td class="column1">{{ drama.title }}</td>

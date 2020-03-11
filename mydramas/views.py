@@ -14,6 +14,8 @@ from .serializers import DramaSerializer, NetworkSerializer
 
 from myscripts.MDL import getdramainfoview
 
+from .filters import DramaFilter
+
 
 @login_required
 def dashboard(request):
@@ -137,20 +139,13 @@ class DramaListView(ListView):
     template_name = "mydramas/dramalist.html"
     ordering = ["title"]
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["filter"] = DramaFilter(self.request.GET, queryset=self.get_queryset())
+        return context
+
 
 class DramaCreateView(CreateView):
-    # model = Drama
-    # fields = [
-    #     "title",
-    #     "year",
-    #     "network",
-    #     "rating",
-    #     "mdlurl",
-    #     "favorite",
-    #     "epcount",
-    #     "eplength",
-    #     "watchdate",
-    # ]
     form_class = CreateDrama
     template_name = "mydramas/newdrama.html"
     success_url = "dramalist/"

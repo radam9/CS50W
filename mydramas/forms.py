@@ -2,17 +2,11 @@ from django import forms
 from .models import Drama
 
 
-class CreateDrama(forms.ModelForm):
-    watchdate = forms.DateField(
-        input_formats=["%d/%m/%Y"],
-        widget=forms.DateInput(
-            attrs={
-                "class": "form-control datetimepicker-input",
-                "data-target": "#datetimepicker1",
-            }
-        ),
-    )
+class DateInput(forms.DateInput):
+    input_type = "date"
 
+
+class CreateDrama(forms.ModelForm):
     class Meta:
         model = Drama
         labels = {
@@ -31,3 +25,4 @@ class CreateDrama(forms.ModelForm):
             "eplength",
             "watchdate",
         ]
+        widgets = {"watchdate": DateInput()}

@@ -3,9 +3,6 @@
 {% block stylesheet %}
 <link rel="stylesheet" href="{% static 'css/newdrama.css' %}" />
 {% endblock stylesheet %}
-{% block js %}
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-{% endblock js %}
 {% block body %}
 <div class="container">
     <div class="row">
@@ -49,11 +46,8 @@
                         {{ form.eplength|as_crispy_field }}
                         </div>
                         <div class="col-mb-4">
-                            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                            <div>
                             {{ form.watchdate|as_crispy_field }}
-                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                            </div>
                             </div>
                         </div>
                     </div>
@@ -72,9 +66,5 @@
 </div>
 {% endblock body %}
 {% block script %}
-<!-- JS for Datetime picker-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
 <script src="{% static 'js/newdrama.js' %}"></script>
 {% endblock script %}
