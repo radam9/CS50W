@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 from django.views.generic import ListView, CreateView
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
@@ -15,6 +15,9 @@ from .serializers import DramaSerializer, NetworkSerializer
 from myscripts.MDL import getdramainfoview
 
 from .filters import DramaFilter
+
+import csv
+import openpyxl
 
 
 @login_required
@@ -142,7 +145,80 @@ class DramaListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["filter"] = DramaFilter(self.request.GET, queryset=self.get_queryset())
+        url = self.request.build_absolute_uri()
+        context["url_csv"] = url.replace("/dramalist/", "/dramalist/csv/")
+        context["url_xlsx"] = url.replace("/dramalist/", "/dramalist/xlsx/")
         return context
+
+
+class DramaDownloadView(ListView):
+    model = Drama
+
+    def get(self, request, file_type):
+        items = DramaFilter(self.request.GET, queryset=self.get_queryset())
+        data = items.qs
+        header = [
+            "Title",
+            "Year",
+            "Network",
+            "Rating",
+            "MyDramaList_URL",
+            "Favorite",
+            "Episodes",
+            "Duration",
+            "Watch Date",
+        ]
+        if file_type == "csv":
+            response = HttpResponse(content_type="text/csv")
+            response[
+                "Content-Disposition"
+            ] = 'attachment; filename="DramaSearchResults.csv"'
+            writer = csv.writer(response, delimiter=",")
+            writer.writerow(header)
+            for d in data:
+                writer.writerow(
+                    [
+                        d.title,
+                        d.year,
+                        d.network.title,
+                        d.rating,
+                        d.mdlurl,
+                        d.favorite,
+                        d.epcount,
+                        d.eplength,
+                        d.watchdate,
+                    ]
+                )
+            return response
+
+        elif file_type == "xlsx":
+            response = HttpResponse(content_type="application/ms-excel")
+            response[
+                "Content-Disposition"
+            ] = 'attachment; filename="DramaSearchResults.xlsx"'
+            wb = openpyxl.Workbook()
+            ws = wb.active
+            ws.title = "Dramas"
+            ws.append(header)
+            for d in data:
+                ws.append(
+                    [
+                        d.title,
+                        d.year,
+                        d.network.title,
+                        d.rating,
+                        d.mdlurl,
+                        d.favorite,
+                        d.epcount,
+                        d.eplength,
+                        d.watchdate,
+                    ]
+                )
+            wb.save(response)
+            return response
+
+        else:
+            return HttpResponseNotFound("<h1>No such file type available<h1>")
 
 
 class DramaCreateView(CreateView):
@@ -164,16 +240,6 @@ def fetchdrama(request):
         "image": t[5],
     }
     return Response(data)
-
-
-@login_required
-def newdrama(request):
-    if request.method == "POST":
-        form = CreateDrama()
-
-    if request.method == "GET":
-        form = CreateDrama()
-        return render(request, "mydramas/newdrama.html", context={"form": form})
 
 
 class DramaView(viewsets.ModelViewSet):

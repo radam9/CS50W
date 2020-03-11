@@ -47,10 +47,3 @@ document.getElementById("fetchdrama").addEventListener("click", () => {
       console.log("parsing failed", ex);
     });
 });
-
-// Date Picker widget for "Watch Date" field
-$(function() {
-  $("#datetimepicker1").datetimepicker({
-    format: "DD/MM/YYYY"
-  });
-});

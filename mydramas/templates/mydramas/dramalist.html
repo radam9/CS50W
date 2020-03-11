@@ -9,8 +9,17 @@
   <div class="row dramas1">
     <form method="GET">
       {{ filter.form|crispy }}
-      <button type="submit" class="btn btn-outline-primary">Search</button>
-    </form>    
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    <div class="dropdown">
+  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown">
+    Download As
+  </a>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="{{ url_csv }}">CSV</a>
+    <a class="dropdown-item" href="{{ url_xlsx }}">Excel (.xlsx)</a>
+  </div>
+</div>
   </div>
   <div class="row dramas2">
     <div class="col-md-12">

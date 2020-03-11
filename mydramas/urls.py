@@ -2,7 +2,7 @@ from django.urls import path, include
 from django.contrib.auth.decorators import login_required
 
 from . import views
-from .views import DramaListView, DramaCreateView
+from .views import DramaListView, DramaCreateView, DramaDownloadView
 
 from rest_framework import routers
 
@@ -16,5 +16,8 @@ urlpatterns = [
     path("api/fetchdrama/", views.fetchdrama, name="fetchdrama"),
     path("dashboard/", views.dashboard, name="dashboard"),
     path("dramalist/", DramaListView.as_view(), name="dramalist"),
+    path(
+        "dramalist/<str:file_type>/", DramaDownloadView.as_view(), name="download_file"
+    ),
     path("newdrama/", DramaCreateView.as_view(), name="newdrama"),
 ]
