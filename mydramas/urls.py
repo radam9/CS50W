@@ -15,9 +15,11 @@ urlpatterns = [
     path("api/favorite/", views.favorite, name="favorite"),
     path("api/fetchdrama/", views.fetchdrama, name="fetchdrama"),
     path("dashboard/", views.dashboard, name="dashboard"),
-    path("dramalist/", DramaListView.as_view(), name="dramalist"),
+    path("dramalist/", login_required(DramaListView.as_view()), name="dramalist"),
     path(
-        "dramalist/<str:file_type>/", DramaDownloadView.as_view(), name="download_file"
+        "dramalist/<str:file_type>/",
+        login_required(DramaDownloadView.as_view()),
+        name="download_file",
     ),
-    path("newdrama/", DramaCreateView.as_view(), name="newdrama"),
+    path("newdrama/", login_required(DramaCreateView.as_view()), name="newdrama"),
 ]
