@@ -1,22 +1,35 @@
 .container {
   justify-content: center;
 }
+.search {
+  display: flex;
+  justify-content: center;
+}
+.form-group {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+#div_id_title__icontains {
+  width: 60%;
+}
+.buttons {
+  justify-content: space-between;
+}
 .dramas1 {
   justify-content: center;
   padding: 5% 0;
-  background-color: rgba(31, 31, 31, 0.522);
-  color: white;
+  background-color: rgba(99, 121, 104, 0.22);
   border-radius: 5px;
 }
 .dramas2 {
   justify-content: center;
   padding: 0 0 15% 0;
-  background-color: rgba(31, 31, 31, 0.522);
-  color: white;
+  background-color: rgba(99, 121, 104, 0.22);
+  color: black;
   border-radius: 5px;
 }
-h2 {
-  text-align: center;
+a {
+  color: #007bff91;
 }
 
 /*[Table]*/
@@ -65,12 +78,12 @@ table th {
 
 table thead tr {
   height: 60px;
-  background: rgba(0, 0, 0, 0.65);
+  background: rgb(255, 255, 255);
 }
 
 table tbody tr {
   height: 70px;
-  background: rgba(36, 36, 37, 0.74);
+  background: rgba(241, 255, 245, 0.74);
 }
 
 table tbody tr:last-child {
@@ -78,12 +91,12 @@ table tbody tr:last-child {
 }
 
 tbody:nth-child(even) tr {
-  background: rgba(27, 27, 27, 0.74);
+  background: rgba(255, 255, 255, 0.74);
 }
 
 tbody tr:hover {
   color: white;
-  background: rgba(54, 54, 56, 0.74);
+  background: rgba(176, 238, 201, 0.712);
 }
 
 .column1 {
@@ -162,7 +175,7 @@ tbody tr:hover {
   }
 
   table tbody tr td:before {
-    color: #b4b4b4;
+    color: #a3a3a3;
     line-height: 1.2;
     position: absolute;
     width: 40%;

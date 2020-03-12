@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{% static 'css/newdrama.css' %}" />
 {% endblock stylesheet %}
 {% block body %}
+{% include "mydramas/navbar.html" %}
 <div class="container">
     <div class="row">
         <div class="col-md-4">
@@ -15,11 +16,9 @@
                 <fieldset class="form-group">
                     <legend class="border-bottom mb-4">Add Drama</legend>
                     <div class="form-row">
-                        <div class="col-mb-8">
+                        <div class="col-mb-12 url">
                         {{ form.mdlurl|as_crispy_field }}
-                        </div>
-                        <div class="col-mb-4">
-                            <button class="btn btn-outline-primary" id="fetchdrama">Fetch</button>
+                        <button class="btn btn-outline-dark" id="fetchdrama">Get info</button>
                         </div>
                     </div>
                     <div class="form-row">
@@ -58,7 +57,7 @@
                     </div>
                 </fieldset>
                 <div class="form-group">
-                    <button class="btn btn-outline-info" type=submit>Add</button>
+                    <button class="btn btn-outline-dark" type=submit>Add</button>
                 </div>
             </form>
         </div>

@@ -16,7 +16,7 @@ class DramaFilter(django_filters.FilterSet):
         ("-favorite", "Favorite - Descending"),
     )
     ordering = django_filters.ChoiceFilter(
-        label="Ordering", choices=CHOICES, method="filter_order"
+        label="Sort by", choices=CHOICES, method="filter_order"
     )
 
     class Meta:

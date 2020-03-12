@@ -4,22 +4,37 @@
 <link rel="stylesheet" href="{% static 'css/dramalist.css' %}" />
 {% endblock stylesheet %}
 {% block body %}
+{% include "mydramas/navbar.html" %}
 <div class="container">
-  <div class="row dramas1"><h1>Drama list</h1></div>
   <div class="row dramas1">
-    <form method="GET">
-      {{ filter.form|crispy }}
-      <button type="submit" class="btn btn-primary">Search</button>
-    </form>
-    <div class="dropdown">
-  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown">
-    Download As
-  </a>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="{{ url_csv }}">CSV</a>
-    <a class="dropdown-item" href="{{ url_xlsx }}">Excel (.xlsx)</a>
-  </div>
-</div>
+    <div class="col-md-12 search">
+      <div class="form-container">
+        <form method="GET">
+          <div class="form-row">
+            {{ filter.form.title__icontains|as_crispy_field }}
+            {{ filter.form.ordering|as_crispy_field }}
+          </div>
+          <div class="form-row">
+            {{ filter.form.year|as_crispy_field }}
+            {{ filter.form.network|as_crispy_field }}
+            {{ filter.form.rating|as_crispy_field }}
+            {{ filter.form.favorite|as_crispy_field }}
+          </div>
+          <div class="form-row buttons">
+            <button type="submit" class="btn btn-outline-dark">Search</button>
+            <div class="dropdown">
+              <a class="btn btn-outline-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown">
+                Download As
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ url_csv }}">CSV</a>
+                <a class="dropdown-item" href="{{ url_xlsx }}">Excel (.xlsx)</a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
   <div class="row dramas2">
     <div class="col-md-12">

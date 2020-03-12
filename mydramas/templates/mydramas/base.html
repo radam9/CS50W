@@ -22,42 +22,6 @@
     {% block stylesheet %}{% endblock stylesheet %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
-      <a class="navbar-brand" href="{% url 'dashboard' %}"
-        ><img src="{% static 'images/logo.png' %}" width="148" height="40"
-      /></a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarCollapse"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="navbar-collapse collapse justify-content-between align-items-center w-100"
-        id="navbarCollapse"
-      >
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'dashboard' %}"
-              >Dashboard <span class="sr-only">Dashboard</span></a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'dramalist' %}">Drama List</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'newdrama' %}">Add Drama</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav justify-content-center">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
     {% block body %}{% endblock body %}
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script

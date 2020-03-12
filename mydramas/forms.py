@@ -10,6 +10,7 @@ class CreateDrama(forms.ModelForm):
     class Meta:
         model = Drama
         labels = {
+            "mdlurl": "MDL URL",
             "epcount": "Episodes",
             "eplength": "Duration (Minutes)",
             "watchdate": "Watch Date",

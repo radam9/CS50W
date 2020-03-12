@@ -125,3 +125,12 @@ REST_FRAMEWORK = {
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
+# to remove django-filter "Contains" label keyword when using icontains
+def FILTERS_VERBOSE_LOOKUPS():
+    from django_filters.conf import DEFAULTS
+
+    verbose_lookups = DEFAULTS["VERBOSE_LOOKUPS"].copy()
+    verbose_lookups.update(
+        {"exact": (""), "iexact": (""), "contains": (""), "icontains": (""),}
+    )
+    return verbose_lookups
