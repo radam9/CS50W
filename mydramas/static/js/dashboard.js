@@ -22,6 +22,21 @@ function charttitle(chart, ctitle) {
   title.marginBottom = 10;
   return title;
 }
+function seriescolor(series) {
+  series.colors.list = [
+    am4core.color("rgba(81, 219, 104, 0.74)"),
+    am4core.color("rgba(84, 238, 174, 0.842)"),
+    am4core.color("rgba(111, 214, 255, 1)"),
+    am4core.color("rgba(26, 76, 240, 0.644)"),
+    am4core.color("rgba(124, 95, 255, 1)"),
+    am4core.color("rgba(249, 113, 136, 1)"),
+    am4core.color("rgba(240, 17, 17, 0.596)"),
+    am4core.color("rgba(241, 131, 57, 1)"),
+    am4core.color("rgba(241, 224, 71, 1)"),
+    am4core.color("rgba(233, 240, 142, 1)")
+  ];
+  return series;
+}
 function favpie(data) {
   var chart = am4core.create("fav-pie", am4charts.PieChart);
   charttitle(chart, "Total Favorites");
@@ -149,18 +164,7 @@ function netpie(data, element, title) {
   series.slices.template.cornerRadius = 7;
   series.slices.template.innerCornerRadius = 7;
   // info - https://www.amcharts.com/docs/v4/concepts/colors/
-  series.colors.list = [
-    am4core.color("rgba(81, 219, 104, 0.74)"),
-    am4core.color("rgba(84, 238, 174, 0.842)"),
-    am4core.color("rgba(111, 214, 255, 1)"),
-    am4core.color("rgba(26, 76, 240, 0.644)"),
-    am4core.color("rgba(124, 95, 255, 1)"),
-    am4core.color("rgba(249, 113, 136, 1)"),
-    am4core.color("rgba(240, 17, 17, 0.596)"),
-    am4core.color("rgba(241, 131, 57, 1)"),
-    am4core.color("rgba(241, 224, 71, 1)"),
-    am4core.color("rgba(233, 240, 142, 1)")
-  ];
+  seriescolor(series);
 
   // Add data
   chart.data = data;
@@ -238,49 +242,51 @@ function netline(data, element, title) {
   // chart.legend.position = "bottom";
   // chart.legend.scrollable = true;
 }
-function rathisto(data, element, title) {
-  console.log(data);
+function rathisto(data, keys, element, title) {
   var chart = am4core.create(element, am4charts.XYChart);
   charttitle(chart, title);
-  chart.hiddenState.properties.opacity = 0;
   var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-  categoryAxis.dataFields.category = "Year";
+  categoryAxis.dataFields.category = "category";
   categoryAxis.renderer.grid.template.location = 0;
+  categoryAxis.renderer.minGridDistance = 30;
+  categoryAxis.renderer.labels.template.horizontalCenter = "right";
+  categoryAxis.renderer.labels.template.verticalCenter = "middle";
+  categoryAxis.renderer.labels.template.rotation = 270;
+  categoryAxis.tooltip.disabled = true;
+  categoryAxis.renderer.minHeight = 110;
 
   var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-  valueAxis.min = 0;
-  // valueAxis.max = 100;
-  // valueAxis.strictMinMax = true;
-  valueAxis.renderer.ticks.template.length = 10;
-  valueAxis.renderer.baseGrid.disabled = true;
-  valueAxis.renderer.minGridDistance = 40;
-  valueAxis.calculateTotals = true;
   valueAxis.renderer.minWidth = 50;
+  chart.data = data.data[keys[0]];
+  // Create series
+  var series = chart.series.push(new am4charts.ColumnSeries());
+  series.sequencedInterpolation = true;
+  series.dataFields.valueY = "count";
+  series.dataFields.categoryX = "category";
+  series.dataFields.valueX = "percent";
+  series.tooltipText = "[bold]{categoryX}:[/] {valueY} ({valueX}%)";
+  series.columns.template.strokeWidth = 0;
 
-  chart.data = data.data;
+  series.tooltip.pointerOrientation = "vertical";
 
-  for (var i = 0; i < data.ratings.length; i++) {
-    chartseries(data.ratings[i]);
-  }
+  series.columns.template.column.cornerRadiusTopLeft = 10;
+  series.columns.template.column.cornerRadiusTopRight = 10;
+  series.columns.template.column.fillOpacity = 0.8;
+  seriescolor(chart);
 
-  function chartseries(rating) {
-    var series = chart.series.push(new am4charts.ColumnSeries());
-    series.columns.template.width = am4core.percent(20);
-    series.columns.template.tooltipText =
-      "{name}: {valueY.totalPercent.formatNumber('#.00')}%";
-    series.name = rating;
-    series.dataFields.categoryX = "Year";
-    series.dataFields.valueY = rating;
-    // series.dataFields.valueYShow = "totalPercent";
-    series.dataItems.template.locations.categoryX = 0.5;
-    series.stacked = true;
-    series.tooltip.pointerOrientation = "vertical";
-    var bullet = series.bullets.push(new am4charts.LabelBullet());
-    bullet.interactionsEnabled = false;
-    bullet.label.text = "{valueY.totalPercent.formatNumber('#.00')}%";
-    bullet.locationY = 0.5;
-    bullet.label.fill = am4core.color("#ffffff");
-  }
+  // on hover, make corner radiuses bigger
+  var hoverState = series.columns.template.column.states.create("hover");
+  hoverState.properties.cornerRadiusTopLeft = 0;
+  hoverState.properties.cornerRadiusTopRight = 0;
+  hoverState.properties.fillOpacity = 1;
+
+  series.columns.template.adapter.add("fill", function(fill, target) {
+    return chart.colors.getIndex(target.dataItem.index);
+  });
+
+  // Cursor
+  chart.cursor = new am4charts.XYCursor();
+  return chart;
 }
 
 fetch("/api/favorite/", {
@@ -296,6 +302,8 @@ fetch("/api/favorite/", {
     return response.json();
   })
   .then(function(data) {
+    localStorage.setItem("datahisto1", JSON.stringify(data.ratinghisto1));
+    localStorage.setItem("datahisto2", JSON.stringify(data.ratinghisto2));
     favpie(data.favpie);
     favarea(data.favarea);
     netpie(data.netpie1, "net-pie1", "Total Network Drama Share");
@@ -303,8 +311,63 @@ fetch("/api/favorite/", {
     netpie(data.netpie2, "net-pie2", "Favorite Network Drama Share");
     netline(data.netline2, "net-line2", "Favorite Network Share / Year");
     netpie(data.ratingpie1, "rat-pie1", "Drama Rating Share");
-    rathisto(data.ratinghisto1, "rat-histo1", "Drama Rating Share / Year");
   })
   .catch(function(ex) {
     console.log("parsing failed", ex);
   });
+
+var chart;
+var chart2;
+// function ratinghelper(dataname, element, title, selector){
+//     data = JSON.parse(localStorage.getItem(dataname))
+//     var keys = Object.keys(data.data);
+//     var selectlist = document.getElementById(selector);
+//     for (var i = 0; i < keys.length; i++) {
+//       var option = document.createElement("option");
+//       option.value = keys[i];
+//       option.text = keys[i];
+//       selectlist.appendChild(option);
+//     }
+//     chart = rathisto(data, keys, element, title);
+//     return chart
+// }
+// setTimeout(function() {
+//     ratinghelper("datahisto1", "rat-histo1", "Drama Rating Share / Year", "rat-histo1-select");
+//     ratinghelper("datahisto2", "rat-histo2", "Network Rating Share / Year", "rat-histo2-select");
+// },3000);
+
+setTimeout(function() {
+  data = JSON.parse(localStorage.getItem("datahisto1"));
+  var keys = Object.keys(data.data);
+  var selectlist = document.getElementById("rat-histo1-select");
+  for (var i = 0; i < keys.length; i++) {
+    var option = document.createElement("option");
+    option.value = keys[i];
+    option.text = keys[i];
+    selectlist.appendChild(option);
+  }
+  chart = rathisto(data, keys, "rat-histo1", "Drama Rating Share / Year");
+  return chart;
+}, 2000);
+setTimeout(function() {
+  data = JSON.parse(localStorage.getItem("datahisto2"));
+  var keys = Object.keys(data.data);
+  var selectlist = document.getElementById("rat-histo2-select");
+  for (var i = 0; i < keys.length; i++) {
+    var option = document.createElement("option");
+    option.value = keys[i];
+    option.text = keys[i];
+    selectlist.appendChild(option);
+  }
+  chart2 = rathisto(data, keys, "rat-histo2", "Network Rating Share / Year");
+  return chart2;
+}, 2000);
+
+function selectDataset(set) {
+  var data = JSON.parse(localStorage.getItem("datahisto1"));
+  chart.data = data.data[set];
+}
+function selectDataset2(set) {
+  var data = JSON.parse(localStorage.getItem("datahisto2"));
+  chart2.data = data.data[set];
+}

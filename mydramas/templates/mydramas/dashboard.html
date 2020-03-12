@@ -43,7 +43,7 @@
             <div class="wrap-tile">
                 <div class="tile">
                     <div>Watch Time</div>
-                    <div>{{ data.duration }}</div>
+                    <div>{{ data.duration }} days</div>
                 </div>
             </div>
         </div>
@@ -62,7 +62,20 @@
     </div>
     <div class="row">
         <div class="col-md-5"><div class="chart-container"><div id="rat-pie1"></div></div></div>
-        <div class="col-md-7"><div class="chart-container"><div id="rat-histo1"></div></div></div>
+        <div class="col-md-7">
+            <div class="chart-container">
+                <select id="rat-histo1-select"onchange="selectDataset(this.options[this.selectedIndex].value);">
+                </select>
+                <div id="rat-histo1">
+            </div></div></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-container">
+                <select id="rat-histo2-select"onchange="selectDataset2(this.options[this.selectedIndex].value);">
+                </select>
+                <div id="rat-histo2">
+            </div></div></div>
     </div>
 </div>
 {% endblock body %}

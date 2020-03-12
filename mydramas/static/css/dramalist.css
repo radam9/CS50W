@@ -134,10 +134,6 @@ tbody tr:hover {
   width: 125px;
   text-align: center;
 }
-.column10 {
-  width: 20px;
-  text-align: center;
-}
 
 @media screen and (max-width: 768px) {
   .container-table100 {
@@ -213,9 +209,6 @@ tbody tr:hover {
   table tbody tr td:nth-child(9):before {
     content: "Watch Date";
   }
-  table tbody tr td:nth-child(10):before {
-    content: "E";
-  }
 
   .column1 {
     width: 100%;
@@ -228,8 +221,7 @@ tbody tr:hover {
   .column6,
   .column7,
   .column8,
-  .column9,
-  .column10 {
+  .column9 {
     width: 100%;
   }
 }

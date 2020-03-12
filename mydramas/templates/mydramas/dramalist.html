@@ -6,6 +6,11 @@
 {% block body %}
 {% include "mydramas/navbar.html" %}
 <div class="container">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
   <div class="row dramas1">
     <div class="col-md-12 search">
       <div class="form-container">
@@ -57,7 +62,6 @@
                               <th class="column7">Episodes</th>
                               <th class="column8">Duration</th>
                               <th class="column9">Watch Date</th>
-                              <th class="column10">E</th>
                           </tr>
                       </thead>
                       {% for drama in filter.qs %}
@@ -68,11 +72,14 @@
                               <td class="column3">{{ drama.network }}</td>
                               <td class="column4">{{ drama.rating }}</td>
                               <td class="column5"><a href="{{ drama.mdlurl }}">Link</a></td>
-                              <td class="column6">{{ drama.favorite }}</td>
+                              {% if drama.favorite == True %}
+                              <td class="column6">Yes</td>
+                              {% else %}
+                              <td class="column6"></td>
+                              {% endif %}
                               <td class="column7">{{ drama.epcount }}</td>
                               <td class="column8">{{ drama.eplength }} min</td>
                               <td class="column9">{{ drama.watchdate|date:"d/M/Y" }}</td>
-                              <td class="column10">e</td>
                           </tr>
                       </tbody>
                       {% endfor %}

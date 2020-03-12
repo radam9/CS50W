@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.http import HttpResponse, HttpResponseNotFound
 from django.views.generic import ListView, CreateView
 from django.contrib.auth.decorators import login_required
+from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Sum
 
 from .models import Drama, Network
@@ -121,19 +123,36 @@ def favorite(request):
         )
     # data for rating historgram 1
     data["ratinghisto1"] = dict()
-    data["ratinghisto1"]["data"] = []
+    data["ratinghisto1"]["data"] = {}
     data["ratinghisto1"]["ratings"] = ratings
     for y in years:
-        d = {"Year": str(y)}
+        data["ratinghisto1"]["data"][y] = []
         t = Drama.objects.filter(year=y).count()
         for r in ratings:
-            r = str(r)
-            d[r] = Drama.objects.filter(rating=r, year=y).count()
-            if d[r] == 0:
-                d[r + " " + "percent"] = 0
+            d = {}
+            d["category"] = str(r)
+            d["count"] = Drama.objects.filter(rating=r, year=y).count()
+            if d["count"] == 0:
+                d["percent"] = 0
             else:
-                d[r + " " + "percent"] = round((d[r] / t) * 100, 2)
-        data["ratinghisto1"]["data"].append(d)
+                d["percent"] = round((d["count"] / t) * 100, 2)
+            data["ratinghisto1"]["data"][y].append(d)
+    # data for rating historgram 2
+    data["ratinghisto2"] = dict()
+    data["ratinghisto2"]["data"] = {}
+    data["ratinghisto2"]["ratings"] = ratings
+    for n in networks:
+        data["ratinghisto2"]["data"][n] = []
+        t = Drama.objects.filter(network__title=n).count()
+        for r in ratings:
+            d = {}
+            d["category"] = str(r)
+            d["count"] = Drama.objects.filter(rating=r, network__title=n).count()
+            if d["count"] == 0:
+                d["percent"] = 0
+            else:
+                d["percent"] = round((d["count"] / t) * 100, 2)
+            data["ratinghisto2"]["data"][n].append(d)
     return Response(data)
 
 
@@ -176,6 +195,10 @@ class DramaDownloadView(ListView):
             writer = csv.writer(response, delimiter=",")
             writer.writerow(header)
             for d in data:
+                if d.favorite == True:
+                    t = "Yes"
+                else:
+                    t = ""
                 writer.writerow(
                     [
                         d.title,
@@ -183,7 +206,7 @@ class DramaDownloadView(ListView):
                         d.network.title,
                         d.rating,
                         d.mdlurl,
-                        d.favorite,
+                        t,
                         d.epcount,
                         d.eplength,
                         d.watchdate,
@@ -201,6 +224,10 @@ class DramaDownloadView(ListView):
             ws.title = "Dramas"
             ws.append(header)
             for d in data:
+                if d.favorite == True:
+                    t = "Yes"
+                else:
+                    t = ""
                 ws.append(
                     [
                         d.title,
@@ -208,7 +235,7 @@ class DramaDownloadView(ListView):
                         d.network.title,
                         d.rating,
                         d.mdlurl,
-                        d.favorite,
+                        t,
                         d.epcount,
                         d.eplength,
                         d.watchdate,
@@ -221,10 +248,11 @@ class DramaDownloadView(ListView):
             return HttpResponseNotFound("<h1>No such file type available<h1>")
 
 
-class DramaCreateView(CreateView):
+class DramaCreateView(SuccessMessageMixin, CreateView):
     form_class = CreateDrama
     template_name = "mydramas/newdrama.html"
-    success_url = "dramalist/"
+    success_url = reverse_lazy("dramalist")
+    success_message = "%(title)s was created successfully!"
 
 
 @api_view()
