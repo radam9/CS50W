@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- custom css -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='index.css') }}"
+    />
+    <!-- bootstrap css -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <!-- bootstrap js/jquery/popper -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- Custom Bootstrap main color -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='BSmod.css') }}"
+    />
+    <!-- socketio -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <!-- handlebars -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.2/handlebars.min.js"></script>
+    <!-- Handlebars template for channels -->
+    <script id="h-channels" type="text/x-handlebars-template">
+         {% raw %}
+      <a class="list-group-item list-group-item-action" id="list-{{ channel }}" data-toggle="list" href="#{{ channel }}" role="tab"># {{ channel }}</a>
+         {% endraw %}
+    </script>
+    <!-- Handlebars template for messages -->
+    <script id="h-messages" type="text/x-handlebars-template">
+         {% raw %}
+      <div class="message">
+      	<div class="msg-info">{{ user }}
+      		<span class="time"> - {{ time }}</span>
+      	</div>
+      	<div class="msg-body">{{ msg }}</div>
+      	<hr>
+      	</div>
+         {% endraw %}
+    </script>
+    <title>Flack</title>
+  </head>
+  <body>
+    <!-- Main Container (sidebar + main section) -->
+    <div class="maincontainer">
+      <!-- Sidebar Container -->
+      <div class="sidebar">
+        <div class="form-inline side-user">
+          <span id="idusername"></span>
+          <button type="submit" class="btn btn-primary ml-2" id="btnlogout">
+            Logout
+          </button>
+        </div>
+        <div class="side-create">
+          <form>
+            <div class="form-inline">
+              <div class="col-9 px-0">
+                <label class="sr-only" for="channelcreate">Channel</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">#</div>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="channelcreate"
+                    placeholder="Channel"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col px-0">
+                <button type="submit" class="btn btn-primary" id="btncreate">
+                  Create
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- Channel List -->
+        <div class="col">
+          <div class="list-group" id="chanlist" role="tablist"></div>
+        </div>
+      </div>
+      <!-- Main chat section Container -->
+      <div class="chat-main">
+        <!-- Chatroom Title -->
+        <div class="channelname">
+          <h5 id="ctitle"></h5>
+        </div>
+        <!-- Chat Area -->
+        <div class="chat" id="msglist">
+          <!-- msg list -->
+        </div>
+        <!-- Chat Input -->
+        <form class="chat-input">
+          <div class="input-group">
+            <textarea
+              type="text"
+              class="form-control"
+              id="msgsend"
+              placeholder="Message"
+              required
+            ></textarea>
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="button" id="btnsend">
+                Send
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- input modal -->
+    <div class="modal" tabindex="-1" id="myModal" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Enter your Display Name</h5>
+          </div>
+          <div class="modal-body col-10 px-5">
+            <label class="sr-only" for="displayname">Channel</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">@</div>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                id="displayname"
+                placeholder="Display Name"
+                required
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="btnUser">
+              Chat
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Alerts Modal -->
+    <div class="modal" tabindex="-1" id="alertmodal" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Alert</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>
+              The channel name you have entered already exists, please choose a
+              different channel name.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- custom js -->
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+  </body>
+</html>

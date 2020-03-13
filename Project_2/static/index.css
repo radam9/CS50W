@@ -1,0 +1,131 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.maincontainer {
+  display: flex;
+  justify-content: flex-start;
+  /* flex-wrap: wrap; */
+  flex-direction: row;
+}
+#idusername {
+  font-size: 20px;
+  color: white;
+}
+.col-9 {
+  padding-right: 0;
+  padding-left: 0;
+}
+.sidebar {
+  height: 100vh;
+  background-color: #2f3136;
+  max-width: 320px;
+  min-width: 320px;
+  padding-left: 15px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+}
+.side-user {
+  display: flex;
+  flex-direction: row;
+  margin: 30px auto;
+}
+
+.side-create {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 25px auto;
+}
+.channelname {
+  width: 99%;
+  height: 50px;
+  background-color: #40444b;
+  color: #c8c9cb;
+  padding: 10px;
+}
+.chat-main {
+  height: 100vh;
+  width: 100%;
+  background-color: #2f3136;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.chat {
+  height: 90%;
+  width: 99%;
+  background-color: #36393f;
+  overflow-y: auto;
+}
+
+.message {
+  width: 100%;
+  background-color: #36393f;
+  border-radius: 5px;
+  padding-top: 15px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+.msg-info {
+  font-weight: 600;
+  font-size: 18px;
+  color: #c8c9cb;
+  padding-bottom: 5px;
+}
+.msg-body {
+  color: #c8c9cb;
+}
+.message hr {
+  background-color: rgb(77, 77, 77);
+}
+.time {
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.chat-input {
+  height: 90px;
+  width: 99%;
+  background-color: #40444b;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  padding-bottom: 10px;
+}
+.chat-input textarea {
+  resize: none;
+}
+
+/* Scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #888;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #333438;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
