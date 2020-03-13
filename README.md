@@ -14,6 +14,11 @@ The ``Add Drama`` page allows you to add a drama to the database, you can enter 
 
 ------------
 
+## Features:
+- Accounts are issued by the administration, its not open for anyone to register.
+- All website routes (API and Normal) require authentication (login).
+
+------------
 
 ## This project was built with:
 1. Python:
@@ -100,6 +105,7 @@ Final-Project                                   # Project's main folder
 
 
 ## Final Project requirements:
+- [x] Your web application must be sufficiently distinct from the other projects in this course, and more complex than those.
 - [x] Your web application must utilize at least two of Python, JavaScript, and SQL. Used:
 	- [x] Python [Django, Django Rest Framework, Django-filter]
 	- [x] Javascript [amCharts 4]
