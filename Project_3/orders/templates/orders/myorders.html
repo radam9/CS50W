@@ -1,0 +1,43 @@
+{% extends "orders/base.html" %} {% load staticfiles %} {% block styles %}
+<link rel="stylesheet" href="{% static 'css/myorders.css' %}" />
+{% endblock %}{% block title %}My Orders{% endblock %} {% block body %}
+<div class="container">
+  <div class="row myorders1"><h1>My Orders</h1></div>
+  <div class="row myorders2">
+    <div class="col-md-8">
+      {% if orders|length == 0 %}
+      <h2>You currently don't have any orders.</h2>
+      {% else %}
+      <div class="limiter">
+        <div class="container-table100">
+          <div class="wrap-table100">
+              <div class="table100">
+                  <table>
+                      <thead>
+                          <tr class="table100-head">
+                              <th class="column1">Order ID</th>
+                              <th class="column2">Total Price</th>
+                              <th class="column3">Order Date</th>
+                              <th class="column4">Status</th>
+                          </tr>
+                      </thead>
+                      {% for order in orders %}
+                      <tbody>
+                          <tr>
+                              <td class="column1">{{ order.id }}</td>
+                              <td class="column2">${{ order.total }}</td>
+                              <td class="column3">{{ order.date }}</td>
+                              <td class="column4">{{ order.status }}</td>
+                          </tr>
+                      </tbody>
+                      {% endfor %}
+                  </table>
+              </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+{% endblock %}
+{% block script %}
+<script src="{% static 'js/myorders.js' %}"></script>
+{% endblock %}

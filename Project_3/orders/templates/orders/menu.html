@@ -1,0 +1,240 @@
+{% extends "orders/base.html" %}{% load staticfiles %} {% block styles %}
+<link rel="stylesheet" href="{% static 'css/menu.css' %}" />
+{% endblock %}{% block title %}Menu{% endblock %} 
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="menumain">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <img
+          src="{% static 'images/logo1.png' %}"
+          style="width: 225px;height: 196px;"
+        />
+        <h2 class="menu">Menu</h2>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pizza">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2 class="text-center">Regular Pizza</h2>
+        {% for reg in regular %}
+        <div>
+          <div>
+            <h4>{{ reg.item }}</h4>
+          </div>
+          <div class="d-flex justify-content-between flex-nowrap">
+            <p>Small: $<span class="sprice-{{ reg.id }}">{{ reg.sprice }}</span> - Large: $<span class="lprice-{{ reg.id }}">{{ reg.lprice }}</span></p>
+            {% if user.is_authenticated %}
+            <button
+              class="btn btn-outline-light additem"
+              type="button"
+              data-toggle="modal"
+              data-target="#addcartitem"
+              id="item-{{ reg.id }}"
+            >
+              +
+            </button>
+            {% endif %}
+          </div>
+        </div>
+        <hr />
+        {% endfor %}
+      </div>
+      <div class="col-md-6">
+        <h2 class="text-center">Sicilian Pizza</h2>
+        {% for sic in sicilian %}
+        <div>
+          <div>
+            <h4>{{ sic.item }}</h4>
+          </div>
+          <div class="d-flex justify-content-between flex-nowrap">
+            <p>Small: $<span class="sprice-{{ sic.id }}">{{ sic.sprice }}</span> - Large: $<span class="lprice-{{ sic.id }}">{{ sic.lprice }}</span></p>
+            {% if user.is_authenticated %}
+            <button
+              class="btn btn-outline-light additem"
+              type="button"
+              id="item-{{ sic.id }}"
+            >
+              +
+            </button>
+            {% endif %}
+          </div>
+        </div>
+        <hr />
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="subs">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h1 class="border-white">Subs</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        {% for sl in subl %}
+        <div>
+          <div>
+            <h4>{{ sl.item }}</h4>
+          </div>
+          <div class="d-flex justify-content-between flex-nowrap">
+            <p>Small: $<span class="sprice-{{ sl.id }}">{{ sl.sprice }}</span> - Large: $<span class="lprice-{{ sl.id }}">{{ sl.lprice }}</span></p>
+            {% if user.is_authenticated %}
+            <button
+              class="btn btn-outline-light additem"
+              type="button"
+              id="item-{{ sl.id }}"
+            >
+              +
+            </button>
+            {% endif %}
+          </div>
+        </div>
+        <hr />
+        {% endfor %}
+      </div>
+      <div class="col-md-6">
+        {% for sr in subr %}
+        <div>
+          <div>
+            <h4>{{ sr.item }}</h4>
+          </div>
+          <div class="d-flex justify-content-between flex-nowrap">
+            <p>Small: $<span class="sprice-{{ sr.id }}">{{ sr.sprice }}</span> - Large: $<span class="lprice-{{ sr.id }}">{{ sr.lprice }}</span></p>
+            {% if user.is_authenticated %}
+            <button
+              class="btn btn-outline-light additem"
+              type="button"
+              id="item-{{ sr.id }}"
+            >
+              +
+            </button>
+            {% endif %}
+          </div>
+        </div>
+        <hr />
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pasta-salad">
+  <div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h2 class="text-center">Pastas</h2>
+          {% for past in pasta %}
+          <div>
+            <div>
+              <h4>{{ past.item }}</h4>
+            </div>
+            <div class="d-flex justify-content-between flex-nowrap">
+              <p>Small: $<span class="sprice-{{ past.id }}">{{ past.sprice }}</span> - Large: $<span class="lprice-{{ past.id }}">{{ past.lprice }}</span></p>
+              {% if user.is_authenticated %}
+              <button
+                class="btn btn-outline-light additem"
+                type="button"
+                id="item-{{ past.id }}"
+              >
+                +
+              </button>
+              {% endif %}
+            </div>
+          </div>
+          <hr />
+          {% endfor %}
+        </div>
+        <div class="col-md-6">
+          <h2 class="text-center">Salads</h2>
+          {% for sala in salad %}
+          <div>
+            <div>
+              <h4>{{ sala.item}}</h4>
+            </div>
+            <div class="d-flex justify-content-between flex-nowrap">
+              <p>Small: $<span class="sprice-{{ sala.id }}">{{ sala.sprice }}</span> - Large: $<span class="lprice-{{ sala.id }}">{{ sala.lprice }}</span></p>
+              {% if user.is_authenticated %}
+              <button
+                class="btn btn-outline-light additem"
+                type="button"
+                id="item-{{ sala.id }}"
+              >
+                +
+              </button>
+              {% endif %}
+            </div>
+          </div>
+          <hr />
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dinner">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h1>Dinner Platters</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        {% for dl in dinnerl %}
+        <div>
+          <div>
+            <h4>{{ dl.item }}</h4>
+          </div>
+          <div class="d-flex justify-content-between flex-nowrap">
+            <p>Small: $<span class="sprice-{{ dl.id }}">{{ dl.sprice }}</span> - Large: $<span class="lprice-{{ dl.id }}">{{ dl.lprice }}</span></p>
+            {% if user.is_authenticated %}
+            <button
+              class="btn btn-outline-light additem"
+              type="button"
+              id="item-{{ dl.id }}"
+            >
+              +
+            </button>
+            {% endif %}
+          </div>
+        </div>
+        <hr />
+        {% endfor %}
+      </div>
+      <div class="col-md-6">
+        {% for dr in dinnerr %}
+        <div>
+          <div>
+            <h4>{{ dr.item }}</h4>
+          </div>
+          <div class="d-flex justify-content-between flex-nowrap">
+            <p>Small: $<span class="sprice-{{ dr.id }}">{{ dr.sprice }}</span> - Large: $<span class="lprice-{{ dr.id }}">{{ dr.lprice }}</span></p>
+            {% if user.is_authenticated %}
+            <button
+              class="btn btn-outline-light additem"
+              type="button"
+              id="item-{{ dr.id }}"
+            >
+              +
+            </button>
+            {% endif %}
+          </div>
+        </div>
+        <hr />
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modalslot"></div>
+{% endblock %} {% block script %}
+<script src="{% static 'js/menu.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,25 @@
+.container {
+  justify-content: center;
+}
+.register {
+  justify-content: center;
+  padding: 10% 10%;
+  background-color: rgba(31, 31, 31, 0.522);
+  color: white;
+  border-radius: 5px;
+}
+.login {
+  justify-content: center;
+  padding: 15% 10%;
+  background-color: rgba(31, 31, 31, 0.522);
+  color: white;
+  border-radius: 5px;
+}
+
+.logout {
+  justify-content: center;
+  padding: 15% 10%;
+  background-color: rgba(31, 31, 31, 0.522);
+  color: white;
+  border-radius: 5px;
+}

@@ -1,0 +1,124 @@
+{% extends "orders/base.html" %} {% load staticfiles %} {% block styles %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}" />
+{% endblock %}{% block title %}Home{% endblock %}{% block body %}
+<div class="home-main">
+  <h1 class="text-center home-head">
+    Pinocchio's Pizza
+  </h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="home-pizza">Regular Pizza</h1>
+        <p style="padding-left: 10px;">
+          Our Regular pizza is a thin-crust or Neapolitan pizza. They come in 2
+          sizes: small (12" in diameter) and large (16" in diameter). The small
+          is suitable for 1 to 2 people while the large feeds 2 to 4 people.<br />
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="home-pizza">Sicilian Pizza</h1>
+        <p style="padding-left: 10px;">
+          Our Sicilian pizza is a deep-dish or thick-crust pizza. We sell them
+          in a 9-slice or a 15-slice size.<br />
+        </p>
+        <ul>
+          <li>
+            The 9-slice size is 16" x 16" and will feed anywhere from 3 to 5
+            people.<br />
+          </li>
+          <li>
+            The 15-slice size is 28" x 16", comes in 2 large pizza boxes and can
+            feed 6 to 9 people.<br />
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="home-pizza">Special Pizza</h1>
+        <p style="padding-left: 10px;">
+          Our Special pizza is a pizza half and half pizza, with two toppings of
+          your choice on each half. You can choose the "Special Pizza" option
+          for both our Regular and Sicilian pizzas. <br />
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="home-info">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h1 class="text-center home-titles">Opening Hours</h1>
+        <div class="home-open">
+          <div class="home-days">
+            <ul>
+              <li>
+                Sunday:
+              </li>
+              <li>
+                Monday - Thursday:
+              </li>
+              <li>
+                Friday - Saturday:
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li>
+                13:00 - 00:00
+              </li>
+              <li>
+                11:00 - 01:00
+              </li>
+              <li>
+                11:00 - 02:30*
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p>
+          *Please note that when the undergraduate students are not in session
+          we close on Friday and Saturday night at 1:00 instead of 2:30
+        </p>
+      </div>
+      <div class="col-md-6">
+        <h1 class="text-center home-titles">
+          Contact Us
+        </h1>
+        <div class="home-contact">
+          <ul>
+            <li>
+              <i class="fas fa-phone-alt"></i
+              ><span>617 876 4897 or 617 876 0012</span>
+            </li>
+            <li><i class="fas fa-fax"></i><span>617 661 6188</span></li>
+            <li>
+              <i class="fas fa-envelope"></i
+              ><span>pinocchiospizza1@gmail.com</span>
+            </li>
+            <li><i class="fab fa-twitter"></i><span>@PinocchiosPizz</span></li>
+            <li>
+              <i class="fab fa-instagram"></i><span>@pinocchiospizza1</span>
+            </li>
+            <li>
+              <i class="fas fa-map-marker-alt"></i
+              ><span
+                >Pinocchio's Pizza, 74 Winthrop Street, Cambridge, MA
+                02138</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
