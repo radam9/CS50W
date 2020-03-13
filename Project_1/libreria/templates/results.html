@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/results.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/results-table.css') }}">{% endblock %}
+
+{% block body %}
+{% include 'navbar.html' %}
+
+{% if books|length < 1 %}
+<div class='h-box'>
+<h1>No Search Results:</h1><span> There were no search results for "{{ searchresult }}"</span>
+</div>
+{% else %}
+<div class='h-box'>
+<h1>Search Results:</h1><span> Search results for "{{ searchresult }}"</span>
+</div>
+<div class="limiter">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <div class="table100">
+                <table>
+                    <thead>
+                        <tr class="table100-head">
+                            <th class="column1">Title</th>
+                            <th class="column2">Author</th>
+                            <th class="column3">Year</th>
+                            <th class="column4">ISBN</th>
+                        </tr>
+                    </thead>
+                    {% for book in books %}
+                    <tbody>
+                        <tr>
+                            <td class="column1"><a class="stretched-link" href="{{ url_for('book', bookid=book.id) }}">{{ book.title }}</a></td>
+                            <td class="column2">{{ book.author }}</td>
+                            <td class="column3">{{ book.year }}</td>
+                            <td class="column4">{{ book.isbn }}</td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,81 @@
+html, body {
+	height: 100vh;
+}
+
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    background: rgb(51, 52, 60);
+}
+.content{
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.spinner {
+	animation: rotator 1.4s linear infinite;
+}
+p{
+    color: rgb(255, 241, 57);
+}
+#farewell{
+    font-family: fantasy;
+    font-size: 100px;
+}
+
+@keyframes rotator {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(270deg);
+	}
+}
+
+.path {
+	stroke-dasharray: 187;
+	stroke-dashoffset: 0;
+	transform-origin: center;
+	animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+}
+
+@keyframes colors {
+	0% {
+		stroke: rgb(221, 207, 86);
+	}
+
+	25% {
+		stroke: rgb(221, 207, 86);
+	}
+
+	50% {
+		stroke: rgb(221, 207, 86);
+	}
+
+	75% {
+		stroke: rgb(221, 207, 86);
+	}
+
+	100% {
+		stroke: rgb(221, 207, 86);
+	}
+}
+
+@keyframes dash {
+	0% {
+		stroke-dashoffset: 187;
+	}
+
+	50% {
+		stroke-dashoffset: 46.75;
+		transform: rotate(135deg);
+	}
+
+	100% {
+		stroke-dashoffset: 187;
+		transform: rotate(450deg);
+	}
+}

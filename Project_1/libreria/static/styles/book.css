@@ -1,0 +1,173 @@
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: linear-gradient(135deg, #7fa090, #dcc173);
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+}
+/* main book box styling */
+.bookbox {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	padding: 25px;
+}
+
+.book {
+	width: 100%;
+	max-width: 50rem;
+	min-width: 32rem;
+	padding: 1rem;
+	background-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1.4rem 8rem rgba(0,0,0,.2);
+    display: flex;
+    align-items: center;
+	flex-wrap: wrap;
+    border-radius: .4rem;
+}
+
+.bookimg {
+	min-width: 16.5rem;
+    max-width: 16.5rem;
+    height: 27.225rem;
+    position: relative;
+	border-radius: .4rem;
+}
+
+.book-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0.4rem;
+}
+.bookinfo {
+	background-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1.4rem 8rem rgba(0,0,0,.2);
+	width: 30rem;
+    display: flex;
+    justify-content: flex-end;
+	padding: 25px;
+	border-radius: .4rem;
+}
+#img1 {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+	border-radius: .4rem;
+}
+#img2 {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+	border-radius: .4rem;
+}
+
+.nobull {
+	list-style-type: none;
+}
+
+.nobull li {
+	font-size: 20px;
+	font-weight: 400;
+}
+
+.nobull .lab {
+	font-weight: 600;
+}
+
+
+
+/* review input styling */
+.review-box {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	padding: 5px;
+}
+.review-form {
+	width: 100%;
+	max-width: 50rem;
+	min-width: 32rem;
+	padding: 1rem;
+	background-color: rgba(0, 0, 0, 0.2);
+	box-shadow: 0 1.4rem 8rem rgba(0,0,0,.2);
+	display: flex;
+	align-items: baseline;
+	flex-wrap: wrap;
+	flex-direction: column;
+	border-radius: .4rem;
+}
+.user-review {
+	width: 100%;
+	margin: 3px 0;
+}
+
+.user-review textarea{
+	resize: vertical;
+	background-color: rgba(255, 255, 255, 0.7);
+	width: 100%;
+	border-radius: 0.4rem;
+}
+
+.btn {
+	background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Styling the books reviews */
+.review-card {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	padding: 5px;
+	margin: auto;
+}
+
+.review {
+	width: 100%;
+	max-width: 50rem;
+	min-width: 32rem;
+	padding: 1rem;
+	background-color: rgba(0, 0, 0, 0.2);
+	box-shadow: 0 1.4rem 8rem rgba(0,0,0,.2);
+	display: flex;
+	align-items: baseline;
+	flex-wrap: wrap;
+	flex-direction: column;
+	border-radius: .4rem;
+}
+
+
+@media screen and (max-width: 1086px) {
+	.book {
+		width: 32rem;
+	}
+	#img1, #img2 {
+		left: 40%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.review-form {
+		width: 32rem;
+	}
+	.review-card {
+		width: 32rem;
+	}
+}

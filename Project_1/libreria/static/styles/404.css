@@ -1,0 +1,42 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+html {
+    height: 100%;
+}
+body {
+    background: linear-gradient(135deg, #7fa090, #dcc173);
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+.angel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.main404 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 10%;
+}
+
+.main404 h1 {
+    font-size: 9rem;
+    font-family: 'Tillana', cursive;
+    font-weight: 800;
+    /* font-family: ; */
+}
+
+.main404 h2 {
+    font-size: 2rem;
+    font-family: "Helvetica Neue", cursive;
+    text-align: center;
+}
