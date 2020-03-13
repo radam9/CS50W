@@ -1,0 +1,92 @@
+{% extends "mydramas/base.html" %}{% load static %}{% load crispy_forms_tags %}
+{% block title %}Drama List{% endblock title %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/dramalist.css' %}" />
+{% endblock stylesheet %}
+{% block body %}
+{% include "mydramas/navbar.html" %}
+<div class="container">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+  <div class="row dramas1">
+    <div class="col-md-12 search">
+      <div class="form-container">
+        <form method="GET">
+          <div class="form-row">
+            {{ filter.form.title__icontains|as_crispy_field }}
+            {{ filter.form.ordering|as_crispy_field }}
+          </div>
+          <div class="form-row">
+            {{ filter.form.year|as_crispy_field }}
+            {{ filter.form.network|as_crispy_field }}
+            {{ filter.form.rating|as_crispy_field }}
+            {{ filter.form.favorite|as_crispy_field }}
+          </div>
+          <div class="form-row buttons">
+            <button type="submit" class="btn btn-outline-dark">Search</button>
+            <div class="dropdown">
+              <a class="btn btn-outline-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown">
+                Download As
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ url_csv }}">CSV</a>
+                <a class="dropdown-item" href="{{ url_xlsx }}">Excel (.xlsx)</a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row dramas2">
+    <div class="col-md-12">
+      {% if filter.qs|length == 0 %}
+      <h2>No Dramas found!</h2>
+      {% else %}
+      <div class="limiter">
+        <div class="container-table100">
+          <div class="wrap-table100">
+              <div class="table100">
+                  <table>
+                      <thead>
+                          <tr class="table100-head">
+                              <th class="column1">Title</th>
+                              <th class="column2">Year</th>
+                              <th class="column3">Network</th>
+                              <th class="column4">Rating</th>
+                              <th class="column5">MDL URL</th>
+                              <th class="column6">Favorite</th>
+                              <th class="column7">Episodes</th>
+                              <th class="column8">Duration</th>
+                              <th class="column9">Watch Date</th>
+                          </tr>
+                      </thead>
+                      {% for drama in filter.qs %}
+                      <tbody>
+                          <tr>
+                              <td class="column1">{{ drama.title }}</td>
+                              <td class="column2">{{ drama.year }}</td>
+                              <td class="column3">{{ drama.network }}</td>
+                              <td class="column4">{{ drama.rating }}</td>
+                              <td class="column5"><a href="{{ drama.mdlurl }}">Link</a></td>
+                              {% if drama.favorite == True %}
+                              <td class="column6">Yes</td>
+                              {% else %}
+                              <td class="column6"></td>
+                              {% endif %}
+                              <td class="column7">{{ drama.epcount }}</td>
+                              <td class="column8">{{ drama.eplength }} min</td>
+                              <td class="column9">{{ drama.watchdate|date:"d/M/Y" }}</td>
+                          </tr>
+                      </tbody>
+                      {% endfor %}
+                  </table>
+              </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+{% endblock body %}

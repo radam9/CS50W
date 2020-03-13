@@ -1,0 +1,47 @@
+body {
+  background-color: rgb(218, 243, 228);
+  width: 100%;
+  height: 100%;
+}
+.container {
+  padding: 15px;
+}
+.ww-tile {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.wrap-tile {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0px 0.2px 1px rgba(0, 0, 0, 0.7);
+}
+.tile {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.chart-container {
+  background-color: white;
+  border-radius: 4px;
+  margin: 5px;
+  box-shadow: 0px 0.2px 1px rgba(0, 0, 0, 0.7);
+}
+#fav-pie,
+#fav-area,
+#net-pie1,
+#net-line1,
+#net-pie2,
+#net-line2,
+#rat-pie1,
+#rat-histo1 {
+  width: 100%;
+  height: 350px;
+}
+#rat-histo2 {
+  width: 100%;
+  height: 500px;
+}

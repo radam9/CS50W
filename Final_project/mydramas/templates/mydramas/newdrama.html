@@ -1,0 +1,69 @@
+{% extends "mydramas/base.html" %}{% load static %}{% load crispy_forms_tags %}
+{% block title %}Add New Drama{% endblock title %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/newdrama.css' %}" />
+{% endblock stylesheet %}
+{% block body %}
+{% include "mydramas/navbar.html" %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+        <img src="" id="poster">
+        </div>
+        <div class="col-md-8">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Add Drama</legend>
+                    <div class="form-row">
+                        <div class="col-mb-12 url">
+                        {{ form.mdlurl|as_crispy_field }}
+                        <button class="btn btn-outline-dark" id="fetchdrama">Get info</button>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-mb-12">
+                        {{ form.title|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-mb-4">
+                        {{ form.rating|as_crispy_field }}
+                        </div>
+                        <div class="col-mb-4">
+                        {{ form.network|as_crispy_field }}
+                        </div>
+                        <div class="col-mb-4">
+                        {{ form.year|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-mb-4">
+                        {{ form.epcount|as_crispy_field }}
+                        </div>
+                        <div class="col-mb-4">
+                        {{ form.eplength|as_crispy_field }}
+                        </div>
+                        <div class="col-mb-4">
+                            <div>
+                            {{ form.watchdate|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-mb-12">
+                        {{ form.favorite|as_crispy_field }}
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-dark" type=submit>Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+{% block script %}
+<script src="{% static 'js/newdrama.js' %}"></script>
+{% endblock script %}
