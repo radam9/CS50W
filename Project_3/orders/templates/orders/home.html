@@ -1,15 +1,13 @@
-{% extends "orders/base.html" %} {% load staticfiles %} {% block styles %}
+{% extends "orders/base.html" %} {% load static %} {% block styles %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}" />
 {% endblock %}{% block title %}Home{% endblock %}{% block body %}
 <div class="home-main">
-  <h1 class="text-center home-head">
-    Pinocchio's Pizza
-  </h1>
+  <h1 class="text-center home-head">Pinocchio's Pizza</h1>
   <div class="container">
     <div class="row">
       <div class="col-md-12">
         <h1 class="home-pizza">Regular Pizza</h1>
-        <p style="padding-left: 10px;">
+        <p style="padding-left: 10px">
           Our Regular pizza is a thin-crust or Neapolitan pizza. They come in 2
           sizes: small (12" in diameter) and large (16" in diameter). The small
           is suitable for 1 to 2 people while the large feeds 2 to 4 people.<br />
@@ -21,7 +19,7 @@
     <div class="row">
       <div class="col-md-12">
         <h1 class="home-pizza">Sicilian Pizza</h1>
-        <p style="padding-left: 10px;">
+        <p style="padding-left: 10px">
           Our Sicilian pizza is a deep-dish or thick-crust pizza. We sell them
           in a 9-slice or a 15-slice size.<br />
         </p>
@@ -42,7 +40,7 @@
     <div class="row">
       <div class="col-md-12">
         <h1 class="home-pizza">Special Pizza</h1>
-        <p style="padding-left: 10px;">
+        <p style="padding-left: 10px">
           Our Special pizza is a pizza half and half pizza, with two toppings of
           your choice on each half. You can choose the "Special Pizza" option
           for both our Regular and Sicilian pizzas. <br />
@@ -59,28 +57,16 @@
         <div class="home-open">
           <div class="home-days">
             <ul>
-              <li>
-                Sunday:
-              </li>
-              <li>
-                Monday - Thursday:
-              </li>
-              <li>
-                Friday - Saturday:
-              </li>
+              <li>Sunday:</li>
+              <li>Monday - Thursday:</li>
+              <li>Friday - Saturday:</li>
             </ul>
           </div>
           <div>
             <ul>
-              <li>
-                13:00 - 00:00
-              </li>
-              <li>
-                11:00 - 01:00
-              </li>
-              <li>
-                11:00 - 02:30*
-              </li>
+              <li>13:00 - 00:00</li>
+              <li>11:00 - 01:00</li>
+              <li>11:00 - 02:30*</li>
             </ul>
           </div>
         </div>
@@ -90,9 +76,7 @@
         </p>
       </div>
       <div class="col-md-6">
-        <h1 class="text-center home-titles">
-          Contact Us
-        </h1>
+        <h1 class="text-center home-titles">Contact Us</h1>
         <div class="home-contact">
           <ul>
             <li>
