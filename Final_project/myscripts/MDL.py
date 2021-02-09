@@ -5,7 +5,7 @@ from openpyxl import load_workbook
 # setup django
 import os, sys
 
-sys.path.append("D:\Knowledge\CS50W\Projects\FinalProject")
+sys.path.append("/home/CS50w/Final_project")
 os.environ["DJANGO_SETTINGS_MODULE"] = "dramas.settings"
 import django
 
@@ -27,7 +27,7 @@ networks = [
     "Naver TV Cast",
     "DramaX",
     "TV Chosun",
-    "Line TV",
+    "LINE TV",
     "None",
 ]
 
