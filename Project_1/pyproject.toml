@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "Libreria"
+version = "0.1.0"
+description = ""
+authors = ["Adam Saleh <radam9@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+Flask-Login = "^0.5.0"
+Flask = "^1.1.2"
+Flask-SQLAlchemy = "^2.4.4"
+WTForms = "^2.3.3"
+requests = "^2.25.1"
+Flask-Bcrypt = "^0.7.1"
+Flask-WTF = "^0.14.3"
+Flask-Session = "^0.3.2"
+python-dotenv = "^0.15.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "Dramas"
+version = "0.1.0"
+description = ""
+authors = ["Adam Saleh <radam9@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+Django = "^3.1.6"
+djangorestframework = "^3.12.2"
+Markdown = "^3.3.3"
+django-filter = "^2.4.0"
+django-crispy-forms = "^1.11.0"
+requests = "^2.25.1"
+beautifulsoup4 = "^4.9.3"
+openpyxl = "^3.0.6"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
