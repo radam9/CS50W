@@ -54,7 +54,7 @@ class Book():
 
     @staticmethod
     def bsearchisbn(isbn):
-        response = db.session.execute("SELECT * FROM books WHERE isbn ILIKE :isbn", {"isbn": "%" + isbn + "%"}).fetchmany(40)
+        response = db.session.execute("select * from books where lower(cast(isbn as varchar)) like lower(cast(:isbn as varchar))", {"isbn": "%" + isbn + "%"}).fetchmany(40)
         books=list()
         if response != None:
             for r in response:
@@ -65,7 +65,7 @@ class Book():
 
     @staticmethod
     def bsearchtitle(title):
-        response = db.session.execute("SELECT * FROM books WHERE title ILIKE :title", {"title": "%" + title + "%"}).fetchmany(40)
+        response = db.session.execute("select * from books where lower(cast(title as varchar)) like lower(cast(:title as varchar))", {"title": "%" + title + "%"}).fetchmany(40)
         books=list()
         if response != None:
             for r in response:
@@ -76,7 +76,7 @@ class Book():
 
     @staticmethod
     def bsearchauthor(author):
-        response = db.session.execute("SELECT * FROM books WHERE author ILIKE :author", {"author": "%" + author + "%"}).fetchmany(40)
+        response = db.session.execute("select * from books where lower(cast(author as varchar)) like lower(cast(:author as varchar))", {"author": "%" + author + "%"}).fetchmany(40)
         books=list()
         if response != None:
             for r in response:
@@ -87,7 +87,7 @@ class Book():
 
     @staticmethod
     def bsearchid(id):
-        r = db.session.execute("SELECT * FROM books WHERE id = :id", {"id":id}).fetchone()
+        r = db.session.execute("select * from books where id = :id", {"id":id}).fetchone()
         if r != None:
             return json.dumps(tuple(r))
         else:
@@ -144,7 +144,7 @@ class Review():
 
     @staticmethod
     def revsearch(userid, bookid):
-        r = db.session.execute("SELECT * FROM reviews WHERE users_id = :userid AND books_id = :bookid", {"userid": userid, "bookid": bookid}).fetchone()
+        r = db.session.execute("select * from reviews where (users_id = :userid and books_id = :bookid)", {"userid": userid, "bookid": bookid}).fetchone()
         if r != None:
             return Review(r[0], r[1], r[2], r[3], r[4])
         else:
