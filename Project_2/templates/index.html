@@ -24,26 +24,39 @@
       href="{{ url_for('static', filename='BSmod.css') }}"
     />
     <!-- socketio -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.1/socket.io.js"></script>
     <!-- handlebars -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.2/handlebars.min.js"></script>
     <!-- Handlebars template for channels -->
     <script id="h-channels" type="text/x-handlebars-template">
-         {% raw %}
-      <a class="list-group-item list-group-item-action" id="list-{{ channel }}" data-toggle="list" href="#{{ channel }}" role="tab"># {{ channel }}</a>
-         {% endraw %}
+      {% raw %}
+      <a
+        class="list-group-item list-group-item-action"
+        id="list-{{channel}}"
+        data-toggle="list"
+        href="#{{channel}}"
+        role="tab"
+      >
+        # {{channel}}
+      </a>
+      {% endraw %}
     </script>
     <!-- Handlebars template for messages -->
     <script id="h-messages" type="text/x-handlebars-template">
-         {% raw %}
+      {% raw %}
       <div class="message">
-      	<div class="msg-info">{{ user }}
-      		<span class="time"> - {{ time }}</span>
-      	</div>
-      	<div class="msg-body">{{ msg }}</div>
-      	<hr>
-      	</div>
-         {% endraw %}
+        <div class="msg-info">
+          {{user}}
+          <span class="time">
+            - {{time}}
+          </span>
+        </div>
+        <div class="msg-body">
+          {{msg}}
+        </div>
+        <hr />
+      </div>
+      {% endraw %}
     </script>
     <title>Flack</title>
   </head>
