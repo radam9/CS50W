@@ -1,0 +1,48 @@
+.home-main {
+  background-image: url("../images/background2.73eb2a3cb01c.jpg");
+  padding-top: 100px;
+  padding-bottom: 250px;
+}
+
+.home-head {
+  color: rgb(255, 255, 255);
+  font-size: 4rem;
+  padding-top: 70px;
+  padding-bottom: 50px;
+}
+.home-info {
+  color: rgb(255, 255, 255);
+  background-color: #262626;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.home-info ul {
+  list-style-type: none;
+}
+.container {
+  padding-bottom: 30px;
+  color: rgb(255, 255, 255);
+}
+.home-titles {
+  padding-bottom: 30px;
+}
+.home-pizza {
+  padding-bottom: 10px;
+  font-size: 2rem;
+}
+.home-open {
+  display: flex;
+  justify-content: center;
+}
+.home-open ul {
+  list-style-type: none;
+}
+.home-days ul {
+  text-align: right;
+}
+.home-contact li {
+  margin-bottom: 10px;
+}
+.home-contact i {
+  margin-right: 20px;
+}

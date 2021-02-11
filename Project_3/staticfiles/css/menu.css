@@ -1,0 +1,93 @@
+.menumain {
+  background-color: #191919;
+}
+
+.menu {
+  background-color: rgba(0, 0, 0, 0.61);
+  color: rgb(211, 204, 180);
+}
+.pizza {
+  background-image: url("../images/pizza.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: rgb(252, 252, 252);
+}
+
+h2 {
+  background-color: rgba(238, 236, 198, 0.22);
+}
+
+hr {
+  background-color: #ffffff;
+  width: 80%;
+}
+
+.btn .btn-outline-light {
+  font-size: 18px;
+  font-weight: bold;
+  font-style: normal;
+}
+.subs {
+  background-image: url("../images/sub.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: rgb(255, 255, 255);
+}
+.pasta-salad {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: rgb(255, 255, 255);
+  background-image: url("../images/salad.jpg");
+}
+.dinner {
+  color: rgb(255, 255, 255);
+  background-image: url("../images/dinner.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+/* modal css */
+.modal-content {
+  background-color: #444444;
+  color: #ffffff;
+}
+.modal-header {
+  border-bottom: 1px solid #6b6b6b;
+}
+.modal-body {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.modal-footer {
+  border-top: 1px solid #6b6b6b;
+}
+.form-check {
+  margin-right: 25px;
+}
+#div_id_size {
+  display: flex;
+  justify-content: start;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+#div_id_size div {
+  display: flex;
+  margin-left: 15px;
+}
+
+#div_id_quantity {
+  width: 110px;
+}
+.price {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+}
+.price-tag {
+  width: 110px;
+  margin-left: 15px;
+}
