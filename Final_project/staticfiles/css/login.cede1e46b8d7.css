@@ -1,0 +1,34 @@
+html {
+  min-height: 100%;
+  overflow: hidden;
+}
+body {
+  background: linear-gradient(
+    to right top,
+    #41f49d,
+    #4bf6c6,
+    #6ff7cbc4,
+    #9cf5f1,
+    #c7f2f6
+  ) !important;
+  position: relative;
+  width: 100%;
+}
+.row {
+  justify-content: center;
+  margin: 10% 0;
+}
+.title {
+  display: flex;
+  justify-content: center;
+}
+h1 {
+  font-size: 6rem;
+  font-family: "Alex Brush", cursive;
+}
+.login {
+  padding: 10px 40px;
+}
+button {
+  width: 100%;
+}
