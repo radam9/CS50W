@@ -1,69 +1,82 @@
-{% extends 'base.html' %}
-
-{% block stylesheet %}<link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">{% endblock %}
-
-{% block body %}
+{% extends 'base.html' %} {% block stylesheet %}<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='styles/index.css') }}"
+/>
+<script type="text/javascript">
+  document.onreadystatechange = function () {
+    //window.addEventListener('readystatechange',function(){...}); (for Netscape) and window.attachEvent('onreadystatechange',function(){...}); (for IE and Opera) also work
+    if (document.readyState == "loaded" || document.readyState == "complete")
+      alert("Username: admin\nPassword: admin");
+  };
+</script>
+{% endblock %} {% block body %}
 <body>
-    <div class="login-container">
-        <div class="login-wrap">
-            <div class="login-html">
-                <div class="img-cont"><img src="{{ url_for('static', filename='images/pantheon-s.png') }}" id="login-img"></div>
-                <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
-                <input id="tab-2" type="radio" name="tab" class="sign-up"><a href="{{ url_for('register') }}" class="tab">Sign Up</a>
-                <div class="login-form">
-                    <form class="sign-in-htm" method="POST" action="">
-                        {{ form.hidden_tag() }}
-                        <div class="group">
-                            {{ form.username.label(class="label") }}
-                            {% if form.username.errors %}
-                                {{ form.username(class="input is-invalid") }}
-                                <div>
-                                    {% for error in form.username.errors %}
-                                        <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form.username(class="input") }}
-                            {% endif %}
-                        </div>
-                        <div class="group">
-                            {{ form.password.label(class="label") }}
-                            {% if form.password.errors %}
-                                {{ form.password(class="input is-invalid") }}
-                                <div>
-                                    {% for error in form.password.errors %}
-                                        <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form.password(class="input") }}
-                            {% endif %}
-                        </div>
-                        <div class="form-check">
-                            {{ form.remember(class="form-check-input") }}
-                            {{ form.remember.label(class="form-check-label") }}
-                        </div>
-                        <div class="group">
-                            {{ form.submit(class="button") }}
-                        </div>
-                        <div class="hr"></div>
-                        <div class="foot-lnk">
-                            {% with messages = get_flashed_messages() %}
-                                {% if messages %}
-                                    {% for message in messages %}
-                                        <div>{{ message }}</div>
-                                    {% endfor %}
-                                {% else %}
-                                <label>
-                                    <a href="{{ url_for('register') }}">Register</a>
-                                </label>
-                                {% endif %}
-                            {% endwith %}
-                        </div>
-                    </form>
-                </div>
-            </div>
+  <div class="login-container">
+    <div class="login-wrap">
+      <div class="login-html">
+        <div class="img-cont">
+          <img
+            src="{{ url_for('static', filename='images/pantheon-s.png') }}"
+            id="login-img"
+          />
         </div>
+        <input
+          id="tab-1"
+          type="radio"
+          name="tab"
+          class="sign-in"
+          checked
+        /><label for="tab-1" class="tab">Sign In</label>
+        <input id="tab-2" type="radio" name="tab" class="sign-up" /><a
+          href="{{ url_for('register') }}"
+          class="tab"
+          >Sign Up</a
+        >
+        <div class="login-form">
+          <form class="sign-in-htm" method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="group">
+              {{ form.username.label(class="label") }} {% if
+              form.username.errors %} {{ form.username(class="input is-invalid")
+              }}
+              <div>
+                {% for error in form.username.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %} {{ form.username(class="input") }} {% endif %}
+            </div>
+            <div class="group">
+              {{ form.password.label(class="label") }} {% if
+              form.password.errors %} {{ form.password(class="input is-invalid")
+              }}
+              <div>
+                {% for error in form.password.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %} {{ form.password(class="input") }} {% endif %}
+            </div>
+            <div class="form-check">
+              {{ form.remember(class="form-check-input") }} {{
+              form.remember.label(class="form-check-label") }}
+            </div>
+            <div class="group">{{ form.submit(class="button") }}</div>
+            <div class="hr"></div>
+            <div class="foot-lnk">
+              {% with messages = get_flashed_messages() %} {% if messages %} {%
+              for message in messages %}
+              <div>{{ message }}</div>
+              {% endfor %} {% else %}
+              <label>
+                <a href="{{ url_for('register') }}">Register</a>
+              </label>
+              {% endif %} {% endwith %}
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
 </body>
 {% endblock %}

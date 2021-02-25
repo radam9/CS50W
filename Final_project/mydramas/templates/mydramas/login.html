@@ -1,29 +1,35 @@
-{% extends "mydramas/base.html" %}{% load static %}
-{% load crispy_forms_tags %}
+{% extends "mydramas/base.html" %}{% load static %} {% load crispy_forms_tags %}
 {% block stylesheet %}
 <link rel="stylesheet" href="{% static 'css/login.css' %}" />
 <!-- google fonts -->
-<link href="https://fonts.googleapis.com/css?family=Alex+Brush&display=swap" rel="stylesheet">
-{% endblock stylesheet %}
-{% block body %}
+<link
+  href="https://fonts.googleapis.com/css?family=Alex+Brush&display=swap"
+  rel="stylesheet"
+/>
+<script type="text/javascript">
+  document.onreadystatechange = function () {
+    //window.addEventListener('readystatechange',function(){...}); (for Netscape) and window.attachEvent('onreadystatechange',function(){...}); (for IE and Opera) also work
+    if (document.readyState == "loaded" || document.readyState == "complete")
+      alert("Username: admin\nPassword: admin");
+  };
+</script>
+{% endblock stylesheet %} {% block body %}
 <div class="container">
-    <div class="row">
-        <div class="col-md-6 title">
-            <h1>Dramas</h1>
-        </div>
+  <div class="row">
+    <div class="col-md-6 title">
+      <h1>Dramas</h1>
     </div>
-    <div class="row">
-        <div class="col-md-4 login">
-            <form method="POST">
-                {% csrf_token %}
-                <fieldset class="form-group">
-                    {{ form|crispy }}
-                </fieldset>
-                <div class="form-group">
-                    <button class="btn btn-outline-dark" type=submit>Login</button>
-                </div>
-            </form>
+  </div>
+  <div class="row">
+    <div class="col-md-4 login">
+      <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">{{ form|crispy }}</fieldset>
+        <div class="form-group">
+          <button class="btn btn-outline-dark" type="submit">Login</button>
         </div>
-    </div>    
+      </form>
+    </div>
+  </div>
 </div>
 {% endblock body %}
